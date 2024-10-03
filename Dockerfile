@@ -23,8 +23,8 @@ WORKDIR /app
 # Copy built assets from the builder stage
 COPY --from=builder /app/.next /app/.next
 COPY --from=builder /app/public /app/public
-COPY --from=builder /next.config.js /next.config.js
-COPY --from=builder /package.json /package.json
+COPY --from=builder /app/next.config.mjs /app/next.config.mjs
+COPY --from=builder /app/package.json /app/package.json
 
 # Expose the Next.js port
 EXPOSE 3000
