@@ -1,5 +1,5 @@
 # Stage 1: Build the Next.js app with Bun
-FROM oven/bun:1.0.0 as builder
+FROM oven/bun:latest as builder
 
 # Set working directory
 WORKDIR /app
@@ -15,7 +15,7 @@ COPY . .
 RUN bun run build
 
 # Stage 2: Serve the Next.js app
-FROM oven/bun:1.0.0 as runner
+FROM oven/bun:latest as runner
 
 # Set working directory
 WORKDIR /app
