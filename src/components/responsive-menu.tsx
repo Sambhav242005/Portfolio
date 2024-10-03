@@ -18,7 +18,7 @@ import {
 
 import { useState, useEffect } from "react";
 import { Menu, X, ChevronDown } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -26,6 +26,8 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { cn } from "@/lib/utils";
+import Link from "next/link";
 
 export function ResponsiveMenu() {
   const [isMobile, setIsMobile] = useState(false);
@@ -45,31 +47,31 @@ export function ResponsiveMenu() {
 
   const menuItems = [
     { name: "Home", href: "#" },
-    { name: "About", href: "#" },
-    { name: "Services", href: "#" },
-    { name: "Contact", href: "#" },
+    { name: "Projects", href: "/project" },
+    { name: "Blog", href: "/Blog" },
+    { name: "Contact Me", href: "/contact" },
+    { name: "Download CV", href: "/downloadcv" },
   ];
 
   return (
     <nav className="bg-transparent shadow-none w-full ml-32 ">
       <div className="hidden md:block">
-        <div className="flex flex-auto justify-start w-full ">
-          <a href="#">
-            <Button
-              variant="ghost"
-              className="text-white text-xl border p-7 my-2.5 rounded-3xl"
-            >
-              Home
-            </Button>
-          </a>
-          <a href="#">
-            <Button
-              variant="ghost"
-              className="text-white text-xl p-7 my-2.5 rounded-3xl"
-            >
-              Skills
-            </Button>
-          </a>
+        <div className="flex flex-auto justify-start w-full gap-3 items-center">
+          {menuItems.map((item) => (
+              <Link
+                key={item.name}
+                href={item.href}
+                className={cn(buttonVariants({variant:"outline"}),
+                  "text-[#2C3E50] text-xl  border p-5 my-2.5 rounded-3xl",
+                  item.name === "Home" ? "bg-[#E67E22] hover:bg-[#F39C12]" : "",
+                  item.name === "Download CV"
+                  ? "ml-auto bg-red-500 text-white py-2 px-4 rounded-xl text-lg"
+                  : ""
+                )}
+              >
+                {item.name}
+              </Link>
+          ))}
         </div>
       </div>
       <div className="md:hidden bg-white rounded-2xl">
