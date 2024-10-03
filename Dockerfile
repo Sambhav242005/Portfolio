@@ -12,22 +12,8 @@ RUN bun install
 COPY . .
 
 # Build the Next.js app
-RUN bun run build
+RUN bun run next build
 
-# Stage 2: Serve the Next.js app
-FROM oven/bun:latest as runner
-
-# Set working directory
-WORKDIR /app
-
-# Copy built assets from the builder stage
-COPY --from=builder /app/.next /app/.next
-COPY --from=builder /app/public /app/public
-COPY --from=builder /app/next.config.mjs /app/next.config.mjs
-COPY --from=builder /app/package.json /app/package.json
-
-# Expose the Next.js port
 EXPOSE 3000
 
-# Start the Next.js app
-CMD ["bun", "run","next", "start"]
+CMD [ "bun","start" ]
