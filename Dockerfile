@@ -1,7 +1,7 @@
 # Stage 1: Build the Next.js app with Bun
 FROM oven/bun:latest as builder
 
-# Set working directory
+# Set working director
 WORKDIR /app
 
 # Copy package files and install dependencies
