@@ -31,7 +31,7 @@ jobs:
       with:
         context: .
         push: true
-        platforms: linux/amd64,linux/arm64  # Multi-arch build for amd64 and arm64
+        platforms: linux/amd64,linux/arm64 ,linux/arm64/v8 # Multi-arch build for amd64 and arm64
         tags: ${{ secrets.DOCKER_USERNAME }}/portfolio:latest  # Replace with your image name
 
     # Step 5: Log out from Docker Hub (optional)
