@@ -12,7 +12,7 @@ RUN bun install
 COPY . .
 
 # Build the Next.js app
-RUN bun run next build
+RUN bun run build
 
 EXPOSE 3000
 
