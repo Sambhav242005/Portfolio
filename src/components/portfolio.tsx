@@ -15,6 +15,7 @@ import {
   Send,
 } from "lucide-react";
 import { Label } from "./ui/label";
+import { SocialButton } from "./utility/common";
 
 export function PortfolioComponent() {
   const [name, setName] = useState("");
@@ -70,25 +71,36 @@ export function PortfolioComponent() {
             whileHover={{ scale: 1.2, y: -4 }}
             className={buttonVariants({ variant: "outline", size: "icon" })}
           >
-            <Github className="h-7 w-7 " />
+            <SocialButton
+              href="https://github.com/Sambhav242005"
+              icon={<Github className="bg-transparent" />}
+              label="GitHub"
+              className="h-7 w-7"
+            />
           </motion.button>
           <motion.button
             whileHover={{ scale: 1.2, y: -4 }}
             className={buttonVariants({ variant: "outline", size: "icon" })}
           >
-            <Linkedin className="h-7 w-7" />
+            <SocialButton
+              href="https://www.linkedin.com/in/sambhav-surana-19a557279/"
+              icon={<Linkedin  className="bg-transparent" />}
+              label="LinkedIn"
+              className="h-7 w-7"
+            />
           </motion.button>
           <motion.button
             whileHover={{ scale: 1.2, y: -4 }}
             className={buttonVariants({ variant: "outline", size: "icon" })}
           >
-            <Mail className="h-7 w-7" />
+            
+            <SocialButton href="mailto:sambhav242005@gmail.com" icon={<Mail  />} label="Mail"  className="h-7 w-7 bg-transparent"/>
           </motion.button>
         </motion.div>
       </section>
 
       {/* Skills Section */}
-      <section className="container mx-auto px-4 py-20">
+      <section className="container mx-auto px-4 py-20" id="skills">
         <h2 className="text-3xl font-bold mb-8 text-center">Skills</h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 bg-[#D6EAF8]">
           <SkillCard
@@ -115,7 +127,7 @@ export function PortfolioComponent() {
       </section>
 
       {/* Projects Section */}
-      <section className="container mx-auto px-4 py-20">
+      <section className="container mx-auto px-4 py-20" id="project">
         <h2 className="text-3xl font-bold mb-8 text-center">Projects</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <ProjectCard
@@ -142,9 +154,9 @@ export function PortfolioComponent() {
       </section>
 
       {/* Contact Section */}
-      <section className="container mx-auto px-4 py-20">
+      <section className="container mx-auto px-4 py-20 ">
         <h2 className="text-3xl font-bold mb-8 text-center">Contact Me</h2>
-        <form onSubmit={handleSubmit} className="max-w-md mx-auto">
+        <form onSubmit={handleSubmit} className="max-w-md mx-auto bg-white p-4 rounded-lg pt-12">
           {/* Name Field */}
           <div className="relative mb-12">
             <Input
@@ -154,7 +166,7 @@ export function PortfolioComponent() {
               onChange={(e) => setName(e.target.value)}
               required
             />
-            <Label className="absolute left-3 top-3 text-gray-500 transition-all peer-focus:top-[-35px] peer-focus:text-lg peer-focus:text-[#E67E22]">
+            <Label className="absolute left-3 top-3 text-gray-500 transition-all peer-focus:top-[-35px] peer-focus:left-0 peer-focus:text-lg peer-focus:text-[#E67E22]">
               Name
             </Label>
           </div>
@@ -163,25 +175,25 @@ export function PortfolioComponent() {
           <div className="relative mb-12">
             <Input
               type="email"
-              className="border border-black peer w-full p-3 rounded-md focus:outline-none focus:border-[#E67E22]"
+              className="border border-black peer w-full p-3 rounded-md focus:outline-none  focus:border-[#E67E22]"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
             />
-            <Label className="absolute left-3 top-3 text-gray-500 transition-all pointer-events-none peer-focus:top-[-35px] peer-focus:text-lg peer-focus:text-[#E67E22]">
+            <Label className="absolute left-3 top-3 text-gray-500 transition-all pointer-events-none peer-focus:left-0 peer-focus:top-[-35px] peer-focus:text-lg peer-focus:text-[#E67E22]">
               Email
             </Label>
           </div>
 
           {/* Message Field */}
-          <div className="relative mb-6 hover:mb-12">
+          <div className="relative mb-6 ">
             <Textarea
               className="border border-black peer w-full p-3 rounded-md focus:outline-none focus:border-[#E67E22]"
               value={message}
               onChange={(e) => setMessage(e.target.value)}
               required
             />
-            <Label className="absolute left-3 top-3 text-gray-500 transition-all peer-focus:top-[-35px] peer-focus:text-lg peer-focus:text-[#E67E22]">
+            <Label className="absolute left-3 top-3 text-gray-500 transition-all peer-focus:top-[-35px] peer-focus:left-0 peer-focus:text-lg peer-focus:text-[#E67E22]">
               Message
             </Label>
           </div>

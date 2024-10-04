@@ -1,6 +1,5 @@
 "use client";
 
-
 import { useState, useEffect } from "react";
 import { Menu } from "lucide-react";
 import { Button, buttonVariants } from "@/components/ui/button";
@@ -25,9 +24,10 @@ export function ResponsiveMenu() {
   }, []);
 
   const menuItems = [
-    { name: "Home", href: "#" },
-    { name: "Projects", href: "/project" },
-    { name: "Blog", href: "/Blog" },
+    { name: "Home", href: "/" },
+    { name: "Skills", href: "/#skills" },
+    { name: "Projects", href: "/#project" },
+    { name: "Blog", href: "/blog" },
     { name: "Contact Me", href: "/contact" },
     { name: "Download CV", href: "/downloadcv" },
   ];
@@ -37,23 +37,24 @@ export function ResponsiveMenu() {
       <div className="hidden md:block">
         <div className="flex flex-auto justify-start w-full gap-3 items-center">
           {menuItems.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                className={cn(buttonVariants({variant:"outline"}),
-                  "text-[#2C3E50] text-xl  border p-5 my-2.5 rounded-3xl",
-                  item.name === "Home" ? "bg-[#E67E22] hover:bg-[#F39C12]" : "",
-                  item.name === "Download CV"
+            <Link
+              key={item.name}
+              href={item.href}
+              className={cn(
+                buttonVariants({ variant: "outline" }),
+                "text-[#2C3E50] text-xl  border p-5 my-2.5 rounded-3xl",
+                item.name === "Home" ? "bg-[#E67E22] hover:bg-[#F39C12]" : "",
+                item.name === "Download CV"
                   ? "ml-auto bg-red-500 text-white py-2 px-4 rounded-xl text-lg"
                   : ""
-                )}
-              >
-                {item.name}
-              </Link>
+              )}
+            >
+              {item.name}
+            </Link>
           ))}
         </div>
       </div>
-      <div className="md:hidden bg-white rounded-2xl">
+      <div className="md:hidden bg-transparent rounded-2xl flex justify-end">
         <Sheet>
           <SheetTrigger asChild>
             <Button variant="ghost" size="icon" aria-label="Open menu">
@@ -63,13 +64,23 @@ export function ResponsiveMenu() {
           <SheetContent side="right" className="w-[300px] sm:w-[400px]">
             <nav className="flex flex-col space-y-4 mt-4">
               {menuItems.map((item) => (
-                <a
-                  key={item.name}
-                  href={item.href}
-                  className="text-lg font-medium text-primary-foreground hover:text-accent-foreground transition-colors"
-                >
-                  {item.name}
-                </a>
+                <SheetTrigger asChild key={item.name}>
+                  <Link
+                    href={item.href}
+                    className={cn(
+                      buttonVariants({ variant: "outline" }),
+                      "text-[#2C3E50] text-xl  border p-5 my-2.5 rounded-3xl",
+                      item.name === "Home"
+                        ? "bg-[#E67E22] hover:bg-[#F39C12]"
+                        : "",
+                      item.name === "Download CV"
+                        ? "ml-auto bg-red-500 text-white py-2 px-4 rounded-xl text-lg"
+                        : ""
+                    )}
+                  >
+                    {item.name}
+                  </Link>
+                </SheetTrigger>
               ))}
             </nav>
           </SheetContent>
