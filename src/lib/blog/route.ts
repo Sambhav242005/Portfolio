@@ -1,5 +1,3 @@
-import { NextRequest, NextResponse } from "next/server";
-import { readFile } from "fs/promises";
 import path from "path";
 import fs from "fs";
 import matter from 'gray-matter';
@@ -39,10 +37,10 @@ export function getPostBySlug(slug: string, fields: string[] = []) {
     return items
   }
 
-export function getAllPosts(fields: string[] = []) {
-    const slugs = getPostSlugs()
+  export function getAllPosts(fields: string[] = []) {
+    const slugs = getPostSlugs();
     const posts = slugs
-      .map((slug) => getPostBySlug(slug, fields))
-      .sort((post1, post2) => (post1.date > post2.date ? -1 : 1))
-    return posts
-  }
+        .map((slug) => getPostBySlug(slug, fields))
+        .sort((post1, post2) => (post1.data > post2.data ? -1 : 1));
+    return posts;
+}

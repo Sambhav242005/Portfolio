@@ -1,4 +1,4 @@
-import { getAllPosts, getPostBySlug } from '@/app/api/blog/route'
+import { getAllPosts, getPostBySlug } from '@/lib/blog/route'
 import ReactMarkdown from 'react-markdown'
 
 export async function generateStaticParams() {
