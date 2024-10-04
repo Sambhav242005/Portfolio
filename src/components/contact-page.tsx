@@ -32,7 +32,7 @@ export function ContactPageComponent() {
           <Card>
             <CardHeader>
               <CardTitle>Get in Touch</CardTitle>
-              <CardDescription>Fill out the form and I'll get back to you as soon as possible.</CardDescription>
+              <CardDescription>Fill out the form and I&aposll get back to you as soon as possible.</CardDescription>
             </CardHeader>
             <CardContent>
               <form onSubmit={handleSubmit} className="space-y-4">
