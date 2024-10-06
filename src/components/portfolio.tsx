@@ -1,41 +1,26 @@
 "use client";
 
-import { useState } from "react";
 import { motion } from "framer-motion";
-import { Button, buttonVariants } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
+import { buttonVariants } from "@/components/ui/button";
 import {
   BrainCircuit,
   Code,
   Cpu,
   Github,
   Linkedin,
-  Mail,
-  Send,
+  Mail
 } from "lucide-react";
-import { Label } from "./ui/label";
 import { SocialButton } from "./utility/common";
+import { cn } from "@/lib/utils";
+import ContactMe from "./contactme";
 
 export function PortfolioComponent() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Here you would typically handle the form submission, e.g., sending an email
-    console.log("Form submitted:", { name, email, message });
-    // Reset form fields
-    setName("");
-    setEmail("");
-    setMessage("");
-  };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b bg-[#D6EAF8] text-[#2C3E50]">
+    <div className="min-h-screen bg-white  text-[#2C3E50] ">
       {/* Hero Section */}
-      <section className="container mx-auto px-4 py-20 text-center">
+      <section className="container mx-auto px-4 py-20 text-center items-center ">
+
         <motion.h1
           className="text-4xl md:text-6xl font-bold mb-4"
           initial={{ opacity: 0, y: -50 }}
@@ -69,40 +54,41 @@ export function PortfolioComponent() {
         >
           <motion.button
             whileHover={{ scale: 1.2, y: -4 }}
-            className={buttonVariants({ variant: "outline", size: "icon" })}
+            className={cn(buttonVariants({ variant: "outline", size: "icon" }), "bg-[#D6EAF8] hover:bg-[#95c9ed]")}
           >
             <SocialButton
               href="https://github.com/Sambhav242005"
               icon={<Github className="bg-transparent" />}
               label="GitHub"
-              className="h-7 w-7"
+              className="h-7 w-7 "
             />
           </motion.button>
           <motion.button
             whileHover={{ scale: 1.2, y: -4 }}
-            className={buttonVariants({ variant: "outline", size: "icon" })}
+            className={cn(buttonVariants({ variant: "outline", size: "icon" }), "bg-[#D6EAF8] hover:bg-[#95c9ed]")}
           >
             <SocialButton
               href="https://www.linkedin.com/in/sambhav-surana-19a557279/"
-              icon={<Linkedin  className="bg-transparent" />}
+              icon={<Linkedin className="bg-transparent" />}
               label="LinkedIn"
               className="h-7 w-7"
             />
           </motion.button>
           <motion.button
             whileHover={{ scale: 1.2, y: -4 }}
-            className={buttonVariants({ variant: "outline", size: "icon" })}
+            className={cn(buttonVariants({ variant: "outline", size: "icon" }), "bg-[#D6EAF8] hover:bg-[#95c9ed]")}
           >
-            
-            <SocialButton href="mailto:sambhav242005@gmail.com" icon={<Mail  />} label="Mail"  className="h-7 w-7 bg-transparent"/>
+
+            <SocialButton href="mailto:sambhav242005@gmail.com" icon={<Mail />} label="Mail" className="h-7 w-7 bg-transparent" />
           </motion.button>
         </motion.div>
       </section>
 
+      <hr />
       {/* Skills Section */}
-      <section className="container mx-auto px-4 py-20" id="skills">
+      <section className="  px-4 py-20 bg-slate-50 w-full    grid  items-center" id="skills">
         <h2 className="text-3xl font-bold mb-8 text-center">Skills</h2>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 bg-[#D6EAF8]">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
           <SkillCard
             icon={<Code className="h-8 w-8" />}
             title="Web Development"
@@ -125,9 +111,9 @@ export function PortfolioComponent() {
           />
         </div>
       </section>
-
+      <hr />
       {/* Projects Section */}
-      <section className="container mx-auto px-4 py-20" id="project">
+      <section className="container mx-auto px-4 py-20 grid  " id="project">
         <h2 className="text-3xl font-bold mb-8 text-center">Projects</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <ProjectCard
@@ -152,61 +138,10 @@ export function PortfolioComponent() {
           />
         </div>
       </section>
-
+      <hr />
       {/* Contact Section */}
-      <section className="container mx-auto px-4 py-20 ">
-        <h2 className="text-3xl font-bold mb-8 text-center">Contact Me</h2>
-        <form onSubmit={handleSubmit} className="max-w-md mx-auto bg-white p-4 rounded-lg pt-12">
-          {/* Name Field */}
-          <div className="relative mb-12">
-            <Input
-              type="text"
-              className="border border-black peer w-full p-3 rounded-md focus:outline-none focus:border-[#E67E22]"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              required
-            />
-            <Label className="absolute left-3 top-3 text-gray-500 transition-all peer-focus:top-[-35px] peer-focus:left-0 peer-focus:text-lg peer-focus:text-[#E67E22]">
-              Name
-            </Label>
-          </div>
-
-          {/* Email Field */}
-          <div className="relative mb-12">
-            <Input
-              type="email"
-              className="border border-black peer w-full p-3 rounded-md focus:outline-none  focus:border-[#E67E22]"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-            <Label className="absolute left-3 top-3 text-gray-500 transition-all pointer-events-none peer-focus:left-0 peer-focus:top-[-35px] peer-focus:text-lg peer-focus:text-[#E67E22]">
-              Email
-            </Label>
-          </div>
-
-          {/* Message Field */}
-          <div className="relative mb-6 ">
-            <Textarea
-              className="border border-black peer w-full p-3 rounded-md focus:outline-none focus:border-[#E67E22]"
-              value={message}
-              onChange={(e) => setMessage(e.target.value)}
-              required
-            />
-            <Label className="absolute left-3 top-3 text-gray-500 transition-all peer-focus:top-[-35px] peer-focus:left-0 peer-focus:text-lg peer-focus:text-[#E67E22]">
-              Message
-            </Label>
-          </div>
-
-          {/* Submit Button */}
-          <Button
-            type="submit"
-            className="w-full bg-[#E67E22] text-white py-3 px-6 rounded-md"
-          >
-            Send Message
-            <Send className="ml-2 h-4 w-4" />
-          </Button>
-        </form>
+      <section className="w-full mx-auto bg-slate-50 px-4 py-20   ">
+        <ContactMe className="max-w-xl mx-auto"/>
       </section>
     </div>
   );
@@ -223,7 +158,7 @@ function SkillCard({
 }) {
   return (
     <motion.div
-      className="bg-[#F9F9F9] p-6 rounded-lg text-center"
+      className="bg-[#D6EAF8] hover:bg-[#95c9ed] p-6 rounded-lg text-center"
       whileHover={{ scale: 1.05 }}
       transition={{ type: "spring", stiffness: 300 }}
     >
@@ -245,17 +180,17 @@ function ProjectCard({
 }) {
   return (
     <motion.div
-      className="bg-[#F9F9F9] p-6 rounded-lg"
+      className="bg-[#D6EAF8] hover:bg-[#95c9ed] group  p-6 rounded-lg"
       whileHover={{ scale: 1.03 }}
       transition={{ type: "spring", stiffness: 300 }}
     >
-      <h3 className="text-xl font-semibold mb-2">{title}</h3>
-      <p className="text-[#E67E22] mb-4">{description}</p>
+      <h3 className="text-xl mb-2 group-hover:text-blue-800 font-bold">{title}</h3>
+      <p className="text-gray-8̥00 mb-4 font-light group-hover:text-blue-700">{description}</p>
       <div className="flex flex-wrap gap-2">
         {technologies.map((tech, index) => (
           <span
             key={index}
-            className="bg-[#27AE60] text-white text-sm px-2 py-1 rounded"
+            className="bg-blue-600 text-white text-sm px-2 py-1 rounded"
           >
             {tech}
           </span>

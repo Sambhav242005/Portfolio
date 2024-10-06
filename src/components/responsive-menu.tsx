@@ -33,27 +33,26 @@ export function ResponsiveMenu() {
   ];
 
   return (
-    <nav className="bg-transparent shadow-none w-full ml-32 ">
-      <div className="hidden md:block">
-        <div className="flex flex-auto justify-start w-full gap-3 items-center">
+    <nav className="bg-transparent shadow-none md:w-full  w-fit    ml-0 md:ml-32 ">
+      <div className="hidden md:block ">
+        <div className="flex flex-auto justify-start w-full gap-3  items-center ">
           {menuItems.map((item) => (
             <Link
               key={item.name}
               href={item.href}
               className={cn(
                 buttonVariants({ variant: "outline" }),
-                "text-[#2C3E50] text-xl  border p-5 my-2.5 rounded-3xl",
-                item.name === "Home" ? "bg-[#E67E22] hover:bg-[#F39C12]" : "",
+                "text-[#2C3E50] text-xl bg-transparent font-normal border-none hover:border-2 shadow-none  p-5 my-2.5 rounded-3xl",
+                item.name === "Home" ? "text-orange-500 underline hover:text-orange-700" : "",
                 item.name === "Download CV"
-                  ? "ml-auto bg-red-500 text-white py-2 px-4 rounded-xl text-lg"
+                  ? "ml-auto text-red-500 hover:text-red-700 underline border-[0.5px] border-black  py-2 px-4 rounded-xl text-lg"
                   : ""
               )}
             >
               {item.name}
             </Link>
           ))}
-        </div>
-      </div>
+        </div></div>
       <div className="md:hidden bg-transparent rounded-2xl flex justify-end">
         <Sheet>
           <SheetTrigger asChild>
