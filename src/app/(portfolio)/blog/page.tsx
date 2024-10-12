@@ -1,5 +1,5 @@
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { getAllPosts } from "../../lib/blog/route";
+import { getAllPosts } from "@/lib/blog/route";
 
 export default function Page(){
     const posts = getAllPosts(['title', 'date', 'description', 'slug'])
