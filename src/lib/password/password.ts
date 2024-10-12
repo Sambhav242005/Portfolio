@@ -7,6 +7,7 @@ let randomPassword: string | null = null;
 
 export async function generateRandomPassword() {
   const password = crypto.randomBytes(8).toString('hex')
+  randomPassword = password;
   console.log(`Generated password: ${password}`)
   
   // Store the hashed password in a server-side cookie
