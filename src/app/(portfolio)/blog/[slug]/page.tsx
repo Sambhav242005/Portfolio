@@ -1,18 +1,12 @@
-import { getAllPosts, getPostBySlug } from '@/lib/blog/route'
+import {  getPostBySlug } from '@/lib/blog/manage'
 import ReactMarkdown from 'react-markdown'
 import remarkGFM from "remark-gfm";
 
-export async function generateStaticParams() {
-  const posts = getAllPosts(['slug'])
 
-  return posts.map((post) => ({
-    slug: post.slug,
-  }))
-}
-
-export default function BlogPost({ params }: { params: { slug: string } }) {
-  const post = getPostBySlug(params.slug, ['title', 'date','author', 'content'])
-
+export default async function BlogPost({ params }: { params: { slug: string } }) {
+  const post = await getPostBySlug(params.slug)
+  console.log(post);
+  
   return (
     <div className="container mx-auto px-4 py-12 lg:px-8">
       {/* Post Title */}
