@@ -2,6 +2,7 @@ import {  getPostBySlug } from '@/lib/blog/manage'
 import ReactMarkdown from 'react-markdown'
 import remarkGFM from "remark-gfm";
 
+export const runtime = 'edge' // 'nodejs' (default) | 'edge'
 
 export default async function BlogPost({ params }: { params: { slug: string } }) {
   const post = await getPostBySlug(params.slug)

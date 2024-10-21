@@ -18,5 +18,9 @@ export async function generateRandomPassword() {
 }
 
 export async function verifyPassword(inputPassword: string) {
-  return await inputPassword === randomPassword;
+
+  console.log(inputPassword,randomPassword,inputPassword === randomPassword);
+  
+
+  return inputPassword === randomPassword;
 }

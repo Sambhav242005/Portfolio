@@ -1,13 +1,27 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { generateRandomPassword } from '@/lib/password/password'
 
 export default function LoginPage() {
   const [password, setPassword] = useState('')
   const router = useRouter()
 
-  
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const resp = await fetch('/api/admin/login', { method: 'GET' });
+        if (!resp.ok) {
+          throw new Error('Network response was not ok');
+        }
+      } catch (error) {
+        console.error('Error fetching data:', error); // Log the error
+      }
+    };
+
+    fetchData(); // Call the async function
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()

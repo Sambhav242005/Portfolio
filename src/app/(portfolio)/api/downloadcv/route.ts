@@ -1,6 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import { readFile } from "fs/promises";
 import path from "path";
+
+
+
 export async function GET(req: NextRequest, res: NextResponse) {
   const buffer = await readFile(
     path.join(process.cwd(), "src/assets", "portfolio.pdf")

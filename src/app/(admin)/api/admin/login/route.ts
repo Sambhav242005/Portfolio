@@ -1,21 +1,27 @@
-import { NextResponse } from 'next/server'
-import { cookies } from 'next/headers'
-import crypto from 'crypto'
+'use server'
+
+import { cookies } from 'next/headers';
+import { generateRandomPassword, verifyPassword } from '@/lib/password/password';
+
+export async function GET(){
+
+  generateRandomPassword();
+
+  return new Response('Password Generated')
+}
+
 
 export async function POST(request: Request) {
-  const { password } = await request.json()
-  const storedHash = cookies().get('auth')?.value
+  const body = await request.json(); 
+  const { password } = body;
 
-  if (!storedHash) {
-    return NextResponse.json({ error: 'No password set' }, { status: 400 })
+  const isValid = await verifyPassword(password);
+
+  if (!isValid) {
+    return new Response('Invalid password', { status: 401 });
   }
 
-  const inputHash = crypto.createHash('sha256').update(password).digest('hex')
+  cookies().set('auth', 'true');
 
-  if (inputHash === storedHash) {
-    cookies().set('loggedIn', 'true', { httpOnly: true, secure: true })
-    return NextResponse.json({ success: true })
-  } else {
-    return NextResponse.json({ error: 'Invalid password' }, { status: 401 })
-  }
+  return new Response('Login successful');
 }
