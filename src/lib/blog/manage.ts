@@ -28,7 +28,6 @@ export async function getPostSlugs(): Promise<string[]> {
 export async function getPostBySlug(slug: string): Promise<PostData> {
   const filePath = path.join(pathBlogDirectory, `${slug}.md`);
   const fileContent = await fs.promises.readFile(filePath, 'utf-8');
-  console.log(matter(fileContent));
   
   return { ...matter(fileContent).data,content:matter(fileContent).content, slug } as PostData;
 } 
@@ -57,7 +56,6 @@ export async function getAllPosts(): Promise<{ date: string; title: string; slug
     (await getPostSlugs()).map((slug) => getPostBySlug(slug))
   );
 
-  console.log(postsData);
   
 
   return postsData.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
