@@ -2,7 +2,7 @@
 
 import path from "path";
 import * as fs from 'node:fs';
-import matter, { GrayMatterFile } from "gray-matter";
+import matter from "gray-matter";
 
 // Define the path to your blog directory
 const pathBlogDirectory = path.join(process.cwd(), "src/blogs");
@@ -36,6 +36,8 @@ async function ensureDirectoryExists() {
   try {
     await fs.promises.access(pathBlogDirectory)
   } catch (error) {
+    console.log(error);
+    
     await fs.promises.mkdir(pathBlogDirectory, { recursive: true })
   }
 }

@@ -12,7 +12,7 @@ export async function generateRandomPassword() {
   
   // Store the hashed password in a server-side cookie
   const hashedPassword = crypto.createHash('sha256').update(password).digest('hex')
-  cookies().set('auth', hashedPassword, { httpOnly: true, secure: true })
+  ;(await cookies()).set('auth', hashedPassword, { httpOnly: true, secure: true })
 
   return await password
 }
