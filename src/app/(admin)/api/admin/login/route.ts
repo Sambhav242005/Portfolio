@@ -1,6 +1,16 @@
+'use server'
 import { NextResponse } from 'next/server'
 import { cookies } from 'next/headers'
 import crypto from 'crypto'
+import { generateRandomPassword } from '@/lib/password/password';
+
+export async function GET(){
+
+  generateRandomPassword();
+
+  return new Response('Password Generated')
+}
+
 
 export async function POST(request: Request) {
   const { password } = await request.json()
