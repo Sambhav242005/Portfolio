@@ -13,7 +13,6 @@
 /.next/
 /out/
 
-bun.lockb
 # production
 /build
 /src/blogs/*
