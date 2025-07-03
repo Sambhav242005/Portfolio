@@ -1,7 +1,6 @@
-import { PortfolioComponent } from "@/components/portfolio";
-import '../globals.css'
+import "../globals.css";
+import PortfolioComponent from "@/components/PortfolioComponent";
+
 export default function Home() {
-  return (
-    <PortfolioComponent />
-  );
+  return <PortfolioComponent />;
 }

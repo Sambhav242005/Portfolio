@@ -1,13 +1,14 @@
-'use client';
-import { useEffect, useState } from "react";
+"use client";
+import { useEffect, useRef } from "react";
 
 const DownloadPortfolio = () => {
-  const [hasDownloaded, setHasDownloaded] = useState(false);
+  const hasDownloaded = useRef(false);
 
   useEffect(() => {
-    if (!hasDownloaded) {
-      // Trigger the download
-      const downloadPortfolio = async () => {
+    if (hasDownloaded.current) return;
+
+    const downloadPortfolio = async () => {
+      try {
         const response = await fetch("/api/downloadcv");
         const blob = await response.blob();
         const url = window.URL.createObjectURL(blob);
@@ -15,14 +16,17 @@ const DownloadPortfolio = () => {
         link.href = url;
         link.download = "sambhav_surana_portfolio.pdf";
         link.click();
-        // Redirect to homepage after download
+        window.URL.revokeObjectURL(url);
+      } catch (error) {
+        console.error("Download failed:", error);
+      } finally {
         window.location.href = "/";
-      };
+      }
+    };
 
-      downloadPortfolio();
-      setHasDownloaded(true); // Prevent further downloads in Strict Mode
-    }
-  }, [hasDownloaded]);
+    downloadPortfolio();
+    hasDownloaded.current = true;
+  }, []);
 
   return (
     <div>
@@ -32,4 +36,3 @@ const DownloadPortfolio = () => {
 };
 
 export default DownloadPortfolio;
-

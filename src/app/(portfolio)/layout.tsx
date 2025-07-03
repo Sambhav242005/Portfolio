@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Theme } from "@radix-ui/themes";
 import Header from "@/components/header";
-import '../globals.css'
+import "../globals.css";
 
 export const metadata: Metadata = {
   title: "Sambhav Surana - Technology Architect",
@@ -16,7 +16,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="font-sans text-gray-900 bg-white dark:bg-gray-800 dark:text-gray-100">
+      <body
+        suppressHydrationWarning
+        className="font-sans bg-white text-gray-900 dark:bg-gray-800 dark:text-gray-100"
+      >
         <Theme>
           <Header />
           {children}

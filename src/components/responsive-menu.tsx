@@ -33,7 +33,7 @@ export function ResponsiveMenu() {
   ];
 
   return (
-    <nav className="bg-transparent shadow-none md:w-full  w-fit    ml-0 md:ml-32 ">
+    <nav className="bg-transparent shadow-none md:w-full  w-fit    ml-5 md:ml-32 ">
       <div className="hidden md:block ">
         <div className="flex flex-auto justify-start w-full gap-3  items-center ">
           {menuItems.map((item) => (
