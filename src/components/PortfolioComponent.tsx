@@ -34,7 +34,7 @@ function PortfolioComponent() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
-          AI Enthusiast | Data Science Student | Problem Solver
+          AI Enthusiast | Python Developer | Problem Solver
         </motion.p>
 
         {/* Social Links */}
