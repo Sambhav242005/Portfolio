@@ -7,7 +7,7 @@ export function ContactPageComponent() {
   
 
   return (
-    <div className="min-h-screen w-full bg-[#D6EAF8] ">
+  <div className="min-h-screen w-full bg-accent">
       <div className="container mx-auto w-full px-4 py-16">
         <h1 className="text-4xl font-bold text-center mb-8">Contact Me</h1>
         

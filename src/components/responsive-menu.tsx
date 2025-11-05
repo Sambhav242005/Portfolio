@@ -33,19 +33,19 @@ export function ResponsiveMenu() {
   ];
 
   return (
-    <nav className="bg-transparent shadow-none md:w-full  w-fit    ml-5 md:ml-32 ">
-      <div className="hidden md:block ">
-        <div className="flex flex-auto justify-start w-full gap-3  items-center ">
+    <nav className="bg-transparent shadow-none w-full">
+      <div className="hidden md:block">
+        <div className="flex justify-center w-full gap-6 items-center">
           {menuItems.map((item) => (
-            <Link
+                <Link
               key={item.name}
               href={item.href}
               className={cn(
                 buttonVariants({ variant: "outline" }),
-                "text-[#2C3E50] text-xl bg-transparent font-normal border-none hover:border-2 shadow-none  p-5 my-2.5 rounded-3xl",
-                item.name === "Home" ? "text-orange-500 underline hover:text-orange-700" : "",
+                "text-foreground text-xl bg-transparent font-normal border-none hover:border-2 shadow-none p-4 my-2 rounded-full",
+                    item.name === "Home" ? "text-primary underline" : "",
                 item.name === "Download CV"
-                  ? "ml-auto text-red-500 hover:text-red-700 underline border-[0.5px] border-black  py-2 px-4 rounded-xl text-lg"
+                  ? "text-destructive underline border-[0.5px] border-border py-2 px-4 rounded-xl text-lg"
                   : ""
               )}
             >
@@ -68,12 +68,12 @@ export function ResponsiveMenu() {
                     href={item.href}
                     className={cn(
                       buttonVariants({ variant: "outline" }),
-                      "text-[#2C3E50] text-xl  border p-5 my-2.5 rounded-3xl",
+                      "text-foreground text-xl border p-4 my-2 rounded-xl",
                       item.name === "Home"
-                        ? "bg-[#E67E22] hover:bg-[#F39C12]"
+                        ? "bg-primary text-primary-foreground hover:brightness-105"
                         : "",
                       item.name === "Download CV"
-                        ? "ml-auto bg-red-500 text-white py-2 px-4 rounded-xl text-lg"
+                        ? "bg-destructive text-destructive-foreground py-2 px-4 rounded-xl text-lg"
                         : ""
                     )}
                   >

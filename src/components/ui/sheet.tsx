@@ -68,6 +68,8 @@ const SheetContent = React.forwardRef<
         <Cross2Icon className="h-4 w-4" />
         <span className="sr-only">Close</span>
       </SheetPrimitive.Close>
+      {/* Provide a Dialog Title for accessibility. Hidden visually but available to screen readers. */}
+      <SheetPrimitive.Title className="sr-only">Menu</SheetPrimitive.Title>
       {children}
     </SheetPrimitive.Content>
   </SheetPortal>

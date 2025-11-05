@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
-import { Theme } from "@radix-ui/themes";
-import Header from "@/components/header";
+import { Header } from "@/components/header";
 import "../globals.css";
+import { ThemeProvider } from "@/components/theme-provider"
+// global styles temporarily disabled to debug build parsing issues
 
 export const metadata: Metadata = {
   title: "Sambhav Surana - Technology Architect",
@@ -15,15 +16,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        suppressHydrationWarning
-        className="font-sans bg-white text-gray-900 dark:bg-gray-800 dark:text-gray-100"
-      >
-        <Theme>
+    <html lang="en" suppressHydrationWarning>
+      <body className="font-sans bg-white text-gray-900 dark:bg-gray-800 dark:text-gray-100">
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
           <Header />
           {children}
-        </Theme>
+          </ThemeProvider>
       </body>
     </html>
   );

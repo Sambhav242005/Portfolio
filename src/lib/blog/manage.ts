@@ -1,13 +1,15 @@
-'use server'
+'use server';
 
-import path from "path";
+import path from 'path';
 import * as fs from 'node:fs';
-import matter from "gray-matter";
+import matter from 'gray-matter';
+import fetch from 'node-fetch';
 
-// Define the path to your blog directory
-const pathBlogDirectory = path.join(process.cwd(), "src/blogs");
+const localBlogDirectory = path.join(process.cwd(), 'src/blogs');
+const githubRepoOwner = 'Sambhav242005';
+const githubRepoName = 'Notes';
+const githubBranch = 'main';
 
-// Define a type for the frontmatter data (including title, date, description, and author)
 interface PostData {
   title: string;
   date: string;
@@ -17,90 +19,145 @@ interface PostData {
   content: string;
 }
 
-// Function to get all post slugs
-export async function getPostSlugs(): Promise<string[]> {
-  const files = await fs.readdirSync(pathBlogDirectory);
-  return files.filter((file) => file.endsWith('.md')).map((file) => file.replace(/\.md$/, ''));
-}
-
-
-// Function to get a single post by slug
-export async function getPostBySlug(slug: string): Promise<PostData> {
-  const filePath = path.join(pathBlogDirectory, `${slug}.md`);
-  const fileContent = await fs.promises.readFile(filePath, 'utf-8');
-  
-  return { ...matter(fileContent).data,content:matter(fileContent).content, slug } as PostData;
-} 
+/* -----------------------------
+   🔹 1. Ensure local directory
+-------------------------------- */
 async function ensureDirectoryExists() {
   try {
-    await fs.promises.access(pathBlogDirectory)
-  } catch (error) {
-    console.log(error);
-    
-    await fs.promises.mkdir(pathBlogDirectory, { recursive: true })
+    await fs.promises.access(localBlogDirectory);
+  } catch {
+    await fs.promises.mkdir(localBlogDirectory, { recursive: true });
   }
 }
 
-export async function getMarkdownFiles() {
-  try {
-    await ensureDirectoryExists()
-    const files = await fs.promises.readdir(pathBlogDirectory)
-    return files.filter(file => file.endsWith('.md'))
-  } catch (error) {
-    console.error('Error reading markdown files:', error)
-    return []
+/* -----------------------------
+   🔹 2. Get GitHub Notes list
+-------------------------------- */
+/* -----------------------------
+   🔹 3. Get markdown file (local or GitHub)
+-------------------------------- */
+export async function getPostBySlug(slug: string): Promise<PostData> {
+  const decodedSlug = decodeURIComponent(slug);
+  const filePath = path.join(localBlogDirectory, `${decodedSlug}.md`);
+
+  let fileContent: string | null = null;
+
+  // Try local file first
+  if (fs.existsSync(filePath)) {
+    fileContent = await fs.promises.readFile(filePath, 'utf-8');
+  } else {
+    // Try GitHub
+    const githubURL = `https://raw.githubusercontent.com/${githubRepoOwner}/${githubRepoName}/${githubBranch}/${decodedSlug}.md`;
+    const res = await fetch(githubURL);
+    if (res.ok) {
+      fileContent = await res.text();
+    }
   }
+
+  if (!fileContent) {
+    throw new Error(`Markdown file not found for slug: ${slug}`);
+  }
+
+  const parsed = matter(fileContent);
+  const data = (parsed.data || {}) as Record<string, any>;
+
+  // Title: prefer frontmatter.title, otherwise derive from first H1 in content
+  let title = data.title || '';
+  if (!title) {
+    const match = parsed.content.match(/^#\s+(.+)$/m);
+    if (match) {
+      title = match[1].trim();
+      // Remove the matched H1 from the content so it doesn't render twice
+      parsed.content = parsed.content.replace(match[0], '').trimStart();
+    }
+  }
+  if (!title) title = decodedSlug;
+
+  return {
+    title,
+    date: data.date ? String(data.date) : '',
+    description: data.description || '',
+    author: data.author || '',
+    content: parsed.content.trim(),
+    slug: decodedSlug,
+  } as PostData;
 }
 
-// Function to get all posts
-export async function getAllPosts(): Promise<{ date: string; title: string; slug: string; description: string }[]> {
-  const postsData = await Promise.all(
-    (await getPostSlugs()).map((slug) => getPostBySlug(slug))
+/* -----------------------------
+   🔹 4. Get all posts (merged local + GitHub)
+-------------------------------- */
+export async function getAllPosts(): Promise<
+  { date: string; title: string; slug: string; description: string }[]
+> {
+  await ensureDirectoryExists();
+
+  const localFiles = (await fs.promises.readdir(localBlogDirectory)).filter((f) => f.endsWith('.md'));
+
+  const uniqueFiles = Array.from(new Set([...localFiles,]));
+
+  const posts = await Promise.all(
+    uniqueFiles.map(async (filename) => {
+      const slug = filename.replace(/\.md$/, '');
+      try {
+        const post = await getPostBySlug(slug);
+        return {
+          date: post.date || '1970-01-01',
+          title: post.title,
+          slug: post.slug,
+          description: post.description || '',
+        };
+      } catch {
+        return null;
+      }
+    })
   );
 
-  
-
-  return postsData.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-    .filter(post => post.slug !== undefined)
-    .map(({ date, title, slug, description }) => ({ date, title, slug, description }));
+  return posts
+    .filter(Boolean)
+    .sort((a, b) => new Date(b!.date).getTime() - new Date(a!.date).getTime()) as any;
 }
 
-// Function to save a markdown file
-export async function saveMarkdownFile(filename: string, content: string): Promise<{ success: boolean; message: string }> {
+/* -----------------------------
+   🔹 5. Admin helper APIs (client-facing helpers)
+-------------------------------- */
+// Minimal implementations so admin client components can call them.
+// These operate on the local `src/blogs` directory.
+
+export async function getMarkdownFiles(): Promise<string[]> {
+  await ensureDirectoryExists();
+  const files = await fs.promises.readdir(localBlogDirectory);
+  return files.filter((f) => f.endsWith('.md')).sort();
+}
+
+export async function getMarkdownContent(filename: string): Promise<{ success: boolean; content: string; message?: string }> {
   try {
-    const filePath = path.join(pathBlogDirectory, `${filename}.md`);
-    await fs.promises.writeFile(filePath, content, 'utf8');
-    return { success: true, message: 'File saved successfully' };
-  } catch (error) {
-    console.error('Error saving markdown file:', error);
-    return { success: false, message: 'Error saving file' };
+    const slug = filename.replace(/\.md$/, '')
+    const post = await getPostBySlug(slug)
+    return { success: true, content: post.content }
+  } catch (err: any) {
+    return { success: false, content: '', message: String(err?.message || err) }
   }
 }
 
+export async function saveMarkdownFile(filenameNoExt: string, content: string): Promise<{ success: boolean; message: string }> {
+  try {
+    await ensureDirectoryExists()
+    const filename = filenameNoExt.endsWith('.md') ? filenameNoExt : `${filenameNoExt}.md`
+    const filePath = path.join(localBlogDirectory, filename)
+    await fs.promises.writeFile(filePath, content, 'utf-8')
+    return { success: true, message: 'File saved successfully.' }
+  } catch (err: any) {
+    return { success: false, message: String(err?.message || err) }
+  }
+}
 
-
-// Function to delete a markdown file
 export async function deleteMarkdownFile(filename: string): Promise<{ success: boolean; message: string }> {
   try {
-    const filePath = path.join(pathBlogDirectory, filename);
-    await fs.promises.unlink(filePath);
-    return { success: true, message: 'File deleted successfully' };
-  } catch (error) {
-    console.error('Error deleting markdown file:', error);
-    return { success: false, message: 'Error deleting file' };
+    const filePath = path.join(localBlogDirectory, filename)
+    await fs.promises.unlink(filePath)
+    return { success: true, message: 'File deleted successfully.' }
+  } catch (err: any) {
+    return { success: false, message: String(err?.message || err) }
   }
+
 }
-
-
-// Function to get markdown content
-export async function getMarkdownContent(filename: string): Promise<{ success: boolean; content: string }> {
-  try {
-    const filePath = path.join(pathBlogDirectory, filename);
-    const content = await fs.promises.readFile(filePath, 'utf-8');
-    return { success: true, content };
-  } catch (error) {
-    console.error('Error reading markdown file:', error);
-    return { success: false, content: '' };
-  }
-}
-
