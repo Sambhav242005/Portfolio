@@ -24,7 +24,7 @@ COPY --from=builder /app/package-lock.json ./
 COPY --from=builder /app/.next ./.next
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/src ./src
-COPY --from=builder /app/next.config.* ./  # in case you have next.config.js/ts
+COPY --from=builder /app/next.config.* ./
 
 # Install only production dependencies
 RUN npm ci --omit=dev
