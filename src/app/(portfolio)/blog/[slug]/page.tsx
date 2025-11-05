@@ -215,9 +215,9 @@ const processCalloutContent = (children: React.ReactNode) => {
   return { type, content }
 }
 
-export default async function BlogPost({ params }: { params: { slug: string } }) {
+export default async function BlogPost({ params }: { params: Promise<{ slug: string }> }) {
   // `params` may be a Promise in App Router; await it before accessing properties
-  const awaitedParams = (await params) as { slug: string }
+  const awaitedParams = await params
   const post = await getPostBySlug(awaitedParams.slug)
   
   // Apply preprocessing
