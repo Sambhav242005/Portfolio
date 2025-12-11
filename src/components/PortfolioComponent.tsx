@@ -107,21 +107,22 @@ function PortfolioComponent() {
           <div className="md:col-span-2">
             <h2 className="text-2xl font-bold mb-4">Summary</h2>
             <p className="mb-6 text-lg leading-relaxed">
-              Third-year B.Tech student specializing in AI. Hands-on experience building practical machine learning
-              and web applications — particularly in computer vision, NLP, and generative AI. Comfortable with Python,
-              modern JavaScript frameworks, LLM integrations, and end-to-end project development. Passionate about
-              research-driven solutions and building tools that assist decision making and automation.
+              Third-year student specializing in Artificial Intelligence. I have built custom AI agents, 
+              scalable full-stack applications, and research-driven tools. Experienced with Next.js 15, FastAPI, 
+              and modern AI frameworks like LangGraph and Supabase. Passionate about solving complex problems 
+              through intelligent systems and automation.
             </p>
 
             <h3 className="text-xl font-semibold mt-6 mb-3">Experience</h3>
             <div className="space-y-4">
               <ExperienceItem
-                role="AI / ML Developer"
-                company="Personal Projects"
-                dateRange="2023 - Present"
+                role="Full Stack AI Developer"
+                company="Personal Projects & Open Source"
+                dateRange="2024 - Present"
                 bullets={[
-                  "Built research tools integrating web search and local LLMs for cited answers.",
-                  "Developed real-time collaborative apps with AI-assisted features using Next.js and WebSockets.",
+                  "Built 'Prime-Paradox' (CampusCare), an intelligent medical ecosystem using Next.js 15, FastAPI, and LangGraph.",
+                  "Developed autonomous agent systems for automated product development using query decomposition and LLM integration.",
+                  "Created 'Project-Savant' focused on Liquid Neural Networks and model optimization.",
                 ]}
               />
 
@@ -133,16 +134,6 @@ function PortfolioComponent() {
                   "Developed AI-based projects including a Time Table Generation system using constraint satisfaction algorithms.",
                   "Organized workshops on Python, NumPy, Pandas, and Scikit-learn for club members.",
                   "Collaborated on model optimization and performance improvement across club projects.",
-                ]}
-              />
-
-              <ExperienceItem
-                role="Data Science / Open Source Contributions"
-                company="Independent / Open Source"
-                dateRange="2022 - 2023"
-                bullets={[
-                  "Implemented data pipelines, model training, and evaluation using scikit-learn and pandas.",
-                  "Created dashboards and reproducible notebooks for stakeholders and demos.",
                 ]}
               />
             </div>
@@ -158,24 +149,24 @@ function PortfolioComponent() {
             <h3 className="text-xl font-semibold mt-6 mb-3">Selected Projects</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <ProjectCard
-                title="Collaborative Whiteboard Tool"
+                title="Prime-Paradox (CampusCare)"
+                description="Intelligent medical ecosystem connecting patients and doctors. Features secure messaging and AI agents."
+                technologies={["Next.js 15", "FastAPI", "LangGraph", "Supabase", "AI Agents"]}
+              />
+              <ProjectCard
+                title="Multi-Agents Product Dev"
+                description="Autonomous agent system that conducts query decomposition and LLM integration for automated development."
+                technologies={["Python", "LangGraph", "LLMs", "Multi-Agent Systems"]}
+              />
+              <ProjectCard
+                title="Project-Savant"
+                description="Research implementation focusing on Liquid Neural Networks and model optimization techniques."
+                technologies={["Python", "Neural Networks", "Model Optimization"]}
+              />
+              <ProjectCard
+                title="Collaborative Whiteboard"
                 description="A real-time collaborative whiteboard with AI suggestions using Next.js and GPT-4o."
                 technologies={["Next.js", "OpenAI API", "Bun", "WebSockets"]}
-              />
-              <ProjectCard
-                title="Deep Search — AI-Powered Research Tool"
-                description="Python + Gradio tool that merges DuckDuckGo results with local Ollama LLMs and returns fully cited answers."
-                technologies={["Python", "Gradio", "Ollama", "DuckDuckGo API"]}
-              />
-              <ProjectCard
-                title="Time Table Generation"
-                description="Automated timetable generator for educational institutions using constraint satisfaction and optimization to handle teacher availability, room constraints and subject requirements."
-                technologies={["Python", "Constraint Satisfaction", "Optimization", "Flask/Gradio UI"]}
-              />
-              <ProjectCard
-                title="AI Face Detection & Recognition"
-                description="Real-time face detection and recognition system using YOLO-face, face_recognition, OpenCV and ChromaDB for scalable embedding storage."
-                technologies={["YOLOv11-face", "face_recognition", "OpenCV", "ChromaDB"]}
               />
             </div>
           </div>
@@ -187,11 +178,11 @@ function PortfolioComponent() {
 
             <h3 className="text-lg font-semibold mb-2">Skills</h3>
             <ul className="list-disc list-inside mb-4">
-              <li>Python, JavaScript, SQL</li>
-              <li>Machine Learning: scikit-learn, TensorFlow, PyTorch</li>
-              <li>Computer Vision: OpenCV, YOLO, face_recognition, ChromaDB</li>
-              <li>LLMs & Tools: OpenAI API, Ollama, LangChain</li>
-              <li>Web: Next.js, React, Gradio</li>
+              <li>Python, Next.js 15, FastAPI</li>
+              <li>AI/ML: LangGraph, AI Agents, Neural Networks</li>
+              <li>Database: Supabase, ChromaDB, MongoDB</li>
+              <li>Tools: Git, VS Code, PyCharm, Docker</li>
+              <li>Languages: English, Hindi, German</li>
             </ul>
 
             <div className="flex space-x-2">
