@@ -9,4 +9,7 @@ services:
       - NODE_ENV=production
     env_file:
       - .env
+    volumes:
+      - .:/app
+      - /app/node_modules
     restart: always
