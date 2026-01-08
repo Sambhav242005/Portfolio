@@ -80,7 +80,7 @@ export default function ContactForm({ className }: { className?: string }) {
   }
 
   return (
-    <div className={cn(className, "max-w-md mx-auto p-6")}>
+    <div className={cn(className, "")}>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
           <FormField
@@ -90,7 +90,7 @@ export default function ContactForm({ className }: { className?: string }) {
               <FormItem className="w-full text-left">
                 <FormLabel className="text-lg">Name</FormLabel>
                 <FormControl>
-                  <Input className="text-base p-2" placeholder="Enter your name" {...field} required />
+                  <Input className="text-base p-2 border-input border-gray-400 dark:border-gray-600 focus:border-primary" placeholder="Enter your name" {...field} required />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -104,7 +104,7 @@ export default function ContactForm({ className }: { className?: string }) {
               <FormItem className="w-full text-left">
                 <FormLabel className="text-lg">Email</FormLabel>
                 <FormControl>
-                  <Input className="text-base p-2" placeholder="Enter your email" type="email" {...field} required />
+                  <Input className="text-base p-2 border-input border-gray-400 dark:border-gray-600 focus:border-primary" placeholder="Enter your email" type="email" {...field} required />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -120,7 +120,7 @@ export default function ContactForm({ className }: { className?: string }) {
                 <FormControl>
                   <Textarea
                     placeholder="Type your message here"
-                    className="min-h-[100px] text-base p-2"
+                    className="min-h-[100px] text-base p-2 border-input border-gray-400 dark:border-gray-600 focus:border-primary"
                     {...field} required
                   />
                 </FormControl>
