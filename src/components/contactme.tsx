@@ -30,7 +30,7 @@ const formSchema = z.object({
   }),
 })
 
-export default function ContactForm({className}:{className?:string}) {
+export default function ContactForm({ className }: { className?: string }) {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -39,6 +39,8 @@ export default function ContactForm({className}:{className?:string}) {
       message: "",
     },
   })
+
+  const [isSent, setIsSent] = React.useState(false);
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
@@ -57,12 +59,18 @@ export default function ContactForm({className}:{className?:string}) {
       toast({
         title: "Success!",
         description: "Your message has been sent successfully.",
+        duration: 5000,
       })
+
+      setIsSent(true);
+      setTimeout(() => {
+        setIsSent(false);
+      }, 5000);
 
       form.reset()
     } catch (error) {
       console.log(error);
-      
+
       toast({
         title: "Error",
         description: "Failed to send message. Please try again.",
@@ -72,7 +80,7 @@ export default function ContactForm({className}:{className?:string}) {
   }
 
   return (
-    <div className={cn(className,"max-w-md mx-auto p-6")}>
+    <div className={cn(className, "max-w-md mx-auto p-6")}>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
           <FormField
@@ -113,7 +121,7 @@ export default function ContactForm({className}:{className?:string}) {
                   <Textarea
                     placeholder="Type your message here"
                     className="min-h-[100px] text-base p-2"
-                    {...field}  required
+                    {...field} required
                   />
                 </FormControl>
                 <FormMessage />
@@ -121,8 +129,12 @@ export default function ContactForm({className}:{className?:string}) {
             )}
           />
 
-          <Button type="submit" className="w-full">
-            {form.formState.isSubmitting ? "Sending..." : "Send Message"}
+          <Button
+            type="submit"
+            className={cn("w-full transition-colors", isSent && "bg-blue-600 hover:bg-blue-700")}
+            disabled={form.formState.isSubmitting || isSent}
+          >
+            {isSent ? "Sended" : (form.formState.isSubmitting ? "Sending..." : "Send Message")}
           </Button>
         </form>
       </Form>
