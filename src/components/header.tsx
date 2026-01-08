@@ -17,11 +17,12 @@ import { cn } from '@/lib/utils'
 
 const navigation = [
   { name: 'Home', href: '/' },
-  { name: 'Projects', href: '/projects' },
-  { name: 'Skills', href: '/skills' },
-  { name: 'About', href: '/about' },
-  { name: 'Contact', href: '/contact' },
+  { name: 'About', href: '/#about' },
+  { name: 'Experience', href: '/#experience' },
+  { name: 'Projects', href: '/#projects' },
+  { name: 'Skills', href: '/#skills' },
   { name: 'Blog', href: '/blog' },
+  { name: 'Contact', href: '/contact' },
 ]
 
 export function Header() {
@@ -40,14 +41,14 @@ export function Header() {
   return (
     <>
       {/* Skip to main content for accessibility */}
-      <a 
-        href="#main-content" 
+      <a
+        href="#main-content"
         className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-primary text-primary-foreground px-4 py-2 rounded-md z-50"
       >
         Skip to main content
       </a>
 
-      <header 
+      <header
         className={cn(
           "sticky top-0 z-40 w-full border-b bg-background/100 backdrop-blur supports-[backdrop-filter]:bg-background/100 transition-all duration-200",
           isScrolled && "shadow-lg"
@@ -56,9 +57,9 @@ export function Header() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex h-20 items-center justify-between">
             {/* Logo - Floating effect with center at header edge */}
-            <div className="relative top-10 -right-20 sm:-left-4 md:-left-4">
+            <div className="relative z-50 md:top-10 md:-left-4">
               <Link href="/" className="flex items-center group" aria-label="Home">
-                <div className="relative w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 transition-transform group-hover:scale-105">
+                <div className="relative w-16 h-16 sm:w-20 sm:h-20 md:w-32 md:h-32 transition-transform group-hover:scale-105">
                   <Image
                     src="/logo.jpg"
                     alt="Portfolio Logo"

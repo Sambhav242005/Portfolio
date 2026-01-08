@@ -4,15 +4,15 @@ import { SocialButton } from './utility/common'
 import ContactMe from "./contactme"
 
 export function ContactPageComponent() {
-  
+
 
   return (
-  <div className="min-h-screen w-full bg-accent">
+    <div className="min-h-screen w-full bg-accent">
       <div className="container mx-auto w-full px-4 py-16">
         <h1 className="text-4xl font-bold text-center mb-8">Contact Me</h1>
-        
-        <div className="flex w-full  gap-2">
-          <ContactMe className="w-full md:w-[45vw]" />   
+
+        <div className="flex flex-col md:flex-row w-full gap-8">
+          <ContactMe className="w-full md:w-[45vw]" />
           <Card className="w-full md:w-[45vw]">
             <CardHeader>
               <CardTitle>Connect With Me</CardTitle>

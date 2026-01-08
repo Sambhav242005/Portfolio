@@ -25,11 +25,13 @@ export function ResponsiveMenu() {
 
   const menuItems = [
     { name: "Home", href: "/" },
-    { name: "Skills", href: "/#skills" },
-    { name: "Projects", href: "/#project" },
-    { name: "Blog", href: "/blog" },
-    { name: "Contact Me", href: "/contact" },
-    { name: "Download CV", href: "/downloadcv" },
+    { name: "About", href: "/#about" },
+    { name: "Experience", href: "/#experience" },
+    { name: 'Projects', href: '/#projects' },
+    { name: 'Skills', href: '/#skills' },
+    { name: 'Blog', href: '/blog' },
+    { name: 'Contact Me', href: '/contact' },
+    { name: "Download CV", href: "/api/downloadcv" },
   ];
 
   return (
@@ -37,13 +39,13 @@ export function ResponsiveMenu() {
       <div className="hidden md:block">
         <div className="flex justify-center w-full gap-6 items-center">
           {menuItems.map((item) => (
-                <Link
+            <Link
               key={item.name}
               href={item.href}
               className={cn(
                 buttonVariants({ variant: "outline" }),
                 "text-foreground text-xl bg-transparent font-normal border-none hover:border-2 shadow-none p-4 my-2 rounded-full",
-                    item.name === "Home" ? "text-primary underline" : "",
+                item.name === "Home" ? "text-primary underline" : "",
                 item.name === "Download CV"
                   ? "text-destructive underline border-[0.5px] border-border py-2 px-4 rounded-xl text-lg"
                   : ""

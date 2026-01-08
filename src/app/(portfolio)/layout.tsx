@@ -17,11 +17,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className="font-sans bg-white text-gray-900 dark:bg-gray-800 dark:text-gray-100">
+      <body className="font-sans bg-white text-gray-900 dark:bg-gray-800 dark:text-gray-100" suppressHydrationWarning>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
           <Header />
           {children}
-          </ThemeProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

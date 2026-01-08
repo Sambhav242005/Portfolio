@@ -17,7 +17,7 @@ import ContactMe from "./contactme";
 function PortfolioComponent() {
   return (
     <div className="min-h-screen bg-background text-foreground">
-      
+
       {/* Hero Section */}
       <section className="container mx-auto px-4 py-20 text-center items-center">
         <motion.h1
@@ -99,7 +99,7 @@ function PortfolioComponent() {
         </motion.div>
       </section>
 
-  <hr className="border-border" />
+      <hr className="border-border" />
 
       {/* Resume / About Section (populated to match CV) */}
       <section className="container mx-auto px-4 py-16" id="about">
@@ -107,33 +107,22 @@ function PortfolioComponent() {
           <div className="md:col-span-2">
             <h2 className="text-2xl font-bold mb-4">Summary</h2>
             <p className="mb-6 text-lg leading-relaxed">
-              Third-year student specializing in Artificial Intelligence. I have built custom AI agents, 
-              scalable full-stack applications, and research-driven tools. Experienced with Next.js 15, FastAPI, 
-              and modern AI frameworks like LangGraph and Supabase. Passionate about solving complex problems 
-              through intelligent systems and automation.
+              Third-year student specializing in Artificial Intelligence. I have built custom AI models, intelligent agents,
+              and real-time face recognition systems from scratch. Skilled in Python, PyTorch, and full-stack
+              development. I am passionate about turning complex AI concepts into working software and am looking
+              for a challenging role in engineering.
             </p>
 
-            <h3 className="text-xl font-semibold mt-6 mb-3">Experience</h3>
+            <h3 className="text-xl font-semibold mt-6 mb-3" id="experience">Experience</h3>
             <div className="space-y-4">
-              <ExperienceItem
-                role="Full Stack AI Developer"
-                company="Personal Projects & Open Source"
-                dateRange="2024 - Present"
-                bullets={[
-                  "Built 'Prime-Paradox' (CampusCare), an intelligent medical ecosystem using Next.js 15, FastAPI, and LangGraph.",
-                  "Developed autonomous agent systems for automated product development using query decomposition and LLM integration.",
-                  "Created 'Project-Savant' focused on Liquid Neural Networks and model optimization.",
-                ]}
-              />
-
               <ExperienceItem
                 role="Club Member"
                 company="Abhyudaya Coding Club — Shri Vaishnav Vidyapeeth Vishwavidyalaya"
                 dateRange="2024 - Present"
                 bullets={[
-                  "Developed AI-based projects including a Time Table Generation system using constraint satisfaction algorithms.",
-                  "Organized workshops on Python, NumPy, Pandas, and Scikit-learn for club members.",
-                  "Collaborated on model optimization and performance improvement across club projects.",
+                  "The development of AI-based projects including Time Table Generation system using constraint satisfaction algorithms",
+                  "Organized workshops on Python, NumPy, Pandas, and Scikit-learn for club members",
+                  "Collaborated with team members on model optimization and performance enhancement",
                 ]}
               />
             </div>
@@ -143,49 +132,96 @@ function PortfolioComponent() {
               institution="Shri Vaishnav Vidyapeeth Vishwavidyalaya"
               degree="B.Tech — Computer Science (AI-IBM) — III Year"
               dateRange="2023 - Present"
-              details={["Relevant: Machine Learning, NLP, Time Series, Statistics"]}
+              details={["CGPA: 7.2", "Relevant: Machine Learning, NLP, Time Series, Statistics"]}
             />
 
-            <h3 className="text-xl font-semibold mt-6 mb-3">Selected Projects</h3>
+            <h3 className="text-xl font-semibold mt-6 mb-3">Certifications</h3>
+            <div className="space-y-4">
+              <div className="p-4 border rounded-md bg-white/60 dark:bg-white/5">
+                <h4 className="font-semibold">Hackathons & Competitions - Hackwave 2.0</h4>
+                <p className="text-sm text-muted-foreground">Aug 2025</p>
+                <p className="text-sm mt-2">Participated in a 36-hour coding hackathon organized by Echelon Dev Society at CDGI, Indore. Gained hands-on experience in rapid prototyping, teamwork, and problem-solving.</p>
+                <a href="https://hackwave-site.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-primary text-sm hover:underline mt-1 block">View Event</a>
+              </div>
+              <div className="p-4 border rounded-md bg-white/60 dark:bg-white/5">
+                <h4 className="font-semibold">Introduction to Machine Learning</h4>
+                <p className="text-sm text-muted-foreground">NPTEL Online Certification – IIT Kharagpur | Jul–Sep 2024</p>
+                <ul className="list-disc list-inside mt-2 text-sm">
+                  <li>Achieved Elite Certificate with a consolidated score of 66%</li>
+                  <li>Completed an 8-week course covering fundamental machine learning concepts and assignments</li>
+                </ul>
+              </div>
+            </div>
+
+            <h3 className="text-xl font-semibold mt-6 mb-3" id="projects">Selected Projects</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <ProjectCard
+                title="Multi-Agents - Automated Product Development"
+                description="An autonomous agent system that converts raw ideas into technical product specifications using a 7-stage LangChain workflow."
+                technologies={["LangChain", "Multi-Agent Systems", "FastAPI", "Docker", "Next.js"]}
+              />
+              <ProjectCard
+                title="Real-Time AI Face Recognition System"
+                description="High-throughput face tracking system using YOLOv11 and Vector Database retrieval with multi-process architecture."
+                technologies={["YOLOv11", "ChromaDB", "Computer Vision", "Multi-Processing", "OpenCV"]}
+              />
+              <ProjectCard
+                title="Savant - Custom Universal Transformer"
+                description="A parameter-efficient Recurrent Language Model built from scratch in PyTorch with Liquid Gating mechanisms."
+                technologies={["PyTorch", "Universal Transformer", "LLM Architecture", "Liquid Neural Networks"]}
+              />
+              <ProjectCard
                 title="Prime-Paradox (CampusCare)"
-                description="Intelligent medical ecosystem connecting patients and doctors. Features secure messaging and AI agents."
-                technologies={["Next.js 15", "FastAPI", "LangGraph", "Supabase", "AI Agents"]}
-              />
-              <ProjectCard
-                title="Multi-Agents Product Dev"
-                description="Autonomous agent system that conducts query decomposition and LLM integration for automated development."
-                technologies={["Python", "LangGraph", "LLMs", "Multi-Agent Systems"]}
-              />
-              <ProjectCard
-                title="Project-Savant"
-                description="Research implementation focusing on Liquid Neural Networks and model optimization techniques."
-                technologies={["Python", "Neural Networks", "Model Optimization"]}
-              />
-              <ProjectCard
-                title="Collaborative Whiteboard"
-                description="A real-time collaborative whiteboard with AI suggestions using Next.js and GPT-4o."
-                technologies={["Next.js", "OpenAI API", "Bun", "WebSockets"]}
+                description="Intelligent medical ecosystem connecting patients and doctors via Multi-Agent AI with secure messaging."
+                technologies={["Next.js 15", "FastAPI", "LangGraph", "Supabase", "Full Stack Development"]}
               />
             </div>
           </div>
 
-          <aside className="bg-muted p-6 rounded-lg">
+          <aside className="bg-muted p-6 rounded-lg" id="skills">
             <h3 className="text-lg font-semibold mb-2">Contact</h3>
-            <p className="mb-2">sambhav242005@gmail.com</p>
-            <p className="mb-4">GitHub: github.com/Sambhav242005</p>
+            <p className="mb-2"><a href="mailto:sambhav242005@gmail.com" className="hover:underline">sambhav242005@gmail.com</a></p>
+            <p className="mb-2"><a href="tel:+917999468896" className="hover:underline">+91 7999468896</a></p>
+            <p className="mb-2"><a href="https://sambhav-surana.online" target="_blank" rel="noopener noreferrer" className="hover:underline">sambhav-surana.online</a></p>
+            <p className="mb-4"><a href="https://github.com/Sambhav242005" target="_blank" rel="noopener noreferrer" className="hover:underline">GitHub: Sambhav242005</a></p>
 
             <h3 className="text-lg font-semibold mb-2">Skills</h3>
-            <ul className="list-disc list-inside mb-4">
-              <li>Python, Next.js 15, FastAPI</li>
-              <li>AI/ML: LangGraph, AI Agents, Neural Networks</li>
-              <li>Database: Supabase, ChromaDB, MongoDB</li>
-              <li>Tools: Git, VS Code, PyCharm, Docker</li>
-              <li>Languages: English, Hindi, German</li>
-            </ul>
+            <div className="space-y-4">
+              <div>
+                <h4 className="font-medium text-sm mb-1">Programming Languages</h4>
+                <p className="text-sm text-muted-foreground">Python, JavaScript, SQL, Bash</p>
+              </div>
+              <div>
+                <h4 className="font-medium text-sm mb-1">ML Libraries & Frameworks</h4>
+                <p className="text-sm text-muted-foreground">NumPy, Pandas, Scikit-learn, TensorFlow, PyTorch, Matplotlib</p>
+              </div>
+              <div>
+                <h4 className="font-medium text-sm mb-1">Computer Vision</h4>
+                <p className="text-sm text-muted-foreground">OpenCV, YOLO, Face Recognition, Object Detection</p>
+              </div>
+              <div>
+                <h4 className="font-medium text-sm mb-1">Deep Learning</h4>
+                <p className="text-sm text-muted-foreground">CNN, Neural Networks, Model Training, Transfer Learning</p>
+              </div>
+              <div>
+                <h4 className="font-medium text-sm mb-1">NLP & Generative AI</h4>
+                <p className="text-sm text-muted-foreground">LangChain, OpenAI API, Ollama, LLM Integration</p>
+              </div>
+              <div>
+                <h4 className="font-medium text-sm mb-1">Web Technologies</h4>
+                <p className="text-sm text-muted-foreground">React.js, Next.js, HTML/CSS, Tailwind CSS</p>
+              </div>
+              <div>
+                <h4 className="font-medium text-sm mb-1">Databases</h4>
+                <p className="text-sm text-muted-foreground">MySQL, MongoDB, ChromaDB</p>
+              </div>
+              <div>
+                <h4 className="font-medium text-sm mb-1">Deployment & Tools</h4>
+                <p className="text-sm text-muted-foreground">Git, Docker, REST APIs, VS Code</p>
+              </div>
+            </div>
 
-            <div className="flex space-x-2">
+            <div className="flex space-x-2 mt-6">
               <a
                 href="/api/viewcv"
                 target="_blank"
@@ -207,7 +243,7 @@ function PortfolioComponent() {
       <hr className="border-gray-300 dark:border-gray-700" />
 
       {/* Contact Section (kept) */}
-  <section className="w-full mx-auto bg-muted px-4 py-20">
+      <section className="w-full mx-auto bg-muted px-4 py-20">
         <ContactMe className="max-w-xl mx-auto" />
       </section>
     </div>
