@@ -19,8 +19,8 @@ import { cn } from "@/lib/utils"
 
 // Form schema
 const formSchema = z.object({
-  name: z.string().min(2, {
-    message: "Name must be at least 2 characters.",
+  name: z.string().min(5, {
+    message: "Name must be at least 5 characters.",
   }),
   email: z.string().email({
     message: "Please enter a valid email address.",
@@ -82,15 +82,19 @@ export default function ContactForm({ className }: { className?: string }) {
   return (
     <div className={cn(className, "")}>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
           <FormField
             control={form.control}
             name="name"
             render={({ field }) => (
               <FormItem className="w-full text-left">
-                <FormLabel className="text-lg">Name</FormLabel>
+                <FormLabel className="text-base">Name</FormLabel>
                 <FormControl>
-                  <Input className="text-base p-2 border-input border-gray-400 dark:border-gray-600 focus:border-primary" placeholder="Enter your name" {...field} required />
+                  <Input
+                    className="text-sm p-3 bg-background/50 border-white/10 dark:border-white/5 rounded-xl focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-0 transition-all duration-300"
+                    placeholder="Enter your name"
+                    {...field} required
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -102,9 +106,12 @@ export default function ContactForm({ className }: { className?: string }) {
             name="email"
             render={({ field }) => (
               <FormItem className="w-full text-left">
-                <FormLabel className="text-lg">Email</FormLabel>
+                <FormLabel className="text-base">Email</FormLabel>
                 <FormControl>
-                  <Input className="text-base p-2 border-input border-gray-400 dark:border-gray-600 focus:border-primary" placeholder="Enter your email" type="email" {...field} required />
+                  <Input
+                    className="text-sm p-3 bg-background/50 border-white/10 dark:border-white/5 rounded-xl focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-0 transition-all duration-300"
+                    placeholder="Enter your email" type="email" {...field} required
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -116,11 +123,11 @@ export default function ContactForm({ className }: { className?: string }) {
             name="message"
             render={({ field }) => (
               <FormItem className="w-full text-left">
-                <FormLabel className="text-lg">Message</FormLabel>
+                <FormLabel className="text-base">Message</FormLabel>
                 <FormControl>
                   <Textarea
                     placeholder="Type your message here"
-                    className="min-h-[100px] text-base p-2 border-input border-gray-400 dark:border-gray-600 focus:border-primary"
+                    className="min-h-[100px] text-sm p-3 bg-background/50 border-white/10 dark:border-white/5 rounded-xl focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-0 transition-all duration-300 resize-none"
                     {...field} required
                   />
                 </FormControl>
@@ -131,10 +138,10 @@ export default function ContactForm({ className }: { className?: string }) {
 
           <Button
             type="submit"
-            className={cn("w-full transition-colors", isSent && "bg-blue-600 hover:bg-blue-700")}
+            className={cn("w-full h-12 text-base font-semibold rounded-xl transition-all duration-300 shadow-md glow-hover", isSent && "bg-green-600 hover:bg-green-700")}
             disabled={form.formState.isSubmitting || isSent}
           >
-            {isSent ? "Sended" : (form.formState.isSubmitting ? "Sending..." : "Send Message")}
+            {isSent ? "Message Sent!" : (form.formState.isSubmitting ? "Sending..." : "Send Message")}
           </Button>
         </form>
       </Form>

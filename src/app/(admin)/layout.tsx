@@ -1,20 +1,23 @@
 import type { Metadata } from "next";
-// global styles temporarily disabled to debug build parsing issues
+import "../globals.css";
+import { ThemeProvider } from "@/components/theme-provider";
+
 export const metadata: Metadata = {
-  title: "Sambhav Surana - Technology Architect",
-  description:
-    "Experienced Technology Architect specializing in DNS management, cloud networking, and machine learning. Delivering innovative, AI-powered solutions.",
+  title: "Admin | Sambhav Surana",
+  description: "Portfolio Administration",
 };
 
-export default function RootLayout({
+export default function AdminLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className="font-sans text-gray-900 bg-white dark:bg-gray-800 dark:text-gray-100 ">
+    <html lang="en" suppressHydrationWarning>
+      <body className="font-sans antialiased bg-background text-foreground transition-colors duration-300">
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={true}>
           {children}
+        </ThemeProvider>
       </body>
     </html>
   );

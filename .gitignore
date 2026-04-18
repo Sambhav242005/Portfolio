@@ -12,10 +12,8 @@
 # next.js
 /.next/
 /out/
-
 # production
 /build
-/src/blogs/*
 # misc
 .DS_Store
 *.pem

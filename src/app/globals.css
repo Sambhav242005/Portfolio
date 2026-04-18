@@ -9,10 +9,91 @@
 
 html, body {
   height: 100%;
+  scroll-behavior: smooth;
+}
+
+html {
+  scroll-snap-type: y proximity;
+  overflow-x: hidden;
 }
 
 body {
   font-family: Inter, Arial, Helvetica, sans-serif;
   background: hsl(var(--background));
   color: hsl(var(--foreground));
+  margin: 0;
+  padding: 0;
+}
+
+/* Enable snapping point at the start of each major section */
+section {
+  scroll-snap-align: start;
+  scroll-margin-top: 5rem; /* Offsets scroll position to prevent header overlaying titles */
+}
+
+/* =========================================
+   PRINT STYLES (For Dynamic Resume / CV)
+   ========================================= */
+@media print {
+  @page {
+    size: A4;
+    margin: 0; /* Setting margin strictly to 0 suppresses default browser headers (date/URL) */
+  }
+
+  html, body {
+    overflow: visible !important;
+    height: auto !important;
+    background: white !important;
+    color: black !important;
+    font-size: 11pt !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Hide absolutely everything we don't want printing */
+  .global-header, nav, footer, .print\:hidden {
+    display: none !important;
+  }
+
+  .cv-paper {
+    box-shadow: none !important;
+    padding: 1.5cm 1.5cm !important; /* Re-apply physical print margins directly to the paper container */
+    max-width: none !important;
+  }
+
+  /* Prevent blocks from breaking across pages */
+  .cv-avoid-break {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  /* Ensure background colors print if needed (like borders) */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+}
+
+@layer utilities {
+  .glass {
+    @apply bg-white/70 dark:bg-[#141928]/50 backdrop-blur-md border border-black/10 dark:border-white/10 shadow-lg;
+  }
+  
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent dark:to-accent;
+  }
+
+  .glow-hover {
+    @apply transition-shadow duration-300 hover:shadow-[0_0_20px_var(--glow-primary)];
+  }
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
 }

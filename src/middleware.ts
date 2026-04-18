@@ -1,22 +1,41 @@
 // /service/dashboard/middleware.ts
 import { NextRequest, NextResponse } from 'next/server';
 
-export function middleware(request: NextRequest) {
-  const authCookie = request.cookies.get('auth');
+export async function middleware(request: NextRequest) {
+  const url = request.nextUrl.pathname;
 
-  // Check if the 'auth' cookie is set
-  if (!authCookie) {
-    // If not authenticated, redirect to login or return an error response
-    return NextResponse.redirect(new URL('/service/login', request.url));
+  // Track page views for the portfolio public pages
+  // We only track the home page or specific routes to avoid tracking static files
+  if (url === '/' || url.startsWith('/contact')) {
+    // We cannot write files directly in standard Edge middleware on Vercel
+    // But since this runs locally (Node runtime), we can trigger an API call to record it
+    // Or if this is purely nextjs server component, we just hit an analytic API route
+    try {
+      fetch(new URL('/api/analytics/track', request.url), {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ 
+          path: url, 
+          userAgent: request.headers.get('user-agent') || 'Unknown',
+          ip: request.headers.get('x-forwarded-for') || 'Unknown'
+        })
+      });
+    } catch(e) {}
   }
 
-  console.log("Middleware reached: User is authenticated");
+  // Dashboard auth protection
+  if (url.startsWith('/service/dashboard')) {
+    const authCookie = request.cookies.get('loggedIn');
 
-  // Proceed if authenticated
+    if (!authCookie) {
+      return NextResponse.redirect(new URL('/service/login', request.url));
+    }
+  }
+
   return NextResponse.next();
 }
 
-// Configure the middleware to match the dashboard route
+// Config to match public routes for tracking + dashboard routes for auth
 export const config = {
-  matcher: ['/service/dashboard/:path*'],  // Adjusted to include 
+  matcher: ['/', '/service/dashboard/:path*', '/contact'],
 };
