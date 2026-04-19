@@ -34,6 +34,7 @@ export async function POST(req: NextRequest) {
   }
 
   // Bust all pages that depend on portfolio data
+  // @ts-expect-error - Next.js 15+ revalidateTag profile arg
   revalidateTag('portfolio-data');
 
   console.log('[Revalidate] Cache busted via GitHub webhook push');
@@ -49,6 +50,7 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
+  // @ts-expect-error - Next.js 15+ revalidateTag profile arg
   revalidateTag('portfolio-data');
   return NextResponse.json({ revalidated: true, timestamp: new Date().toISOString() });
 }

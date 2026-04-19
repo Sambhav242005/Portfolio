@@ -5,7 +5,15 @@ import { MouseEvent } from "react";
 import { ProjectData } from "@/lib/portfolio-data";
 import { AnimatedSection } from "./AnimatedSection";
 import { cn } from "@/lib/utils";
-import { ExternalLink, Github } from "lucide-react";
+import { ExternalLink } from "lucide-react";
+
+function GithubIcon({ className }: { className?: string }) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className={className}>
+      <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.04-.015-2.04-3.338.72-4.042-1.61-4.042-1.61-.546-1.385-1.335-1.755-1.335-1.755-1.087-.745.084-.73.084-.73 1.205.085 1.838 1.235 1.838 1.235 1.07 1.835 2.809 1.305 3.495.995.105-.775.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.37 1.235-3.205-.12-.3-.54-1.524.12-3.16 0 0 1.005-.315 3.285 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.28-1.555 3.285-1.23 3.285-1.23.66 1.636.24 2.86.12 3.16.77.835 1.235 1.9 1.235 3.205 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.285 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+    </svg>
+  );
+}
 
 export function ProjectShowcase({ data }: { data: ProjectData[] }) {
   return (
@@ -80,7 +88,7 @@ function ProjectCard({ project }: { project: ProjectData }) {
           <h3 className="text-2xl font-bold group-hover:text-primary transition-colors">
             {project.title}
           </h3>
-          <Github className="w-6 h-6 text-muted-foreground group-hover:text-primary transition-colors" />
+          <GithubIcon className="w-6 h-6 text-muted-foreground group-hover:text-primary transition-colors" />
         </div>
         
         <p className="text-muted-foreground mb-6 leading-relaxed">

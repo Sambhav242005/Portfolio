@@ -5,13 +5,12 @@
 
 :root {
   --radius: 0.75rem;
-  /* HSL component values (used as var(--name) inside hsl()) */
   /* Premium Pearl/Cool-Gray Light Theme */
-  --background: 220 30% 98%; /* soft cool gray instead of harsh white */
+  --background: 0 0% 100%; /* Pure white background */
   --foreground: 220 40% 16%; /* deep navy gray */
 
   /* UI tokens */
-  --card: 0 0% 100%; /* pristine white cards to create floating pop */
+  --card: 0 0% 100%;
   --card-foreground: 220 40% 16%;
   --popover: 0 0% 100%;
   --popover-foreground: 220 40% 16%;
@@ -19,10 +18,10 @@
   --primary: 24 85% 48%; /* orange */
   --primary-foreground: 0 0% 100%;
   
-  --secondary: 220 25% 94%;
+  --secondary: 220 25% 96%;
   --secondary-foreground: 220 40% 16%;
   
-  --muted: 220 20% 92%;
+  --muted: 220 20% 94%;
   --muted-foreground: 220 15% 45%;
   
   --accent: 220 80% 92%;
@@ -31,8 +30,8 @@
   --destructive: 350 80% 56%;
   --destructive-foreground: 0 0% 100%;
   
-  --border: 220 20% 90%;
-  --input: 0 0% 100%;
+  --border: 220 15% 85%; /* Darker border for better visibility */
+  --input: 220 15% 90%;
   --ring: 24 85% 48%; 
   
   --chart-1: 12 95% 60%;
@@ -42,34 +41,34 @@
   --chart-5: 40 80% 55%;
 
   /* New variables for glass & gradient */
-  --glass-bg: rgba(255, 255, 255, 0.85); /* Slightly more opaque glass to contrast the gray background */
-  --glass-border: rgba(0, 50, 100, 0.08); /* slight blue border */
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(0, 0, 0, 0.12); /* More visible border */
   --gradient-start: 220 30% 98%;
   --gradient-end: 220 15% 94%;
-  --glow-primary: rgba(230, 90, 30, 0.15); /* Subdued glow */
+  --glow-primary: rgba(230, 90, 30, 0.15);
   --glow-accent: rgba(100, 150, 250, 0.15);
 }
 
 .dark {
   /* Dark theme tokens */
-  --background: 220 40% 6%; /* Deep navy blue background */
+  --background: 220 40% 6%;
   --foreground: 210 15% 96%;
 
   --card: 220 40% 10%;
   --card-foreground: 210 15% 96%;
   --popover: 220 40% 10%;
   --popover-foreground: 210 15% 96%;
-  --primary: 24 90% 55%; /* Keep the orange accent */
+  --primary: 24 90% 55%;
   --primary-foreground: 210 10% 96%;
   --secondary: 220 20% 18%;
   --secondary-foreground: 215 20% 88%;
   --muted: 220 30% 12%;
   --muted-foreground: 218 18% 66%;
-  --accent: 260 60% 40%; /* Deeper violet accent */
+  --accent: 260 60% 40%;
   --accent-foreground: 260 60% 98%;
   --destructive: 0 70% 60%;
   --destructive-foreground: 0 0% 100%;
-  --border: 220 25% 18%;
+  --border: 220 20% 20%; /* More visible border in dark mode */
   --input: 220 25% 12%;
   --ring: 204 100% 60%;
   --chart-1: 12 95% 60%;
@@ -80,7 +79,7 @@
 
   /* New variables for glass & gradient */
   --glass-bg: rgba(20, 25, 40, 0.5);
-  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-border: rgba(255, 255, 255, 0.15); /* More visible border */
   --gradient-start: 220 40% 6%;
   --gradient-end: 260 40% 12%;
   --glow-primary: rgba(240, 100, 40, 0.3);

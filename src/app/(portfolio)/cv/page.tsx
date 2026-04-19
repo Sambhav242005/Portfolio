@@ -1,5 +1,6 @@
 import { getPortfolioData } from "@/lib/portfolio-data";
-import { Mail, MapPin, Globe, Github, Linkedin, Printer, LinkIcon, Phone } from "lucide-react";
+import { Mail, MapPin, Globe, Printer, LinkIcon, Phone } from "lucide-react";
+import { GitHubLogoIcon as Github, LinkedInLogoIcon as Linkedin } from "@radix-ui/react-icons";
 
 export const metadata = {
   title: "CV - Sambhav Surana",

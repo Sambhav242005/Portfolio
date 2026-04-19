@@ -1,8 +1,5 @@
 @import "./theme.css";
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
 /* Minimal global styles. Keep this file small and stable to avoid loader/parser issues.
    Import external CSS (katex, highlight.js) in the pages/components that need them instead. */
@@ -14,6 +11,7 @@ html, body {
 
 html {
   scroll-snap-type: y proximity;
+  scroll-padding-top: 8.5rem;
   overflow-x: hidden;
 }
 
@@ -28,7 +26,7 @@ body {
 /* Enable snapping point at the start of each major section */
 section {
   scroll-snap-align: start;
-  scroll-margin-top: 5rem; /* Offsets scroll position to prevent header overlaying titles */
+  scroll-margin-top: 8.5rem; /* Offsets fixed header height during anchor scrolling */
 }
 
 /* =========================================
@@ -78,13 +76,19 @@ section {
   .glass {
     @apply bg-white/70 dark:bg-[#141928]/50 backdrop-blur-md border border-black/10 dark:border-white/10 shadow-lg;
   }
-  
+   
   .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent dark:to-accent;
+    background: linear-gradient(to right, hsl(var(--primary)), hsl(var(--accent)));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 
   .glow-hover {
-    @apply transition-shadow duration-300 hover:shadow-[0_0_20px_var(--glow-primary)];
+    transition: box-shadow 0.3s ease;
+  }
+  .glow-hover:hover {
+    box-shadow: 0 0 20px var(--glow-primary);
   }
 }
 

@@ -1,7 +1,6 @@
-// /service/dashboard/middleware.ts
 import { NextRequest, NextResponse } from 'next/server';
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const url = request.nextUrl.pathname;
 
   // Track page views for the portfolio public pages
@@ -35,7 +34,6 @@ export async function middleware(request: NextRequest) {
   return NextResponse.next();
 }
 
-// Config to match public routes for tracking + dashboard routes for auth
 export const config = {
   matcher: ['/', '/service/dashboard/:path*', '/contact'],
 };

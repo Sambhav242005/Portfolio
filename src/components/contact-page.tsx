@@ -1,6 +1,7 @@
 "use client";
 
-import { Github, Linkedin, Twitter, Mail, MapPin } from "lucide-react"
+import { Mail, MapPin } from "lucide-react";
+import { GitHubLogoIcon as Github, LinkedInLogoIcon as Linkedin, TwitterLogoIcon as Twitter } from "@radix-ui/react-icons";
 import { SocialButton } from './utility/common'
 import ContactMe from "./contactme"
 import { AnimatedSection } from "./AnimatedSection"

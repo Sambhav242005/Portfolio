@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { usePathname, useRouter } from 'next/navigation'
+import { usePathname } from 'next/navigation'
 import { Menu, X } from 'lucide-react'
 import { ModeToggle } from './theme-toggle'
 import { Button } from '@/components/ui/button'
@@ -22,7 +22,18 @@ export function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const pathname = usePathname()
-  const router = useRouter()
+
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(id)
+    if (!element) return
+
+    const headerOffset = 132
+    const elementPosition = element.getBoundingClientRect().top + window.scrollY
+    const offsetPosition = Math.max(elementPosition - headerOffset, 0)
+
+    window.history.replaceState(null, "", `/#${id}`)
+    window.scrollTo({ top: offsetPosition, behavior: "smooth" })
+  }
 
   useEffect(() => {
     const handleScroll = () => {
@@ -32,6 +43,17 @@ export function Header() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
+  useEffect(() => {
+    setIsMobileMenuOpen(false)
+  }, [pathname])
+
+  useEffect(() => {
+    document.body.style.overflow = isMobileMenuOpen ? 'hidden' : ''
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [isMobileMenuOpen])
+
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     setIsMobileMenuOpen(false);
 
@@ -39,10 +61,7 @@ export function Header() {
     if (href.startsWith('/#') && pathname === '/') {
       e.preventDefault();
       const id = href.replace('/#', '');
-      const element = document.getElementById(id);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-      }
+      scrollToSection(id)
     } else if (href.startsWith('/#') && pathname !== '/') {
       // If we're on a different page, let standard Next.js routing push back to home and scroll
       // Or manually route there
@@ -61,11 +80,20 @@ export function Header() {
 
       <header
         className={cn(
-          "fixed top-0 left-0 right-0 z-40 w-full transition-all duration-300 border-none bg-transparent print:hidden"
+          "fixed top-0 left-0 right-0 z-40 w-full transition-all duration-300 border-none print:hidden",
+          isScrolled ? "bg-background/75 supports-[backdrop-filter]:backdrop-blur-xl" : "bg-transparent"
         )}
       >
-        <div className="container mx-auto px-4 mt-6">
-          <div className="flex h-20 items-center justify-between mx-auto max-w-6xl rounded-full border border-white/10 dark:border-white/5 bg-background/50 backdrop-blur-xl shadow-lg px-8">
+        <div className={cn(
+          "container mx-auto px-4 transition-all duration-300",
+          isScrolled ? "mt-3" : "mt-6"
+        )}>
+          <div className={cn(
+            "flex items-center justify-between mx-auto max-w-6xl rounded-full px-5 md:px-8 transition-all duration-300",
+            isScrolled
+              ? "h-16 border border-border/70 bg-background/85 shadow-lg"
+              : "h-20 border border-white/10 dark:border-white/5 bg-background/50 shadow-lg backdrop-blur-xl"
+          )}>
             
             {/* Logo - Floating effect */}
             <div className="flex shrink-0">
@@ -74,6 +102,7 @@ export function Header() {
                   src="/logo.jpg"
                   alt="Portfolio Logo"
                   fill
+                  sizes="48px"
                   className="rounded-full object-cover shadow-sm transition-all group-hover:shadow-md"
                   priority
                 />
@@ -112,7 +141,8 @@ export function Header() {
 
         {/* Mobile Navigation */}
         <div className={cn(
-          "lg:hidden absolute top-24 left-4 right-4 rounded-3xl border border-white/10 shadow-2xl bg-background/95 backdrop-blur-xl transition-all duration-300",
+          "lg:hidden absolute left-4 right-4 rounded-3xl border shadow-2xl bg-background/95 backdrop-blur-xl transition-all duration-300",
+          isScrolled ? "top-20 border-border/70" : "top-24 border-white/10",
           isMobileMenuOpen ? "opacity-100 translate-y-0 visible" : "opacity-0 -translate-y-4 invisible pointer-events-none"
         )}>
           <nav className="p-3 space-y-1" aria-label="Mobile navigation">

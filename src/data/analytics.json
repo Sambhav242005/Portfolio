@@ -1,5 +1,24 @@
 {
-  "views": [],
-  "totalViews": 0,
-  "uniqueVisitors": 0
+  "views": [
+    {
+      "path": "/",
+      "timestamp": "2026-04-19T09:45:03.754Z",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0",
+      "ipHash": "::1"
+    },
+    {
+      "path": "/",
+      "timestamp": "2026-04-19T09:47:13.985Z",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0",
+      "ipHash": "::1"
+    },
+    {
+      "path": "/",
+      "timestamp": "2026-04-19T09:49:05.203Z",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 Edg/143.0.0.0",
+      "ipHash": "::1"
+    }
+  ],
+  "totalViews": 3,
+  "uniqueVisitors": 1
 }
