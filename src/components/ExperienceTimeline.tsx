@@ -58,12 +58,12 @@ function TimelineCard({ item }: { item: ExperienceData }) {
         {item.dateRange}
       </span>
       <h3 className="text-xl font-bold mb-1">{item.role}</h3>
-      <p className="text-muted-foreground font-medium mb-4">{item.company}</p>
+      <p className="text-muted-foreground font-semibold mb-4">{item.company}</p>
       
-      <ul className="space-y-2 text-sm text-foreground/80">
+      <ul className="space-y-2 text-sm text-foreground/90">
         {item.bullets.map((bullet, i) => (
-          <li key={i} className="flex relative pl-5">
-            <span className="absolute left-0 top-2 w-1.5 h-1.5 rounded-full bg-primary/60" />
+          <li key={i} className="flex relative pl-5 leading-relaxed">
+            <span className="absolute left-0 top-2 w-1.5 h-1.5 rounded-full bg-primary" />
             {bullet}
           </li>
         ))}

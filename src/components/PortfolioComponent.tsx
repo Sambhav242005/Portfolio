@@ -39,13 +39,13 @@ export default function PortfolioComponent({ data }: { data: PortfolioData }) {
         
         <div className="z-10 text-center px-4 pointer-events-none">
           <AnimatedSection direction="up" delay={0.2}>
-            <h1 className="text-5xl md:text-7xl font-extrabold mb-6 drop-shadow-lg text-foreground">
+            <h1 className="text-5xl md:text-7xl font-extrabold mb-6 drop-shadow-xl text-foreground">
               {data.profile.name}
             </h1>
           </AnimatedSection>
           
           <AnimatedSection direction="up" delay={0.4}>
-            <p className="text-xl md:text-3xl mb-8 font-light text-foreground/90 drop-shadow-md">
+            <p className="text-xl md:text-3xl mb-8 font-light text-foreground/90 drop-shadow-lg">
               {data.profile.tagline}
             </p>
           </AnimatedSection>
@@ -75,7 +75,7 @@ export default function PortfolioComponent({ data }: { data: PortfolioData }) {
             <div className="mt-12 flex flex-col justify-center gap-4 pointer-events-auto sm:flex-row">
               <a
                 href="#projects"
-                className={cn(buttonVariants({ size: "lg" }), "px-8 shadow-lg shadow-primary/30")}
+                className={cn(buttonVariants({ size: "lg" }), "px-8 shadow-lg shadow-primary/30 font-bold")}
               >
                 View Work
               </a>
@@ -83,7 +83,7 @@ export default function PortfolioComponent({ data }: { data: PortfolioData }) {
                 href="/cv"
                 target="_blank"
                 rel="noopener noreferrer"
-                className={cn(buttonVariants({ variant: "outline", size: "lg" }), "px-8 bg-foreground/5 backdrop-blur-md text-foreground border-foreground/20 hover:bg-foreground/10 hover:text-foreground")}
+                className={cn(buttonVariants({ variant: "outline", size: "lg" }), "px-8 bg-foreground/5 backdrop-blur-md text-foreground border-foreground/30 hover:bg-foreground/10 hover:text-foreground font-bold")}
               >
                 View CV
               </a>
@@ -105,7 +105,7 @@ export default function PortfolioComponent({ data }: { data: PortfolioData }) {
         <div className="max-w-4xl mx-auto text-center">
           <AnimatedSection direction="up">
             <h2 className="text-3xl font-bold mb-8 text-gradient">Who I Am</h2>
-            <p className="text-lg md:text-xl leading-relaxed text-muted-foreground font-light">
+            <p className="text-lg md:text-xl leading-relaxed text-muted-foreground font-medium">
               {data.profile.summary}
             </p>
           </AnimatedSection>
@@ -116,8 +116,6 @@ export default function PortfolioComponent({ data }: { data: PortfolioData }) {
       <ProjectShowcase data={data.projects} />
       <SkillsSection data={data.skills} />
       <CertificationsGrid data={data.certifications} />
-
-
 
       <Footer data={data.profile} />
     </main>

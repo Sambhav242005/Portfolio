@@ -81,7 +81,7 @@ export function Header() {
       <header
         className={cn(
           "fixed top-0 left-0 right-0 z-40 w-full transition-all duration-300 border-none print:hidden",
-          isScrolled ? "bg-background/75 supports-[backdrop-filter]:backdrop-blur-xl" : "bg-transparent"
+          isScrolled ? "bg-background/80 supports-[backdrop-filter]:backdrop-blur-xl" : "bg-transparent"
         )}
       >
         <div className={cn(
@@ -91,8 +91,8 @@ export function Header() {
           <div className={cn(
             "flex items-center justify-between mx-auto max-w-6xl rounded-full px-5 md:px-8 transition-all duration-300",
             isScrolled
-              ? "h-16 border border-border/70 bg-background/85 shadow-lg"
-              : "h-20 border border-white/10 dark:border-white/5 bg-background/50 shadow-lg backdrop-blur-xl"
+              ? "h-16 border border-border/70 bg-background/90 shadow-lg backdrop-blur-xl"
+              : "h-20 border border-black/5 dark:border-white/10 bg-background/60 shadow-lg backdrop-blur-xl"
           )}>
             
             {/* Logo - Floating effect */}
@@ -116,7 +116,7 @@ export function Header() {
                   key={item.name}
                   href={item.href}
                   onClick={(e) => handleNavClick(e, item.href)}
-                  className="px-5 py-2 text-base font-medium text-muted-foreground hover:text-foreground hover:bg-foreground/5 rounded-full transition-all duration-300 relative group"
+                  className="px-5 py-2 text-base font-semibold text-foreground/70 hover:text-foreground hover:bg-foreground/5 rounded-full transition-all duration-300 relative group"
                 >
                   {item.name}
                 </Link>
@@ -129,7 +129,7 @@ export function Header() {
               <Button
                 variant="ghost"
                 size="icon"
-                className="lg:hidden rounded-full hover:bg-foreground/5 h-10 w-10"
+                className="lg:hidden rounded-full hover:bg-foreground/5 h-10 w-10 text-foreground"
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
               >
@@ -142,7 +142,7 @@ export function Header() {
         {/* Mobile Navigation */}
         <div className={cn(
           "lg:hidden absolute left-4 right-4 rounded-3xl border shadow-2xl bg-background/95 backdrop-blur-xl transition-all duration-300",
-          isScrolled ? "top-20 border-border/70" : "top-24 border-white/10",
+          isScrolled ? "top-20 border-border/70" : "top-24 border-black/5 dark:border-white/10",
           isMobileMenuOpen ? "opacity-100 translate-y-0 visible" : "opacity-0 -translate-y-4 invisible pointer-events-none"
         )}>
           <nav className="p-3 space-y-1" aria-label="Mobile navigation">
@@ -150,7 +150,7 @@ export function Header() {
               <Link
                 key={item.name}
                 href={item.href}
-                className="block px-6 py-2.5 text-base font-medium text-muted-foreground hover:text-foreground hover:bg-foreground/5 rounded-2xl transition-all duration-200 text-center"
+                className="block px-6 py-2.5 text-base font-semibold text-foreground/70 hover:text-foreground hover:bg-foreground/5 rounded-2xl transition-all duration-200 text-center"
                 onClick={(e) => handleNavClick(e, item.href)}
               >
                 {item.name}

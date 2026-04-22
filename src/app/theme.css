@@ -5,34 +5,34 @@
 
 :root {
   --radius: 0.75rem;
-  /* Premium Pearl/Cool-Gray Light Theme */
-  --background: 0 0% 100%; /* Pure white background */
-  --foreground: 220 40% 16%; /* deep navy gray */
+  /* Premium Pearl/Cool-Gray Light Theme - Refined for better contrast */
+  --background: 210 20% 98%; /* Slightly off-white for depth */
+  --foreground: 220 40% 12%; /* Deep navy black */
 
   /* UI tokens */
   --card: 0 0% 100%;
-  --card-foreground: 220 40% 16%;
+  --card-foreground: 220 40% 12%;
   --popover: 0 0% 100%;
-  --popover-foreground: 220 40% 16%;
+  --popover-foreground: 220 40% 12%;
   
-  --primary: 24 85% 48%; /* orange */
+  --primary: 24 95% 45%; /* Slightly darker/richer orange for light mode */
   --primary-foreground: 0 0% 100%;
   
-  --secondary: 220 25% 96%;
-  --secondary-foreground: 220 40% 16%;
+  --secondary: 220 15% 92%; /* Slightly darker secondary for better visibility on glass */
+  --secondary-foreground: 220 40% 12%;
   
-  --muted: 220 20% 94%;
-  --muted-foreground: 220 15% 45%;
+  --muted: 220 15% 90%;
+  --muted-foreground: 220 20% 35%; /* Darkened for better readability */
   
-  --accent: 220 80% 92%;
-  --accent-foreground: 220 40% 16%;
+  --accent: 220 80% 90%;
+  --accent-foreground: 220 40% 12%;
   
-  --destructive: 350 80% 56%;
+  --destructive: 350 80% 50%;
   --destructive-foreground: 0 0% 100%;
   
-  --border: 220 15% 85%; /* Darker border for better visibility */
-  --input: 220 15% 90%;
-  --ring: 24 85% 48%; 
+  --border: 220 20% 85%; /* Stronger border */
+  --input: 220 20% 88%;
+  --ring: 24 95% 45%; 
   
   --chart-1: 12 95% 60%;
   --chart-2: 200 80% 50%;
@@ -40,13 +40,13 @@
   --chart-4: 140 60% 45%;
   --chart-5: 40 80% 55%;
 
-  /* New variables for glass & gradient */
-  --glass-bg: rgba(255, 255, 255, 0.7);
-  --glass-border: rgba(0, 0, 0, 0.12); /* More visible border */
-  --gradient-start: 220 30% 98%;
-  --gradient-end: 220 15% 94%;
-  --glow-primary: rgba(230, 90, 30, 0.15);
-  --glow-accent: rgba(100, 150, 250, 0.15);
+  /* New variables for glass & gradient - Optimized for light mode visibility */
+  --glass-bg: rgba(255, 255, 255, 0.85); /* Increased opacity */
+  --glass-border: rgba(0, 0, 0, 0.08);
+  --gradient-start: 220 40% 98%;
+  --gradient-end: 220 20% 94%;
+  --glow-primary: rgba(230, 90, 30, 0.12);
+  --glow-accent: rgba(100, 150, 250, 0.12);
 }
 
 .dark {
@@ -58,19 +58,26 @@
   --card-foreground: 210 15% 96%;
   --popover: 220 40% 10%;
   --popover-foreground: 210 15% 96%;
+  
   --primary: 24 90% 55%;
   --primary-foreground: 210 10% 96%;
+  
   --secondary: 220 20% 18%;
   --secondary-foreground: 215 20% 88%;
+  
   --muted: 220 30% 12%;
   --muted-foreground: 218 18% 66%;
+  
   --accent: 260 60% 40%;
   --accent-foreground: 260 60% 98%;
+  
   --destructive: 0 70% 60%;
   --destructive-foreground: 0 0% 100%;
-  --border: 220 20% 20%; /* More visible border in dark mode */
+  
+  --border: 220 20% 20%;
   --input: 220 25% 12%;
-  --ring: 204 100% 60%;
+  --ring: 24 90% 55%;
+  
   --chart-1: 12 95% 60%;
   --chart-2: 200 80% 50%;
   --chart-3: 260 70% 60%;
@@ -78,12 +85,12 @@
   --chart-5: 40 80% 55%;
 
   /* New variables for glass & gradient */
-  --glass-bg: rgba(20, 25, 40, 0.5);
-  --glass-border: rgba(255, 255, 255, 0.15); /* More visible border */
+  --glass-bg: rgba(15, 20, 35, 0.6); /* Slightly more opaque */
+  --glass-border: rgba(255, 255, 255, 0.12);
   --gradient-start: 220 40% 6%;
   --gradient-end: 260 40% 12%;
-  --glow-primary: rgba(240, 100, 40, 0.3);
-  --glow-accent: rgba(120, 80, 240, 0.3);
+  --glow-primary: rgba(240, 100, 40, 0.25);
+  --glow-accent: rgba(120, 80, 240, 0.25);
 }
 
 /* Mark / highlight (used by blog and markdown) */
@@ -106,4 +113,3 @@ mark.highlight {
   padding: 0 0.125rem; /* matches px-[2px] */
   border-radius: 0.125rem; /* matches rounded-sm */
 }
-

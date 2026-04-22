@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Header } from "@/components/header";
 import "../globals.css";
 import { ThemeProvider } from "@/components/theme-provider"
-// global styles temporarily disabled to debug build parsing issues
 
 export const metadata: Metadata = {
   title: "Sambhav Surana - Technology Architect",
@@ -17,7 +16,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className="font-sans bg-white text-gray-900 dark:bg-gray-800 dark:text-gray-100" suppressHydrationWarning>
+      <body className="font-sans antialiased bg-background text-foreground transition-colors duration-300" suppressHydrationWarning>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
           <Header />
           {children}
