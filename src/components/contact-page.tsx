@@ -5,8 +5,9 @@ import { GitHubLogoIcon as Github, LinkedInLogoIcon as Linkedin, TwitterLogoIcon
 import { SocialButton } from './utility/common'
 import ContactMe from "./contactme"
 import { AnimatedSection } from "./AnimatedSection"
+import { ProfileData } from "@/lib/portfolio-data"
 
-export function ContactPageComponent() {
+export function ContactPageComponent({ profile }: { profile?: ProfileData }) {
   return (
     <div className="min-h-screen w-full flex items-center justify-center pt-36 pb-8 relative overflow-hidden">
       
@@ -34,13 +35,13 @@ export function ContactPageComponent() {
                 </p>
 
                 <div className="space-y-6">
-                  <a href="mailto:sambhav242005@gmail.com" className="flex items-center group">
+                  <a href={`mailto:${profile?.email || 'sambhav242005@gmail.com'}`} className="flex items-center group">
                     <div className="p-3 bg-primary/10 rounded-xl mr-4 group-hover:bg-primary/20 group-hover:scale-110 transition-all duration-300">
                       <Mail className="h-5 w-5 text-primary" />
                     </div>
                     <div>
                       <h4 className="text-xs font-semibold text-muted-foreground mb-0.5">Email</h4>
-                      <p className="text-base font-medium group-hover:text-primary transition-colors">sambhav242005@gmail.com</p>
+                      <p className="text-base font-medium group-hover:text-primary transition-colors">{profile?.email || 'sambhav242005@gmail.com'}</p>
                     </div>
                   </a>
                   
@@ -59,8 +60,8 @@ export function ContactPageComponent() {
               <div className="mt-8 pt-6 border-t border-border/50">
                 <h4 className="text-xs font-medium text-muted-foreground mb-4">Connect on Socials</h4>
                 <div className="flex space-x-3">
-                  <SocialButton href="https://github.com/Sambhav242005" icon={<Github className="h-5 w-5" />} label="GitHub" className="p-2.5 bg-secondary rounded-lg hover:bg-primary hover:text-white transition-all duration-300" />
-                  <SocialButton href="https://www.linkedin.com/in/sambhav-surana-19a557279/" icon={<Linkedin className="h-5 w-5" />} label="LinkedIn" className="p-2.5 bg-secondary rounded-lg hover:bg-primary hover:text-white transition-all duration-300" />
+                  <SocialButton href={profile?.github || "https://github.com/Sambhav242005"} icon={<Github className="h-5 w-5" />} label="GitHub" className="p-2.5 bg-secondary rounded-lg hover:bg-primary hover:text-white transition-all duration-300" />
+                  <SocialButton href={profile?.linkedin || "https://www.linkedin.com/in/sambhav-surana-19a557279/"} icon={<Linkedin className="h-5 w-5" />} label="LinkedIn" className="p-2.5 bg-secondary rounded-lg hover:bg-primary hover:text-white transition-all duration-300" />
                   <SocialButton href="https://twitter.com/Sambhav242005" icon={<Twitter className="h-5 w-5" />} label="Twitter" className="p-2.5 bg-secondary rounded-lg hover:bg-primary hover:text-white transition-all duration-300" />
                 </div>
               </div>

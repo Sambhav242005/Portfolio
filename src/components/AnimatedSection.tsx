@@ -8,7 +8,7 @@ interface AnimatedSectionProps {
   children: ReactNode;
   className?: string;
   delay?: number;
-  direction?: "up" | "down" | "left" | "right" | "none";
+  direction?: "up" | "down" | "left" | "right" | "none" | "scale";
 }
 
 export function AnimatedSection({ 
@@ -26,6 +26,7 @@ export function AnimatedSection({
       case "down": return { y: -50, opacity: 0 };
       case "left": return { x: 50, opacity: 0 };
       case "right": return { x: -50, opacity: 0 };
+      case "scale": return { scale: 0.8, opacity: 0 };
       case "none": return { opacity: 0 };
     }
   };
@@ -35,11 +36,12 @@ export function AnimatedSection({
       ref={ref}
       className={cn(className)}
       initial={getVariants()}
-      animate={isInView ? { x: 0, y: 0, opacity: 1 } : getVariants()}
+      animate={isInView ? { x: 0, y: 0, scale: 1, opacity: 1 } : getVariants()}
       transition={{ 
-        duration: 0.6, 
+        type: "spring",
+        stiffness: 100,
+        damping: 20,
         delay, 
-        ease: [0.21, 0.47, 0.32, 0.98] 
       }}
     >
       {children}

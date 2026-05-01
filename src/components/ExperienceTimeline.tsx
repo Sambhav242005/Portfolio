@@ -3,6 +3,7 @@
 import { ExperienceData } from "@/lib/portfolio-data";
 import { AnimatedSection } from "./AnimatedSection";
 import { Briefcase } from "lucide-react";
+import { motion } from "framer-motion";
 
 export function ExperienceTimeline({ data }: { data: ExperienceData[] }) {
   if (!data || data.length === 0) return null;
@@ -15,7 +16,13 @@ export function ExperienceTimeline({ data }: { data: ExperienceData[] }) {
 
       <div className="relative max-w-4xl mx-auto">
         {/* Central connecting line for desktop */}
-        <div className="hidden md:block absolute left-1/2 top-4 bottom-4 w-0.5 bg-border -translate-x-1/2" />
+        <motion.div 
+          className="hidden md:block absolute left-1/2 top-4 bottom-4 w-0.5 bg-border -translate-x-1/2 origin-top" 
+          initial={{ scaleY: 0 }}
+          whileInView={{ scaleY: 1 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 1.5, ease: "easeInOut" }}
+        />
         
         <div className="space-y-12">
           {data.map((item, index) => {

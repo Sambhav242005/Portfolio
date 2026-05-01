@@ -55,11 +55,10 @@ function ProjectCard({ project }: { project: ProjectData }) {
 
   const isAI = project.category === 'ai';
 
+  const mainUrl = project.liveUrl || project.githubUrl;
+
   return (
-    <motion.a
-      href={project.githubUrl}
-      target="_blank"
-      rel="noopener noreferrer"
+    <motion.div
       className={cn(
         "group relative flex flex-col justify-between p-8 rounded-2xl h-full outline-none",
         "glass overflow-hidden block transition-transform duration-300",
@@ -85,10 +84,16 @@ function ProjectCard({ project }: { project: ProjectData }) {
       
       <div className="z-10 relative">
         <div className="flex justify-between items-start mb-4">
-          <h3 className="text-2xl font-bold group-hover:text-primary transition-colors">
-            {project.title}
-          </h3>
-          <GithubIcon className="w-6 h-6 text-muted-foreground group-hover:text-primary transition-colors" />
+          <a href={mainUrl} target="_blank" rel="noopener noreferrer" className="z-10 hover:underline">
+            <h3 className="text-2xl font-bold group-hover:text-primary transition-colors pr-4">
+              {project.title}
+            </h3>
+          </a>
+          {project.githubUrl && (
+            <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="z-20 cursor-pointer" aria-label="View on GitHub">
+              <GithubIcon className="w-6 h-6 text-muted-foreground hover:text-primary transition-colors" />
+            </a>
+          )}
         </div>
         
         <p className="text-muted-foreground mb-6 leading-relaxed">
@@ -106,6 +111,11 @@ function ProjectCard({ project }: { project: ProjectData }) {
           </span>
         ))}
       </div>
-    </motion.a>
+      
+      {/* Make the entire card clickable, underneath the other links */}
+      <a href={mainUrl} target="_blank" rel="noopener noreferrer" className="absolute inset-0 z-0">
+        <span className="sr-only">View Project</span>
+      </a>
+    </motion.div>
   );
 }

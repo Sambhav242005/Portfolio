@@ -71,24 +71,6 @@ export interface PortfolioData {
 }
 
 export async function getPortfolioData(): Promise<PortfolioData> {
-  const GITHUB_URL = "https://raw.githubusercontent.com/Sambhav242005/Sambhav242005/main/portfolio-data.json";
-  
-  try {
-    const res = await fetch(GITHUB_URL, {
-      next: {
-        revalidate: 86400, // Re-fetch at most once per day
-        tags: ['portfolio-data'], // Allows on-demand revalidation via webhook
-      }
-    });
-    if (res.ok) {
-      const remoteData = await res.json();
-      return remoteData as PortfolioData;
-    }
-  } catch (error) {
-    console.log("Failed to fetch from GitHub, falling back to local JSON schema.", error);
-  }
-
-  // Fallback to local if fetch fails or network is disconnected
   try {
     const fileContents = await fs.readFile(DATA_FILE_PATH, 'utf8');
     return JSON.parse(fileContents) as PortfolioData;
