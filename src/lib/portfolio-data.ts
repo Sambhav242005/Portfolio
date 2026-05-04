@@ -82,18 +82,22 @@ export async function getPortfolioData(): Promise<PortfolioData> {
     });
     if (res.ok) {
       const remoteData = await res.json();
+      console.log("✅ Successfully fetched portfolio data from GitHub online.");
       return remoteData as PortfolioData;
+    } else {
+      console.warn(`⚠️ GitHub fetch returned status ${res.status}, falling back to local JSON.`);
     }
   } catch (error) {
-    console.error("Failed to fetch from GitHub, falling back to local JSON schema.", error);
+    console.error("❌ Failed to fetch from GitHub, falling back to local JSON schema.", error);
   }
 
   // Fallback to local if fetch fails or network is disconnected
   try {
     const fileContents = await fs.readFile(DATA_FILE_PATH, 'utf8');
+    console.log("✅ Successfully read portfolio data from local offline JSON.");
     return JSON.parse(fileContents) as PortfolioData;
   } catch (error) {
-    console.error('Error reading portfolio data:', error);
+    console.error('❌ Error reading portfolio data:', error);
     throw new Error('Failed to read portfolio data');
   }
 }

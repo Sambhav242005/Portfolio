@@ -99,7 +99,7 @@ export function Header() {
             <div className="flex shrink-0">
               <Link href="/" className="flex items-center group relative w-12 h-12 transition-transform group-hover:scale-105" aria-label="Home">
                 <Image
-                  src="/logo.jpg"
+                  src="/profile.jpeg"
                   alt="Portfolio Logo"
                   fill
                   sizes="48px"

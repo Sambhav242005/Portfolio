@@ -34,3 +34,5 @@ yarn-error.log*
 next-env.d.ts
 
 .codegpt
+
+/src/data/analytics.json
