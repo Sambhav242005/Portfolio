@@ -5,7 +5,7 @@ import { MouseEvent } from "react";
 import { ProjectData } from "@/lib/portfolio-data";
 import { AnimatedSection } from "./AnimatedSection";
 import { cn } from "@/lib/utils";
-import { ExternalLink } from "lucide-react";
+import { ExternalLink, GitBranch, Layers3 } from "lucide-react";
 
 function GithubIcon({ className }: { className?: string }) {
   return (
@@ -17,20 +17,47 @@ function GithubIcon({ className }: { className?: string }) {
 
 export function ProjectShowcase({ data }: { data: ProjectData[] }) {
   return (
-    <section className="container mx-auto px-4 py-16" id="projects">
-      <AnimatedSection direction="up">
-        <h2 className="text-3xl font-bold mb-8 text-center">Featured Projects</h2>
-      </AnimatedSection>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
-        {data.map((project, index) => (
-          <AnimatedSection 
-            key={project.id} 
-            delay={index * 0.1} 
-            direction={index % 2 === 0 ? "left" : "right"}
-          >
-            <ProjectCard project={project} />
-          </AnimatedSection>
-        ))}
+    <section className="relative overflow-hidden py-24" id="projects">
+      <div className="container mx-auto px-4">
+        <AnimatedSection direction="up">
+          <div className="mx-auto mb-12 grid max-w-7xl gap-6 lg:grid-cols-[0.85fr_1.15fr] lg:items-end">
+            <div>
+              <span className="mb-4 inline-flex rounded-full border border-primary/25 bg-primary/10 px-3 py-1 text-xs font-bold uppercase tracking-[0.16em] text-primary">
+                Project index
+              </span>
+              <h2 className="text-3xl font-bold leading-tight tracking-tight text-foreground md:text-5xl">
+                Featured builds with visible engineering shape.
+              </h2>
+            </div>
+            <div className="grid gap-3 sm:grid-cols-2 lg:justify-self-end">
+              <div className="rounded-[8px] border border-border/70 bg-card/75 p-4">
+                <div className="flex items-center gap-2 text-sm font-semibold text-foreground">
+                  <Layers3 className="h-4 w-4 text-primary" />
+                  Systems focus
+                </div>
+                <p className="mt-2 text-sm leading-6 text-muted-foreground">Agents, vision, model architecture, and full-stack product work.</p>
+              </div>
+              <div className="rounded-[8px] border border-border/70 bg-card/75 p-4">
+                <div className="flex items-center gap-2 text-sm font-semibold text-foreground">
+                  <GitBranch className="h-4 w-4 text-primary" />
+                  Open source trail
+                </div>
+                <p className="mt-2 text-sm leading-6 text-muted-foreground">Each card links back to the repository or live surface when available.</p>
+              </div>
+            </div>
+          </div>
+        </AnimatedSection>
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+          {data.map((project, index) => (
+            <AnimatedSection
+              key={project.id}
+              delay={index * 0.1}
+              direction={index % 2 === 0 ? "left" : "right"}
+            >
+              <ProjectCard project={project} />
+            </AnimatedSection>
+          ))}
+        </div>
       </div>
     </section>
   );
@@ -49,20 +76,22 @@ function ProjectCard({ project }: { project: ProjectData }) {
     mouseY.set(y);
   }
 
-  // 3D tilt calculations based on mouse position
-  const rotateX = useMotionTemplate`calc((${(mouseY as any).get()}px - 50%) * 0.05deg)`;
-  const rotateY = useMotionTemplate`calc((${(mouseX as any).get()}px - 50%) * -0.05deg)`;
-
   const isAI = project.category === 'ai';
-
+  const categoryLabel = isAI ? "AI system" : "Full-stack build";
   const mainUrl = project.liveUrl || project.githubUrl;
+  const spotlight = useMotionTemplate`
+    radial-gradient(
+      650px circle at ${mouseX}px ${mouseY}px,
+      ${isAI ? 'rgba(249, 115, 22, 0.14)' : 'rgba(8, 145, 178, 0.14)'},
+      transparent 80%
+    )
+  `;
 
   return (
     <motion.div
       className={cn(
-        "group relative flex flex-col justify-between p-8 rounded-2xl h-full outline-none",
-        "glass overflow-hidden block transition-transform duration-300",
-        isAI ? "hover:shadow-[0_0_30px_var(--glow-accent)]" : "hover:shadow-[0_0_30px_var(--glow-primary)]"
+        "group relative flex h-full flex-col justify-between overflow-hidden rounded-[8px] border border-border/70 bg-card/85 p-7 outline-none transition-[border-color,box-shadow,transform] duration-300",
+        isAI ? "hover:shadow-[0_22px_60px_-36px_var(--glow-primary)]" : "hover:shadow-[0_22px_60px_-36px_var(--glow-accent)]"
       )}
       onMouseMove={handleMouseMove}
       style={{ perspective: 1000 }}
@@ -70,22 +99,29 @@ function ProjectCard({ project }: { project: ProjectData }) {
     >
       {/* Interactive gradient border/glow effect on mouse hover */}
       <motion.div
-        className="pointer-events-none absolute -inset-px rounded-xl opacity-0 transition duration-300 group-hover:opacity-100"
-        style={{
-          background: useMotionTemplate`
-            radial-gradient(
-              650px circle at ${mouseX}px ${mouseY}px,
-              ${isAI ? 'rgba(139, 92, 246, 0.15)' : 'rgba(249, 115, 22, 0.15)'},
-              transparent 80%
-            )
-          `,
-        }}
+        className="pointer-events-none absolute -inset-px rounded-[8px] opacity-0 transition duration-300 group-hover:opacity-100"
+        style={{ background: spotlight }}
       />
       
       <div className="z-10 relative">
-        <div className="flex justify-between items-start mb-4">
+        <div className="mb-5 flex items-center justify-between gap-4">
+          <span className="rounded-full border border-primary/20 bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-primary">
+            {categoryLabel}
+          </span>
+          {mainUrl && (
+            <a
+              href={mainUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 text-xs font-semibold text-muted-foreground transition-colors hover:text-primary"
+            >
+              Open <ExternalLink className="h-3.5 w-3.5" />
+            </a>
+          )}
+        </div>
+        <div className="mb-4 flex items-start justify-between">
           <a href={mainUrl} target="_blank" rel="noopener noreferrer" className="z-10 hover:underline">
-            <h3 className="text-2xl font-bold group-hover:text-primary transition-colors pr-4">
+            <h3 className="pr-4 text-2xl font-bold leading-tight text-foreground transition-colors group-hover:text-primary">
               {project.title}
             </h3>
           </a>
@@ -96,16 +132,16 @@ function ProjectCard({ project }: { project: ProjectData }) {
           )}
         </div>
         
-        <p className="text-muted-foreground mb-6 leading-relaxed">
+        <p className="mb-6 leading-relaxed text-muted-foreground">
           {project.description}
         </p>
       </div>
 
-      <div className="flex flex-wrap gap-2 mt-auto z-10 relative">
+      <div className="relative z-10 mt-auto flex flex-wrap gap-2">
         {project.technologies.map((tech, idx) => (
           <span 
             key={idx} 
-            className="px-3 py-1 text-xs font-medium bg-secondary text-secondary-foreground rounded-full"
+            className="rounded-full border border-border/70 bg-secondary/70 px-3 py-1 text-xs font-medium text-secondary-foreground"
           >
             {tech}
           </span>

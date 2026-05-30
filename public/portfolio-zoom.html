@@ -1,0 +1,2050 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sambhav: Creative Developer Space Portfolio</title>
+  
+  <!-- Typography: Inter for clean UI, JetBrains Mono for terminals -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  
+  <!-- Lucide Icons via CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    /* --------------------------------------------------
+       1. CORE SYSTEM & COLOR PALETTE
+       -------------------------------------------------- */
+    :root {
+      --bg-color: #030306;
+      --panel-bg: rgba(7, 7, 15, 0.7);
+      --panel-border: rgba(255, 255, 255, 0.06);
+      --glass-glow: rgba(0, 242, 254, 0.03);
+      
+      /* Neon Theme Palette */
+      --cyan: #00ddff;
+      --cyan-glow: rgba(0, 221, 255, 0.45);
+      --amber: #ffaa00;
+      --amber-glow: rgba(255, 170, 0, 0.45);
+      --purple: #bd00ff;
+      --purple-glow: rgba(189, 0, 255, 0.45);
+      --green: #22c55e;
+      --green-glow: rgba(34, 197, 150, 0.45);
+      
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body, html {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background-color: var(--bg-color);
+      font-family: 'Inter', sans-serif;
+      color: var(--text-main);
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+      z-index: 1;
+    }
+
+    /* --------------------------------------------------
+       2. PREMIUM GLASS HUD CONSOLES (STATIC)
+       -------------------------------------------------- */
+    .hud {
+      position: absolute;
+      z-index: 10;
+      pointer-events: auto;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      background: var(--panel-bg);
+      border: 1px solid var(--panel-border);
+      border-radius: 16px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5), inset 0 0 1px rgba(255, 255, 255, 0.08);
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .hud:hover {
+      border-color: rgba(255, 255, 255, 0.12);
+    }
+
+    /* Top Left: Diagnostics Tracker */
+    .hud-status {
+      top: 24px;
+      left: 24px;
+      padding: 20px;
+      width: 320px;
+      border-left: 4px solid var(--cyan);
+    }
+
+    .hud-status h1 {
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .hud-status h1 i {
+      color: var(--cyan);
+      animation: neon-pulse 2s infinite alternate;
+    }
+
+    .hud-row {
+      display: flex;
+      justify-content: space-between;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      margin-bottom: 8px;
+      align-items: center;
+    }
+
+    .hud-row:last-child {
+      margin-bottom: 0;
+    }
+
+    .hud-row span.label {
+      color: var(--text-muted);
+    }
+
+    .hud-row span.val {
+      color: var(--cyan);
+      font-weight: 600;
+      text-shadow: 0 0 6px rgba(0, 221, 255, 0.3);
+    }
+
+    /* Top Right: Camera Actions HUD */
+    .hud-controls {
+      top: 24px;
+      right: 24px;
+      padding: 10px;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .hud-btn {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--panel-border);
+      color: var(--text-main);
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .hud-btn:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.2);
+      transform: translateY(-1.5px);
+    }
+
+    .hud-btn:active {
+      transform: translateY(0.5px);
+    }
+
+    .hud-btn.btn-back {
+      width: auto;
+      padding: 0 16px;
+      font-size: 11px;
+      font-weight: 700;
+      gap: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      opacity: 0.4;
+      pointer-events: none;
+    }
+
+    .hud-btn.btn-back.active {
+      opacity: 1;
+      pointer-events: auto;
+      border-color: var(--purple);
+      color: #f5f3ff;
+      box-shadow: 0 0 12px rgba(189, 0, 255, 0.25);
+    }
+
+    .hud-btn.btn-back.active:hover {
+      background: rgba(189, 0, 255, 0.12);
+    }
+
+    /* Bottom: Quick Fast Travel Panel */
+    .hud-navigation {
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 12px 20px;
+      display: flex;
+      gap: 14px;
+      align-items: center;
+    }
+
+    .nav-title {
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--text-muted);
+      margin-right: 12px;
+      border-right: 1px solid var(--panel-border);
+      padding-right: 20px;
+    }
+
+    .sector-jump {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--panel-border);
+      color: var(--text-main);
+      padding: 9px 18px;
+      border-radius: 10px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .sector-jump.sec-1:hover {
+      background: rgba(0, 221, 255, 0.08);
+      border-color: var(--cyan);
+      box-shadow: 0 0 16px rgba(0, 221, 255, 0.2);
+      transform: translateY(-2px);
+    }
+    .sector-jump.sec-2:hover {
+      background: rgba(255, 170, 0, 0.08);
+      border-color: var(--amber);
+      box-shadow: 0 0 16px rgba(255, 170, 0, 0.2);
+      transform: translateY(-2px);
+    }
+    .sector-jump.sec-3:hover {
+      background: rgba(189, 0, 255, 0.08);
+      border-color: var(--purple);
+      box-shadow: 0 0 16px rgba(189, 0, 255, 0.2);
+      transform: translateY(-2px);
+    }
+
+    .sector-jump span.dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .sector-jump.sec-1 span.dot { background-color: var(--cyan); box-shadow: 0 0 10px var(--cyan); }
+    .sector-jump.sec-2 span.dot { background-color: var(--amber); box-shadow: 0 0 10px var(--amber); }
+    .sector-jump.sec-3 span.dot { background-color: var(--purple); box-shadow: 0 0 10px var(--purple); }
+
+    /* --------------------------------------------------
+       3. SPATIAL HYBRID PORTFOLIO CONTAINERS
+       -------------------------------------------------- */
+    #html-overlays-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 2;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    #html-overlays-world {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 0;
+      transform-origin: 0 0;
+      pointer-events: none;
+    }
+
+    /* Core Spatial Overlay Panel Style */
+    .overlay-panel {
+      position: absolute;
+      pointer-events: auto;
+      transform: translate(-50%, -50%);
+      background: rgba(6, 6, 12, 0.82);
+      border: 1px solid var(--panel-border);
+      border-radius: 20px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), inset 0 0 2px rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      color: var(--text-main);
+      opacity: 0;
+      transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.1s ease-out;
+      will-change: transform, opacity;
+    }
+
+    /* --------------------------------------------------
+       4. MACRO VIEW OVERLAY GRAPHICS (ZOOM < 2.0x)
+       -------------------------------------------------- */
+    .panel-macro {
+      background: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
+      backdrop-filter: none !important;
+      text-align: center;
+      width: 350px;
+    }
+
+    .macro-ring {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      border: 1px dashed rgba(255, 255, 255, 0.15);
+      margin: 0 auto 16px auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      animation: rotate-slow 20s infinite linear;
+    }
+
+    .macro-ring::before {
+      content: '';
+      position: absolute;
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      border: 2px solid transparent;
+      animation: rotate-reverse 10s infinite linear;
+    }
+
+    .panel-macro.sector-1 .macro-ring::before { border-top-color: var(--cyan); border-bottom-color: var(--cyan); }
+    .panel-macro.sector-2 .macro-ring::before { border-top-color: var(--amber); border-bottom-color: var(--amber); }
+    .panel-macro.sector-3 .macro-ring::before { border-top-color: var(--purple); border-bottom-color: var(--purple); }
+
+    .macro-icon {
+      font-size: 28px;
+      animation: pulse-slower 2s infinite ease-in-out;
+    }
+    .panel-macro.sector-1 .macro-icon { color: var(--cyan); }
+    .panel-macro.sector-2 .macro-icon { color: var(--amber); }
+    .panel-macro.sector-3 .macro-icon { color: var(--purple); }
+
+    .panel-macro h2 {
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .panel-macro p {
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+    .panel-macro.sector-1 p { color: var(--cyan); }
+    .panel-macro.sector-2 p { color: var(--amber); }
+    .panel-macro.sector-3 p { color: var(--purple); }
+
+    /* --------------------------------------------------
+       5. MID VIEW OVERLAY CARDS (ZOOM 2.0x - 5.5x)
+       -------------------------------------------------- */
+    .panel-mid {
+      width: 440px;
+      padding: 32px;
+      border-radius: 20px;
+    }
+
+    .panel-mid.sector-1 { border-top: 4px solid var(--cyan); box-shadow: 0 15px 45px rgba(0, 221, 255, 0.08), inset 0 0 1px var(--cyan); }
+    .panel-mid.sector-2 { border-top: 4px solid var(--amber); box-shadow: 0 15px 45px rgba(255, 170, 0, 0.08), inset 0 0 1px var(--amber); }
+    .panel-mid.sector-3 { border-top: 4px solid var(--purple); box-shadow: 0 15px 45px rgba(189, 0, 255, 0.08), inset 0 0 1px var(--purple); }
+
+    .panel-mid-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    .panel-mid-title h3 {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+
+    .panel-mid-title p {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .panel-mid-body {
+      font-size: 13.5px;
+      line-height: 1.6;
+      color: #cbd5e1;
+      margin-bottom: 24px;
+    }
+
+    .btn-spatial-cta {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--panel-border);
+      color: var(--text-main);
+      padding: 14px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: all 0.3s ease;
+    }
+
+    .panel-mid.sector-1 .btn-spatial-cta:hover { border-color: var(--cyan); background: rgba(0, 221, 255, 0.06); box-shadow: 0 0 15px rgba(0, 221, 255, 0.1); }
+    .panel-mid.sector-2 .btn-spatial-cta:hover { border-color: var(--amber); background: rgba(255, 170, 0, 0.06); box-shadow: 0 0 15px rgba(255, 170, 0, 0.1); }
+    .panel-mid.sector-3 .btn-spatial-cta:hover { border-color: var(--purple); background: rgba(189, 0, 255, 0.06); box-shadow: 0 0 15px rgba(189, 0, 255, 0.1); }
+
+    /* Animated Holographic Core graphic */
+    .holo-core {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0, 221, 255, 0.2) 0%, transparent 70%);
+      border: 2px solid var(--cyan);
+      box-shadow: 0 0 15px var(--cyan-glow);
+      position: relative;
+      animation: pulse-core 2s infinite ease-in-out;
+    }
+    .panel-mid.sector-2 .holo-core { border-color: var(--amber); box-shadow: 0 0 15px var(--amber-glow); background: radial-gradient(circle, rgba(255, 170, 0, 0.2) 0%, transparent 70%); }
+    .panel-mid.sector-3 .holo-core { border-color: var(--purple); box-shadow: 0 0 15px var(--purple-glow); background: radial-gradient(circle, rgba(189, 0, 255, 0.2) 0%, transparent 70%); }
+
+    .holo-core::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+    }
+    .panel-mid.sector-1 .holo-core::after { background: var(--cyan); box-shadow: 0 0 10px var(--cyan); }
+    .panel-mid.sector-2 .holo-core::after { background: var(--amber); box-shadow: 0 0 10px var(--amber); }
+    .panel-mid.sector-3 .holo-core::after { background: var(--purple); box-shadow: 0 0 10px var(--purple); }
+
+    /* --------------------------------------------------
+       6. DETAIL VIEW OVERLAY CARDS (ZOOM > 5.5x)
+       -------------------------------------------------- */
+    .panel-detail {
+      width: 580px;
+      padding: 36px;
+      border-radius: 24px;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), inset 0 0 2px rgba(255, 255, 255, 0.1);
+    }
+    .panel-detail.sector-1 { border-top: 5px solid var(--cyan); box-shadow: 0 20px 50px rgba(0, 221, 255, 0.1), inset 0 0 2px rgba(0, 221, 255, 0.15); }
+    .panel-detail.sector-2 { border-top: 5px solid var(--amber); box-shadow: 0 20px 50px rgba(255, 170, 0, 0.1), inset 0 0 2px rgba(255, 170, 0, 0.15); }
+    .panel-detail.sector-3 { border-top: 5px solid var(--purple); box-shadow: 0 20px 50px rgba(189, 0, 255, 0.1), inset 0 0 2px rgba(189, 0, 255, 0.15); }
+
+    .detail-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding-bottom: 18px;
+    }
+
+    .detail-header-left h2 {
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+    }
+
+    .detail-header-left p {
+      font-size: 11px;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .detail-header span.badge {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--panel-border);
+    }
+    .panel-detail.sector-1 span.badge { color: var(--cyan); border-color: rgba(0, 221, 255, 0.2); }
+    .panel-detail.sector-2 span.badge { color: var(--amber); border-color: rgba(255, 170, 0, 0.2); }
+    .panel-detail.sector-3 span.badge { color: var(--purple); border-color: rgba(189, 0, 255, 0.2); }
+
+    /* Forms, input controls & interactive slots */
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    .form-row {
+      display: flex;
+      gap: 16px;
+    }
+
+    .form-row .form-group {
+      flex: 1;
+    }
+
+    label {
+      display: block;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      background: rgba(0, 0, 0, 0.45);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 8px;
+      padding: 12px 14px;
+      color: var(--text-main);
+      font-family: inherit;
+      font-size: 13.5px;
+      transition: all 0.3s ease;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: rgba(0, 221, 255, 0.4);
+      box-shadow: 0 0 12px rgba(0, 221, 255, 0.15);
+      background: rgba(0, 0, 0, 0.6);
+    }
+
+    .panel-detail.sector-2 input:focus, .panel-detail.sector-2 textarea:focus { border-color: rgba(255, 170, 0, 0.4); box-shadow: 0 0 12px rgba(255, 170, 0, 0.15); }
+    .panel-detail.sector-3 input:focus, .panel-detail.sector-3 textarea:focus { border-color: rgba(189, 0, 255, 0.4); box-shadow: 0 0 12px rgba(189, 0, 255, 0.15); }
+
+    .primary-btn {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--text-main);
+      padding: 14px;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 13px;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .panel-detail.sector-1 .primary-btn { background: linear-gradient(135deg, rgba(0, 221, 255, 0.1) 0%, rgba(0, 110, 255, 0.05) 100%); border-color: rgba(0, 221, 255, 0.3); }
+    .panel-detail.sector-1 .primary-btn:hover { border-color: var(--cyan); box-shadow: 0 0 20px rgba(0, 221, 255, 0.2); background: linear-gradient(135deg, rgba(0, 221, 255, 0.2) 0%, rgba(0, 110, 255, 0.1) 100%); }
+
+    .panel-detail.sector-2 .primary-btn { background: linear-gradient(135deg, rgba(255, 170, 0, 0.1) 0%, rgba(200, 100, 0, 0.05) 100%); border-color: rgba(255, 170, 0, 0.3); }
+    .panel-detail.sector-2 .primary-btn:hover { border-color: var(--amber); box-shadow: 0 0 20px rgba(255, 170, 0, 0.2); background: linear-gradient(135deg, rgba(255, 170, 0, 0.2) 0%, rgba(200, 100, 0, 0.1) 100%); }
+
+    .panel-detail.sector-3 .primary-btn { background: linear-gradient(135deg, rgba(189, 0, 255, 0.1) 0%, rgba(100, 0, 200, 0.05) 100%); border-color: rgba(189, 0, 255, 0.3); }
+    .panel-detail.sector-3 .primary-btn:hover { border-color: var(--purple); box-shadow: 0 0 20px rgba(189, 0, 255, 0.2); background: linear-gradient(135deg, rgba(189, 0, 255, 0.2) 0%, rgba(100, 0, 200, 0.1) 100%); }
+
+    /* --------------------------------------------------
+       7. SECTOR 01 DETAIL: BIO DOSSIER SYSTEM
+       -------------------------------------------------- */
+    .tab-header {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      padding-bottom: 8px;
+    }
+
+    .tab-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      padding: 6px 14px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      position: relative;
+    }
+
+    .tab-btn.active {
+      color: var(--cyan);
+    }
+
+    .tab-btn.active::after {
+      content: '';
+      position: absolute;
+      bottom: -9px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background-color: var(--cyan);
+      box-shadow: 0 0 8px var(--cyan);
+    }
+
+    .tab-content {
+      display: none;
+      animation: fade-in-up 0.4s ease-out;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    .bio-text {
+      font-size: 13.5px;
+      line-height: 1.7;
+      color: #94a3b8;
+      margin-bottom: 18px;
+    }
+
+    .skills-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .skill-row {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .skill-meta {
+      display: flex;
+      justify-content: space-between;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+    }
+
+    .skill-meta span.name {
+      color: var(--text-main);
+      font-weight: 500;
+    }
+
+    .skill-meta span.desc {
+      color: var(--text-muted);
+    }
+
+    .skill-bar {
+      height: 6px;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .skill-fill {
+      height: 100%;
+      background-color: var(--cyan);
+      box-shadow: 0 0 10px var(--cyan);
+      border-radius: 3px;
+      width: 0; /* Animated dynamically */
+      transition: width 1s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .timeline-item {
+      display: flex;
+      gap: 16px;
+    }
+
+    .timeline-date {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--cyan);
+      font-weight: 700;
+      min-width: 90px;
+    }
+
+    .timeline-info h4 {
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .timeline-info p {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    /* --------------------------------------------------
+       8. SECTOR 02 DETAIL: PROJECT MATRIX EXPLORER
+       -------------------------------------------------- */
+    .project-explorer-container {
+      display: flex;
+      gap: 20px;
+    }
+
+    .project-sidebar {
+      width: 180px;
+      border-right: 1px solid rgba(255, 255, 255, 0.05);
+      padding-right: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .project-side-btn {
+      width: 100%;
+      background: transparent;
+      border: 1px solid transparent;
+      border-radius: 8px;
+      padding: 10px 12px;
+      text-align: left;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .project-side-btn:hover {
+      background: rgba(255, 255, 255, 0.02);
+      color: var(--text-main);
+    }
+
+    .project-side-btn.active {
+      background: rgba(255, 170, 0, 0.08);
+      border-color: rgba(255, 170, 0, 0.2);
+      color: var(--amber);
+    }
+
+    .project-detail-body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      min-height: 220px;
+    }
+
+    .project-title-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .project-title-row h3 {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--text-main);
+    }
+
+    .project-stack {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .project-stack span.pill {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      font-weight: 700;
+      color: var(--amber);
+      background: rgba(255, 170, 0, 0.06);
+      border: 1px solid rgba(255, 170, 0, 0.15);
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+
+    .project-desc {
+      font-size: 12.5px;
+      line-height: 1.6;
+      color: var(--text-muted);
+    }
+
+    .project-metrics {
+      display: flex;
+      gap: 16px;
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid var(--panel-border);
+      border-radius: 8px;
+      padding: 10px 14px;
+    }
+
+    .metric-box {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .metric-box span.lbl {
+      font-size: 9px;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+
+    .metric-box span.num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .terminal-console {
+      background: #030307;
+      border: 1px solid var(--panel-border);
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--text-muted);
+      height: 70px;
+      overflow-y: auto;
+    }
+
+    .terminal-console p.log-line {
+      margin-bottom: 4px;
+    }
+
+    .terminal-console p.log-success {
+      color: var(--amber);
+      font-weight: 600;
+    }
+
+    /* --------------------------------------------------
+       9. SECTOR 03 DETAIL: CONTACT CORE & PRIORITY
+       -------------------------------------------------- */
+    .priority-slider-box {
+      background: rgba(0,0,0,0.3);
+      border: 1px solid var(--panel-border);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 20px;
+      transition: all 0.3s ease;
+    }
+
+    .slider-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+    }
+
+    .slider-title span.lbl {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+
+    .slider-title span.val {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--purple);
+      text-shadow: 0 0 6px rgba(189, 0, 255, 0.2);
+    }
+
+    input[type=range] {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 4px;
+      border-radius: 2px;
+      background: rgba(255, 255, 255, 0.08);
+      outline: none;
+      margin: 10px 0;
+    }
+
+    input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--purple);
+      box-shadow: 0 0 10px var(--purple);
+      cursor: pointer;
+      transition: transform 0.1s;
+    }
+
+    input[type=range]::-webkit-slider-thumb:hover {
+      transform: scale(1.2);
+    }
+
+    .slider-desc {
+      display: flex;
+      justify-content: space-between;
+      font-size: 10px;
+      color: var(--text-muted);
+      border-top: 1px dashed rgba(255, 255, 255, 0.06);
+      padding-top: 8px;
+      margin-top: 4px;
+    }
+
+    .slider-desc span.fee {
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--text-main);
+      font-weight: 700;
+    }
+
+    .terminal-console.sector-3 {
+      border-color: rgba(189, 0, 255, 0.15);
+      color: rgba(189, 0, 255, 0.6);
+      display: none;
+      margin-top: 14px;
+    }
+
+    .terminal-console.sector-3.active {
+      display: block;
+    }
+
+    /* Keyframe Animations */
+    @keyframes rotate-slow {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes rotate-reverse {
+      from { transform: rotate(360deg); }
+      to { transform: rotate(0deg); }
+    }
+
+    @keyframes pulse-slower {
+      0%, 100% { transform: scale(1); opacity: 0.9; }
+      50% { transform: scale(1.05); opacity: 1; }
+    }
+
+    @keyframes pulse-core {
+      0%, 100% { transform: scale(1); box-shadow: 0 0 12px rgba(0, 221, 255, 0.3); }
+      50% { transform: scale(1.04); box-shadow: 0 0 20px rgba(0, 221, 255, 0.6); }
+    }
+
+    @keyframes neon-pulse {
+      from { filter: drop-shadow(0 0 1px var(--cyan-glow)); }
+      to { filter: drop-shadow(0 0 6px var(--cyan)); }
+    }
+
+    @keyframes fade-in-up {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Customized browser scrollbars */
+    ::-webkit-scrollbar {
+      width: 4px;
+    }
+    ::-webkit-scrollbar-track {
+      background: rgba(0,0,0,0.1);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(255,255,255,0.15);
+      border-radius: 2px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(255,255,255,0.25);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background WebGL/Canvas Viewport -->
+  <canvas id="zoomCanvas"></canvas>
+
+  <!-- --------------------------------------------------
+       HUD LAYERS
+       -------------------------------------------------- -->
+  <!-- Top Left: Live Status Tracker -->
+  <div class="hud hud-status">
+    <h1><i data-lucide="compass" class="btn-icon"></i> Space HUD Terminal</h1>
+    <div class="hud-row">
+      <span class="label">COORDINATES:</span>
+      <span class="val" id="hud-coords">X: 0.00 | Y: 0.00</span>
+    </div>
+    <div class="hud-row">
+      <span class="label">ZOOM AMPLITUDE:</span>
+      <span class="val" id="hud-zoom">1.00x</span>
+    </div>
+    <div class="hud-row">
+      <span class="label">LEVEL OF DETAIL:</span>
+      <span class="val" id="hud-lod" style="color: var(--cyan);">MACRO VIEW</span>
+    </div>
+    <div class="hud-row">
+      <span class="label">PORTFOLIO SYNC:</span>
+      <span class="val" style="color: var(--green);">100% ONLINE</span>
+    </div>
+  </div>
+
+  <!-- Top Right: Navigation Tools -->
+  <div class="hud hud-controls">
+    <button class="hud-btn btn-back" id="btn-back">
+      <i data-lucide="arrow-left" class="btn-icon"></i> Back
+    </button>
+    <button class="hud-btn" id="btn-zoom-in" title="Zoom In">
+      <i data-lucide="plus" class="btn-icon"></i>
+    </button>
+    <button class="hud-btn" id="btn-zoom-out" title="Zoom Out">
+      <i data-lucide="minus" class="btn-icon"></i>
+    </button>
+    <button class="hud-btn" id="btn-reset" title="Fit to Map">
+      <i data-lucide="maximize" class="btn-icon"></i>
+    </button>
+  </div>
+
+  <!-- Bottom Bar: Coordinates Space Selector -->
+  <div class="hud hud-navigation">
+    <div class="nav-title">Spatial Map</div>
+    <button class="sector-jump sec-1" onclick="jumpToSector(1)">
+      <span class="dot"></span> Profile Core
+    </button>
+    <button class="sector-jump sec-2" onclick="jumpToSector(2)">
+      <span class="dot"></span> Project Matrix
+    </button>
+    <button class="sector-jump sec-3" onclick="jumpToSector(3)">
+      <span class="dot"></span> Contact Core
+    </button>
+  </div>
+
+  <!-- --------------------------------------------------
+       FLOATING HTML UI ELEMENTS (HYBRID VIEWPORT)
+       -------------------------------------------------- -->
+  <div id="html-overlays-container">
+    <div id="html-overlays-world">
+      
+      <!-- ==================================================
+           SECTOR 1: PROFILE CORE (0, 0)
+           ================================================== -->
+      <!-- Sector 1: Macro Beacon (LOD: < 2.0x) -->
+      <div class="overlay-panel panel-macro sector-1" data-wx="0" data-wy="0" data-min-zoom="0" data-max-zoom="2.0">
+        <div class="macro-ring">
+          <i data-lucide="user" class="macro-icon"></i>
+        </div>
+        <h2>Sector 01</h2>
+        <p>Profile Core</p>
+      </div>
+
+      <!-- Sector 1: Mid Zoom (LOD: 2.0x to 5.5x) -->
+      <div id="s1-mid" class="overlay-panel panel-mid sector-1" data-wx="0" data-wy="200" data-min-zoom="2.0" data-max-zoom="5.5">
+        <div class="panel-mid-header">
+          <div class="holo-core"></div>
+          <div class="panel-mid-title">
+            <h3>Sambhav</h3>
+            <p>Creative Developer & Tech Architect</p>
+          </div>
+        </div>
+        <div class="panel-mid-body">
+          Sculpting high-performance spatial engines, immersive canvas models, and ultra-premium modern frontend layers with ES6 Javascript.
+        </div>
+        <button class="btn-spatial-cta" onclick="flyToDetailed(1)">
+          <i data-lucide="chevrons-down" class="btn-icon"></i> Decrypt Dossier Details
+        </button>
+      </div>
+
+      <!-- Sector 1: Deep Zoom Detail (LOD: >= 5.5x) -->
+      <div id="s1-detail" class="overlay-panel panel-detail sector-1" data-wx="0" data-wy="0" data-min-zoom="5.5" data-max-zoom="999">
+        <div class="detail-header">
+          <div class="detail-header-left">
+            <h2>Biographical Dossier</h2>
+            <p>DECRYPT_STATUS: SECURE_LINK_CONNECTED</p>
+          </div>
+          <span class="badge">Sector-01</span>
+        </div>
+        
+        <!-- Tabbed Dossier Sections -->
+        <div class="tab-header">
+          <button class="tab-btn active" onclick="switchS1Tab(this, 's1-tab-bio')">IDENTITY</button>
+          <button class="tab-btn" onclick="switchS1Tab(this, 's1-tab-skills')">STACK SKILLS</button>
+          <button class="tab-btn" onclick="switchS1Tab(this, 's1-tab-exp')">TIMELINE</button>
+        </div>
+
+        <!-- Identity Bio Tab -->
+        <div id="s1-tab-bio" class="tab-content active">
+          <div class="bio-text">
+            Hello, I am **Sambhav**, a creative programmer and technical engineer specializing in canvas vector engines, WebGL integrations, and high-fidelity interaction design. I believe user interfaces should be responsive, tactile, and visually majestic.
+          </div>
+          <div class="bio-text">
+            My work combines mathematical rendering models with production-grade modular system code to build spatial software maps, fluid engines, and immersive client architectures.
+          </div>
+          <div class="form-row" style="margin-top: 10px;">
+            <div class="form-group">
+              <label>Specialty domain</label>
+              <input type="text" readonly value="WebGL, Canvas2D, ES6 JS">
+            </div>
+            <div class="form-group">
+              <label>Link State</label>
+              <input type="text" readonly value="Quantum Uplink Active" style="color: var(--cyan)">
+            </div>
+          </div>
+        </div>
+
+        <!-- Stack Skills Tab -->
+        <div id="s1-tab-skills" class="tab-content">
+          <div class="skills-grid">
+            <div class="skill-row">
+              <div class="skill-meta">
+                <span class="name">WebGL & GLSL Shaders</span>
+                <span class="desc">Expert (94%)</span>
+              </div>
+              <div class="skill-bar"><div class="skill-fill" data-pct="94%"></div></div>
+            </div>
+            <div class="skill-row">
+              <div class="skill-meta">
+                <span class="name">HTML5 Canvas API</span>
+                <span class="desc">Expert (98%)</span>
+              </div>
+              <div class="skill-bar"><div class="skill-fill" data-pct="98%"></div></div>
+            </div>
+            <div class="skill-row">
+              <div class="skill-meta">
+                <span class="name">Next.js & React Architectures</span>
+                <span class="desc">Advanced (88%)</span>
+              </div>
+              <div class="skill-bar"><div class="skill-fill" data-pct="88%"></div></div>
+            </div>
+            <div class="skill-row">
+              <div class="skill-meta">
+                <span class="name">Mathematical Physics & Vectors</span>
+                <span class="desc">Fluent (85%)</span>
+              </div>
+              <div class="skill-bar"><div class="skill-fill" data-pct="85%"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Experience timeline Tab -->
+        <div id="s1-tab-exp" class="tab-content">
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-date">2024 - PRES</div>
+              <div class="timeline-info">
+                <h4>Lead Frontend Architect</h4>
+                <p>Developing interactive physical canvas architectures and premium WebGL systems.</p>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-date">2022 - 2024</div>
+              <div class="timeline-info">
+                <h4>Creative Technologist</h4>
+                <p>Engineered hardware-accelerated interactive web engines and custom graphics models.</p>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-date">2020 - 2022</div>
+              <div class="timeline-info">
+                <h4>Open Source Developer</h4>
+                <p>Designed modular geometric vector systems and graphics rendering packages.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- ==================================================
+           SECTOR 2: PROJECT MATRIX (2500, -1800)
+           ================================================== -->
+      <!-- Sector 2: Macro Beacon (LOD: < 2.0x) -->
+      <div class="overlay-panel panel-macro sector-2" data-wx="2500" data-wy="-1800" data-min-zoom="0" data-max-zoom="2.0">
+        <div class="macro-ring">
+          <i data-lucide="layers" class="macro-icon"></i>
+        </div>
+        <h2>Sector 02</h2>
+        <p>Project Matrix</p>
+      </div>
+
+      <!-- Sector 2: Mid Zoom (LOD: 2.0x to 5.5x) -->
+      <div id="s2-mid" class="overlay-panel panel-mid sector-2" data-wx="2500" data-wy="-1600" data-min-zoom="2.0" data-max-zoom="5.5">
+        <div class="panel-mid-header">
+          <div class="holo-core"></div>
+          <div class="panel-mid-title">
+            <h3>Featured Projects</h3>
+            <p>Code Repositories & Visual Prototypes</p>
+          </div>
+        </div>
+        <div class="panel-mid-body">
+          Explore interactive repositories featuring 2D physics models, hardware-accelerated shaders, dynamic nodes, and premium layouts.
+        </div>
+        <button class="btn-spatial-cta" onclick="flyToDetailed(2)">
+          <i data-lucide="chevrons-down" class="btn-icon"></i> Open Archives Index
+        </button>
+      </div>
+
+      <!-- Sector 2: Deep Zoom Detail (LOD: >= 5.5x) -->
+      <div id="s2-detail" class="overlay-panel panel-detail sector-2" data-wx="2500" data-wy="-1800" data-min-zoom="5.5" data-max-zoom="999">
+        <div class="detail-header">
+          <div class="detail-header-left">
+            <h2>Project Archives Portal</h2>
+            <p>STATUS: DIRECTORY_SYNC_COMPLETE</p>
+          </div>
+          <span class="badge">Sector-02</span>
+        </div>
+
+        <div class="project-explorer-container">
+          <!-- Sidebar selector -->
+          <div class="project-sidebar">
+            <button class="project-side-btn active" onclick="selectProject(this, 'aether')">AETHER GLIDE</button>
+            <button class="project-side-btn" onclick="selectProject(this, 'helios')">HELIOS GRID</button>
+            <button class="project-side-btn" onclick="selectProject(this, 'neural')">NEURAL CORE</button>
+          </div>
+
+          <!-- Active project detailed dashboard -->
+          <div class="project-detail-body">
+            <div class="project-title-row">
+              <h3 id="proj-name">Aether Glide</h3>
+              <div class="project-stack" id="proj-stack">
+                <span class="pill">WebGL</span>
+                <span class="pill">GLSL</span>
+                <span class="pill">Canvas</span>
+              </div>
+            </div>
+            
+            <p class="project-desc" id="proj-desc">
+              An immersive hardware-accelerated WebGL physics engine designed for rendering smooth fluid vectors and spatial terrain maps in modern landing layouts.
+            </p>
+
+            <div class="project-metrics">
+              <div class="metric-box">
+                <span class="lbl">Stars</span>
+                <span class="num" id="proj-stars">342</span>
+              </div>
+              <div class="metric-box">
+                <span class="lbl">Status</span>
+                <span class="num" id="proj-status" style="color: var(--green);">Stable</span>
+              </div>
+              <div class="metric-box">
+                <span class="lbl">Forks</span>
+                <span class="num" id="proj-forks">48</span>
+              </div>
+            </div>
+
+            <button class="primary-btn" id="s2-sandbox-btn" onclick="triggerProjectSandbox()">
+              <i data-lucide="play" class="btn-icon"></i> Run Sandbox Initialization
+            </button>
+
+            <!-- Logging Terminal -->
+            <div class="terminal-console" id="s2-console">
+              <p class="log-line">> Sandbox ready for deployment...</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- ==================================================
+           SECTOR 3: CONTACT CORE (-2500, 1800)
+           ================================================== -->
+      <!-- Sector 3: Macro Beacon (LOD: < 2.0x) -->
+      <div class="overlay-panel panel-macro sector-3" data-wx="-2500" data-wy="1800" data-min-zoom="0" data-max-zoom="2.0">
+        <div class="macro-ring">
+          <i data-lucide="send" class="macro-icon"></i>
+        </div>
+        <h2>Sector 03</h2>
+        <p>Contact Core</p>
+      </div>
+
+      <!-- Sector 3: Mid Zoom (LOD: 2.0x to 5.5x) -->
+      <div id="s3-mid" class="overlay-panel panel-mid sector-3" data-wx="-2500" data-wy="2000" data-min-zoom="2.0" data-max-zoom="5.5">
+        <div class="panel-mid-header">
+          <div class="holo-core"></div>
+          <div class="panel-mid-title">
+            <h3>Transmit Signal</h3>
+            <p>Establish Direct Encryption Conduit</p>
+          </div>
+        </div>
+        <div class="panel-mid-body">
+          Open a verified digital retransmission line to broadcast contract requests, project offers, or creative inquiries directly into my signal stack.
+        </div>
+        <button class="btn-spatial-cta" onclick="flyToDetailed(3)">
+          <i data-lucide="chevrons-down" class="btn-icon"></i> Open Secure Terminal
+        </button>
+      </div>
+
+      <!-- Sector 3: Deep Zoom Detail (LOD: >= 5.5x) -->
+      <div id="s3-detail" class="overlay-panel panel-detail sector-3" data-wx="-2500" data-wy="1800" data-min-zoom="5.5" data-max-zoom="999">
+        <div class="detail-header">
+          <div class="detail-header-left">
+            <h2>Signal Core Transmitter</h2>
+            <p>CRYPTO_PROTOCOL: TLS_SECURE_SSL</p>
+          </div>
+          <span class="badge">Sector-03</span>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="c-name">Sender Signature</label>
+            <input type="text" id="c-name" placeholder="Architect Name" value="Jane Doe">
+          </div>
+          <div class="form-group">
+            <label for="c-email">Retransmit Address</label>
+            <input type="email" id="c-email" placeholder="email@protocol.com" value="jane@cybercore.net">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="c-msg">Data Flow Packet</label>
+          <textarea id="c-msg" rows="3" placeholder="Establish connection context...">Connecting to discuss immersive portfolio project design. Outstanding spatial layout concept!</textarea>
+        </div>
+
+        <!-- Priority Config Slider -->
+        <div class="priority-slider-box" id="s3-priority-box">
+          <div class="slider-title">
+            <span class="lbl">Broadcast Priority Level</span>
+            <span class="val" id="s3-prio-text">Standard Queue</span>
+          </div>
+          <input type="range" id="s3-prio-slider" min="1" max="3" step="1" value="2" oninput="updatePriority(this.value)">
+          <div class="slider-desc">
+            <span>Staking Bandwidth Allocation:</span>
+            <span class="fee" id="s3-prio-fee">1.0 GFLOPS Standard</span>
+          </div>
+        </div>
+
+        <button class="primary-btn" id="s3-submit-btn" onclick="transmitSignalPacket()">
+          <i data-lucide="send" class="btn-icon"></i> Transmit Cryptographic Signals
+        </button>
+
+        <!-- Retransmit feedback terminal -->
+        <div class="terminal-console sector-3" id="s3-console">
+          <p class="log-line">> Establishing packet transmission pipelines...</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- --------------------------------------------------
+       JAVASCRIPT ARCHITECTURE & LOGIC
+       -------------------------------------------------- -->
+  <script>
+    // --------------------------------------------------
+    // A. ENGINE VARIABLES & CAMERA SYSTEM
+    // --------------------------------------------------
+    const canvas = document.getElementById('zoomCanvas');
+    const ctx = canvas.getContext('2d');
+    
+    // Core camera mechanics
+    const camera = {
+      x: 0,
+      y: 0,
+      zoom: 0.35,
+      
+      targetX: 0,
+      targetY: 0,
+      targetZoom: 0.35
+    };
+
+    const LERP_FACTOR = 0.08;      // Smooth tween index
+    let isDragging = false;        // Pan tracking
+    let dragStart = { x: 0, y: 0 };
+    let cameraStart = { x: 0, y: 0 };
+
+    // Navigation History stack
+    const historyStack = [];
+
+    // Particle field
+    const particles = [];
+    const maxParticles = 100;
+    
+    // Starfield for deep space parallax background
+    const stars = [];
+    const maxStars = 200;
+
+    // Track mouse viewport coordinates for grid warping
+    let mx = -9999;
+    let my = -9999;
+
+    // Sectors mapping vectors
+    const SECTORS = {
+      1: { name: 'Profile Core', x: 0, y: 0, theme: '#00ddff', detailZoom: 7.0 },
+      2: { name: 'Project Matrix', x: 2500, y: -1800, theme: '#ffaa00', detailZoom: 7.0 },
+      3: { name: 'Contact Core', x: -2500, y: 1800, theme: '#bd00ff', detailZoom: 7.0 }
+    };
+
+    // --------------------------------------------------
+    // B. MATH CALCULATORS (ISOMETRIC VECTORS & PROJECTORS)
+    // --------------------------------------------------
+    const cos30 = Math.cos(Math.PI / 6); // ~0.866
+    const sin30 = Math.sin(Math.PI / 6); // 0.5
+
+    function getIsoCoords(x, y, z) {
+      return {
+        x: (x - y) * cos30,
+        y: (x + y) * sin30 - z
+      };
+    }
+
+    function worldToScreen(wx, wy) {
+      const sx = (wx - camera.x) * camera.zoom + canvas.width / 2;
+      const sy = (wy - camera.y) * camera.zoom + canvas.height / 2;
+      return { x: sx, y: sy };
+    }
+
+    function screenToWorld(sx, sy) {
+      const wx = (sx - canvas.width / 2) / camera.zoom + camera.x;
+      const wy = (sy - canvas.height / 2) / camera.zoom + camera.y;
+      return { x: wx, y: wy };
+    }
+
+    // --------------------------------------------------
+    // C. INITIATION & ENGINE RESIZING
+    // --------------------------------------------------
+    function resizeCanvas() {
+      const dpr = window.devicePixelRatio || 1;
+      canvas.width = window.innerWidth * dpr;
+      canvas.height = window.innerHeight * dpr;
+      ctx.scale(dpr, dpr);
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    // Generate static deep space star parallax vectors
+    for (let i = 0; i < maxStars; i++) {
+      stars.push({
+        x: (Math.random() - 0.5) * 8000,
+        y: (Math.random() - 0.5) * 8000,
+        depth: 0.1 + Math.random() * 0.9, // Lower value = further away (slower movement)
+        size: 0.5 + Math.random() * 1.5,
+        alpha: 0.2 + Math.random() * 0.8
+      });
+    }
+
+    // Create initial world space floating particles
+    for (let i = 0; i < maxParticles; i++) {
+      particles.push(createSpaceParticle(true));
+    }
+
+    function createSpaceParticle(randomizeAge = false) {
+      const secId = Math.floor(Math.random() * 3) + 1;
+      const sec = SECTORS[secId];
+      return {
+        x: sec.x + (Math.random() - 0.5) * 1000,
+        y: sec.y + (Math.random() - 0.5) * 1000,
+        z: randomizeAge ? Math.random() * 200 : 0,
+        vx: (Math.random() - 0.5) * 0.5,
+        vy: (Math.random() - 0.5) * 0.5,
+        vz: 0.4 + Math.random() * 0.6,
+        size: 1.0 + Math.random() * 2.0,
+        color: sec.theme,
+        alpha: randomizeAge ? Math.random() : 0,
+        maxLife: 150 + Math.random() * 150,
+        life: randomizeAge ? Math.random() * 150 : 0
+      };
+    }
+
+    // --------------------------------------------------
+    // D. SYSTEM EVENTS (MOUSE & INTERACTIVITY)
+    // --------------------------------------------------
+    window.addEventListener('mousedown', (e) => {
+      if (e.target.closest('.hud') || e.target.closest('.overlay-panel')) return;
+      isDragging = true;
+      dragStart = { x: e.clientX, y: e.clientY };
+      cameraStart = { x: camera.targetX, y: camera.targetY };
+      canvas.style.cursor = 'grabbing';
+    });
+
+    window.addEventListener('mousemove', (e) => {
+      // Always capture mouse positions in viewport for mesh warping
+      mx = e.clientX;
+      my = e.clientY;
+
+      if (!isDragging) return;
+      const dx = e.clientX - dragStart.x;
+      const dy = e.clientY - dragStart.y;
+      camera.targetX = cameraStart.x - dx / camera.zoom;
+      camera.targetY = cameraStart.y - dy / camera.zoom;
+    });
+
+    window.addEventListener('mouseup', () => {
+      isDragging = false;
+      canvas.style.cursor = 'default';
+    });
+
+    // Touch Support
+    window.addEventListener('touchstart', (e) => {
+      if (e.target.closest('.hud') || e.target.closest('.overlay-panel')) return;
+      if (e.touches.length === 1) {
+        isDragging = true;
+        dragStart = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+        cameraStart = { x: camera.targetX, y: camera.targetY };
+      }
+    }, { passive: true });
+
+    window.addEventListener('touchmove', (e) => {
+      if (!isDragging) return;
+      const dx = e.touches[0].clientX - dragStart.x;
+      const dy = e.touches[0].clientY - dragStart.y;
+      camera.targetX = cameraStart.x - dx / camera.zoom;
+      camera.targetY = cameraStart.y - dy / camera.zoom;
+    }, { passive: true });
+
+    window.addEventListener('touchend', () => {
+      isDragging = false;
+    });
+
+    // Figma scroll wheel zoom centered exactly under the mouse pointer
+    canvas.addEventListener('wheel', (e) => {
+      e.preventDefault();
+      
+      const mouseWorldBefore = screenToWorld(e.clientX, e.clientY);
+      const intensity = 0.002;
+      let factor = Math.exp(-e.deltaY * intensity);
+      let nextZoom = camera.targetZoom * factor;
+      
+      // Limit range
+      nextZoom = Math.max(0.18, Math.min(nextZoom, 15.0));
+      camera.targetZoom = nextZoom;
+      
+      camera.targetX = mouseWorldBefore.x - (e.clientX - canvas.width / 2) / camera.targetZoom;
+      camera.targetY = mouseWorldBefore.y - (e.clientY - canvas.height / 2) / camera.targetZoom;
+    }, { passive: false });
+
+    // --------------------------------------------------
+    // E. HUD & NAVIGATION UTILITY ACTIONS
+    // --------------------------------------------------
+    document.getElementById('btn-zoom-in').onclick = () => {
+      camera.targetZoom = Math.min(camera.targetZoom * 1.5, 15.0);
+    };
+
+    document.getElementById('btn-zoom-out').onclick = () => {
+      camera.targetZoom = Math.max(camera.targetZoom / 1.5, 0.18);
+    };
+
+    document.getElementById('btn-reset').onclick = () => {
+      pushCameraHistory();
+      camera.targetX = 0;
+      camera.targetY = 0;
+      camera.targetZoom = 0.35;
+    };
+
+    const backBtn = document.getElementById('btn-back');
+    backBtn.onclick = () => {
+      if (historyStack.length > 0) {
+        const prev = historyStack.pop();
+        camera.targetX = prev.x;
+        camera.targetY = prev.y;
+        camera.targetZoom = prev.zoom;
+        updateHistoryButton();
+      }
+    };
+
+    function pushCameraHistory() {
+      if (historyStack.length >= 20) historyStack.shift();
+      historyStack.push({
+        x: camera.targetX,
+        y: camera.targetY,
+        zoom: camera.targetZoom
+      });
+      updateHistoryButton();
+    }
+
+    function updateHistoryButton() {
+      if (historyStack.length > 0) {
+        backBtn.classList.add('active');
+      } else {
+        backBtn.classList.remove('active');
+      }
+    }
+
+    function jumpToSector(id) {
+      pushCameraHistory();
+      const sec = SECTORS[id];
+      camera.targetX = sec.x;
+      camera.targetY = sec.y;
+      camera.targetZoom = 1.2; // Fly to Mid-view
+    }
+
+    function flyToDetailed(id) {
+      pushCameraHistory();
+      const sec = SECTORS[id];
+      camera.targetX = sec.x;
+      camera.targetY = sec.y;
+      camera.targetZoom = sec.detailZoom;
+    }
+
+    // --------------------------------------------------
+    // F. MAIN RENDER ENGINE & ANIMATION LOOP
+    // --------------------------------------------------
+    function draw(time) {
+      // 1. PROCESS LERP CAMERA INTERPOLATIONS
+      camera.x = lerp(camera.x, camera.targetX, LERP_FACTOR);
+      camera.y = lerp(camera.y, camera.targetY, LERP_FACTOR);
+      camera.zoom = lerp(camera.zoom, camera.targetZoom, LERP_FACTOR);
+
+      // Snap micro increments
+      if (Math.abs(camera.x - camera.targetX) < 0.01) camera.x = camera.targetX;
+      if (Math.abs(camera.y - camera.targetY) < 0.01) camera.y = camera.targetY;
+      if (Math.abs(camera.zoom - camera.targetZoom) < 0.0005) camera.zoom = camera.targetZoom;
+
+      // 2. SYNCHRONIZE COORDS STATS IN HUD
+      document.getElementById('hud-coords').innerText = `X: ${camera.x.toFixed(2)} | Y: ${camera.y.toFixed(2)}`;
+      document.getElementById('hud-zoom').innerText = `${camera.zoom.toFixed(2)}x`;
+      
+      const lodText = document.getElementById('hud-lod');
+      if (camera.zoom < 2.0) {
+        lodText.innerText = 'MACRO VIEW';
+        lodText.style.color = 'var(--cyan)';
+      } else if (camera.zoom < 5.5) {
+        lodText.innerText = 'MID DETAIL';
+        lodText.style.color = 'var(--amber)';
+      } else {
+        lodText.innerText = 'MICRO DOSSIER';
+        lodText.style.color = 'var(--purple)';
+        
+        // Trigger skills progress bar animations once detailed view loads
+        const activeS1 = document.querySelector('#s1-detail');
+        if (activeS1 && parseFloat(activeS1.style.opacity) > 0.8) {
+          document.querySelectorAll('.skill-fill').forEach(bar => {
+            bar.style.width = bar.dataset.pct;
+          });
+        }
+      }
+
+      // 3. BACKGROUND RADIAL SCREEN GRADIENT
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      const bg = ctx.createRadialGradient(canvas.width/2, canvas.height/2, 100, canvas.width/2, canvas.height/2, Math.max(canvas.width, canvas.height));
+      bg.addColorStop(0, '#06060c');
+      bg.addColorStop(1, '#020204');
+      ctx.fillStyle = bg;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      // 4. DEEP SPACE PARALLAX STARFIELD
+      stars.forEach(s => {
+        // Star screen position: Translate based on depth mapping
+        const sx = s.x - camera.x * s.depth * camera.zoom + canvas.width/2;
+        const sy = s.y - camera.y * s.depth * camera.zoom + canvas.height/2;
+        
+        // Draw star if within viewport bounds
+        if (sx > 0 && sx < canvas.width && sy > 0 && sy < canvas.height) {
+          ctx.fillStyle = `rgba(255, 255, 255, ${s.alpha})`;
+          ctx.beginPath();
+          ctx.arc(sx, sy, s.size * Math.max(0.3, camera.zoom * 0.5), 0, Math.PI * 2);
+          ctx.fill();
+        }
+      });
+
+      // 5. CAMERA TRANSFORMED MATRIX DRAWINGS (WORLD COORDINATES SPACE)
+      ctx.save();
+      ctx.translate(canvas.width / 2, canvas.height / 2);
+      ctx.scale(camera.zoom, camera.zoom);
+      ctx.translate(-camera.x, -camera.y);
+
+      // 6. MAGNETIC WARREN WRAPPING CYBER GRID
+      // warping occurs relative to mouse position mapped into World coordinates
+      const mouseWorld = screenToWorld(mx, my);
+      ctx.strokeStyle = 'rgba(0, 221, 255, 0.015)';
+      ctx.lineWidth = 1;
+      
+      const gridSpan = 6000;
+      const gridStep = 300;
+      const subdivisions = 12; // Segment subdivisions to calculate warp bendings
+      
+      // Horizontal Lines
+      for (let y = -gridSpan; y <= gridSpan; y += gridStep) {
+        ctx.beginPath();
+        for (let i = 0; i <= subdivisions; i++) {
+          const t = i / subdivisions;
+          const x = -gridSpan + t * (gridSpan * 2);
+          
+          // Project flat coordinate into isometric grid position
+          const iso = getIsoCoords(x, y, 0);
+          
+          // Calculate mouse warp pulling force
+          const dx = iso.x - mouseWorld.x;
+          const dy = iso.y - mouseWorld.y;
+          const dist = Math.sqrt(dx*dx + dy*dy);
+          
+          let warpedX = iso.x;
+          let warpedY = iso.y;
+          
+          const maxInfluence = 900;
+          if (dist < maxInfluence) {
+            const pull = (maxInfluence - dist) / maxInfluence;
+            // Pull points slightly towards mouse coordinate
+            const strength = 130 / camera.zoom; // Scale relative to zoom
+            warpedX -= (dx / dist) * pull * Math.min(strength, dist);
+            warpedY -= (dy / dist) * pull * Math.min(strength, dist);
+          }
+          
+          if (i === 0) ctx.moveTo(warpedX, warpedY);
+          else ctx.lineTo(warpedX, warpedY);
+        }
+        ctx.stroke();
+      }
+
+      // Vertical Lines
+      for (let x = -gridSpan; x <= gridSpan; x += gridStep) {
+        ctx.beginPath();
+        for (let i = 0; i <= subdivisions; i++) {
+          const t = i / subdivisions;
+          const y = -gridSpan + t * (gridSpan * 2);
+          
+          const iso = getIsoCoords(x, y, 0);
+          const dx = iso.x - mouseWorld.x;
+          const dy = iso.y - mouseWorld.y;
+          const dist = Math.sqrt(dx*dx + dy*dy);
+          
+          let warpedX = iso.x;
+          let warpedY = iso.y;
+          
+          const maxInfluence = 900;
+          if (dist < maxInfluence) {
+            const pull = (maxInfluence - dist) / maxInfluence;
+            const strength = 130 / camera.zoom;
+            warpedX -= (dx / dist) * pull * Math.min(strength, dist);
+            warpedY -= (dy / dist) * pull * Math.min(strength, dist);
+          }
+          
+          if (i === 0) ctx.moveTo(warpedX, warpedY);
+          else ctx.lineTo(warpedX, warpedY);
+        }
+        ctx.stroke();
+      }
+
+      // 7. DRAW CYBER PIPELINE CONDUITS BETWEEN REGIONS
+      drawCyberConduit(SECTORS[1], SECTORS[2], '#ffaa00', time);
+      drawCyberConduit(SECTORS[1], SECTORS[3], '#bd00ff', time);
+
+      // 8. UPDATE AND DRAW VIRTUAL WORLD SYSTEM PARTICLES
+      particles.forEach((p, idx) => {
+        p.life++;
+        p.x += p.vx;
+        p.y += p.vy;
+        p.z += p.vz;
+        
+        if (p.life < 20) p.alpha = p.life / 20;
+        else if (p.life > p.maxLife - 20) p.alpha = (p.maxLife - p.life) / 20;
+        else p.alpha = 1.0;
+        
+        const iso = getIsoCoords(p.x, p.y, p.z);
+        
+        ctx.fillStyle = p.color;
+        ctx.globalAlpha = p.alpha * 0.7;
+        ctx.beginPath();
+        ctx.arc(iso.x, iso.y, p.size, 0, Math.PI * 2);
+        ctx.fill();
+        
+        if (p.life >= p.maxLife || p.z > 350) {
+          if (p.isConfetti) {
+            particles.splice(idx, 1);
+          } else {
+            particles[idx] = createSpaceParticle();
+          }
+        }
+      });
+      ctx.globalAlpha = 1.0;
+
+      // 9. DRAW SECTOR RING BASES ON CANVAS
+      drawSectorGroundRing(SECTORS[1]);
+      drawSectorGroundRing(SECTORS[2]);
+      drawSectorGroundRing(SECTORS[3]);
+
+      ctx.restore(); // POP VIRTUAL CAMERA SPACE TRANSFORM
+
+      // 10. MATRIX SYNC PORTFOLIO HTML OVERLAYS LAYER
+      const overlaysWorld = document.getElementById('html-overlays-world');
+      overlaysWorld.style.transform = `translate3d(${canvas.width / 2}px, ${canvas.height / 2}px, 0) scale(${camera.zoom}) translate3d(${-camera.x}px, ${-camera.y}px, 0)`;
+
+      // Loop through individual overlays and trigger opacity based on camera LOD bounds
+      const panels = document.querySelectorAll('.overlay-panel');
+      panels.forEach(panel => {
+        const minZoom = parseFloat(panel.dataset.minZoom);
+        const maxZoom = parseFloat(panel.dataset.maxZoom);
+        
+        let opacity = 0;
+        if (camera.zoom >= minZoom && camera.zoom <= maxZoom) {
+          const range = 0.5; // Linear transition scope (fade range)
+          if (camera.zoom < minZoom + range) {
+            opacity = (camera.zoom - minZoom) / range;
+          } else if (camera.zoom > maxZoom - range) {
+            opacity = (maxZoom - camera.zoom) / range;
+          } else {
+            opacity = 1.0;
+          }
+        }
+        
+        panel.style.opacity = opacity;
+        
+        // Prevent click/mouse collision capture when elements are fully transparent
+        if (opacity > 0.05) {
+          panel.style.pointerEvents = 'auto';
+          panel.style.display = 'block';
+        } else {
+          panel.style.pointerEvents = 'none';
+          // Completely hide when invisible to clear browser overlays performance
+          panel.style.display = 'none';
+        }
+      });
+
+      requestAnimationFrame(draw);
+    }
+
+    function lerp(start, end, amt) {
+      return (1 - amt) * start + amt * end;
+    }
+
+    // --------------------------------------------------
+    // G. GRAPHICS DRAWING HELPER FUNCTIONS
+    // --------------------------------------------------
+    function drawSectorGroundRing(sec) {
+      ctx.strokeStyle = `${sec.theme}1f`; // Transparent hex overlay
+      ctx.lineWidth = 4;
+      ctx.beginPath();
+      ctx.ellipse(sec.x, sec.y, 350, 175, 0, 0, Math.PI * 2);
+      ctx.stroke();
+
+      ctx.strokeStyle = `${sec.theme}0a`;
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.ellipse(sec.x, sec.y, 420, 210, 0, 0, Math.PI * 2);
+      ctx.stroke();
+    }
+
+    function drawCyberConduit(from, to, colorHex, time) {
+      ctx.save();
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.02)';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(from.x, from.y);
+      ctx.lineTo(to.x, to.y);
+      ctx.stroke();
+      
+      // Pulse dash animation running along conduit path
+      ctx.strokeStyle = colorHex;
+      ctx.globalAlpha = 0.4;
+      ctx.setLineDash([12, 40]);
+      ctx.lineDashOffset = -time * 0.08;
+      ctx.beginPath();
+      ctx.moveTo(from.x, from.y);
+      ctx.lineTo(to.x, to.y);
+      ctx.stroke();
+      ctx.restore();
+    }
+
+    requestAnimationFrame(draw);
+    lucide.createIcons();
+
+    // --------------------------------------------------
+    // H. PORTFOLIO INTERACTION ACTIONS & FORM SYSTEM
+    // --------------------------------------------------
+    
+    // SECTOR 01: Profile Dossier Dossier Tabs Switch
+    function switchS1Tab(btn, tabId) {
+      // Deactivate all buttons
+      btn.parentElement.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      
+      // Deactivate all contents
+      const panel = btn.closest('.panel-detail');
+      panel.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+      
+      // Activate target tab content
+      panel.querySelector(`#${tabId}`).classList.add('active');
+    }
+
+    // SECTOR 02: Portfolio Project Matrix Viewer
+    const projects = {
+      'aether': {
+        name: 'Aether Glide',
+        stack: ['WebGL', 'GLSL', 'Canvas2D'],
+        desc: 'An immersive hardware-accelerated WebGL physics engine designed for rendering smooth fluid vectors, spatial topography terrains, and parallax visual background maps in creative layouts.',
+        stars: '342',
+        status: 'Stable',
+        forks: '48'
+      },
+      'helios': {
+        name: 'Helios Grid',
+        stack: ['ThreeJS', 'React', 'Tailwind'],
+        desc: 'A futuristic decentralized clean-energy trading visualizer featuring responsive 3D node networks, glowing solar grid capsules, and real-time computation tickers running across socket pipes.',
+        stars: '189',
+        status: 'Optimization',
+        forks: '26'
+      },
+      'neural': {
+        name: 'Neural Core',
+        stack: ['VanillaJS', 'WebAudio', 'GLSL'],
+        desc: 'An audio-reactive visual synapses matrix showing musical decibel streams mapped onto dynamic Three.js particle neural coordinates. Beautiful glowing micro-nodes that bounce to bass signals.',
+        stars: '420',
+        status: 'Beta-V2',
+        forks: '64'
+      }
+    };
+
+    let activeProjectKey = 'aether';
+    function selectProject(btn, key) {
+      btn.parentElement.querySelectorAll('.project-side-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      activeProjectKey = key;
+      const data = projects[key];
+
+      document.getElementById('proj-name').innerText = data.name;
+      document.getElementById('proj-desc').innerText = data.desc;
+      document.getElementById('proj-stars').innerText = data.stars;
+      document.getElementById('proj-forks').innerText = data.forks;
+      
+      const statusSpan = document.getElementById('proj-status');
+      statusSpan.innerText = data.status;
+      if (data.status === 'Stable') statusSpan.style.color = 'var(--green)';
+      else if (data.status === 'Optimization') statusSpan.style.color = 'var(--amber)';
+      else statusSpan.style.color = 'var(--purple)';
+
+      // Populate stacks
+      const stack = document.getElementById('proj-stack');
+      stack.innerHTML = '';
+      data.stack.forEach(s => {
+        stack.innerHTML += `<span class="pill">${s}</span>`;
+      });
+    }
+
+    function triggerProjectSandbox() {
+      const btn = document.getElementById('s2-sandbox-btn');
+      const consoleDiv = document.getElementById('s2-console');
+      
+      btn.disabled = true;
+      btn.innerHTML = `<i data-lucide="loader" style="animation: rotate-slow 1s infinite linear;" class="btn-icon"></i> Compiling Shader Packets...`;
+      lucide.createIcons();
+
+      consoleDiv.innerHTML = `<p class="log-line">> Initializing sandbox environment...</p>`;
+      
+      setTimeout(() => {
+        consoleDiv.innerHTML += `<p class="log-line">> Mounting stack: [${projects[activeProjectKey].stack.join(', ')}]</p>`;
+        consoleDiv.scrollTop = consoleDiv.scrollHeight;
+      }, 500);
+
+      setTimeout(() => {
+        consoleDiv.innerHTML += `<p class="log-line">> Compiling vertex shaders... OK</p>`;
+        consoleDiv.innerHTML += `<p class="log-line">> Compiling fragment shaders... OK</p>`;
+        consoleDiv.scrollTop = consoleDiv.scrollHeight;
+      }, 1100);
+
+      setTimeout(() => {
+        consoleDiv.innerHTML += `<p class="log-success">> SANDBOX DEPLOYED SUCCESSFULLY! RUNTIME: 60FPS</p>`;
+        consoleDiv.scrollTop = consoleDiv.scrollHeight;
+        
+        btn.disabled = false;
+        btn.innerHTML = `<i data-lucide="check" class="btn-icon"></i> Sandbox Running`;
+        lucide.createIcons();
+        
+        // Spray glowing gold sparks at Sector 02 core
+        triggerParticleSpray(2500, -1800, '#ffaa00');
+      }, 1800);
+    }
+
+    // SECTOR 03: Contact Transmitter Config Slider
+    function updatePriority(val) {
+      const box = document.getElementById('s3-priority-box');
+      const text = document.getElementById('s3-prio-text');
+      const fee = document.getElementById('s3-prio-fee');
+      
+      if (val == 1) {
+        text.innerText = 'Standard Protocol';
+        text.style.color = 'var(--green)';
+        fee.innerText = '0.5 GFLOPS Standard';
+        box.style.borderColor = 'rgba(34, 197, 94, 0.15)';
+        box.style.boxShadow = '0 0 10px rgba(34, 197, 94, 0.05)';
+      } else if (val == 2) {
+        text.innerText = 'Accelerated Retransmit';
+        text.style.color = 'var(--amber)';
+        fee.innerText = '2.5 GFLOPS Mid-Stake';
+        box.style.borderColor = 'rgba(255, 170, 0, 0.15)';
+        box.style.boxShadow = '0 0 10px rgba(255, 170, 0, 0.05)';
+      } else {
+        text.innerText = 'Quantum Cryptographic Hyperway';
+        text.style.color = 'var(--purple)';
+        fee.innerText = '10.0 GFLOPS Critical';
+        box.style.borderColor = 'rgba(189, 0, 255, 0.25)';
+        box.style.boxShadow = '0 0 15px rgba(189, 0, 255, 0.1)';
+      }
+    }
+
+    function transmitSignalPacket() {
+      const name = document.getElementById('c-name').value;
+      const email = document.getElementById('c-email').value;
+      const btn = document.getElementById('s3-submit-btn');
+      const consoleDiv = document.getElementById('s3-console');
+
+      btn.disabled = true;
+      btn.innerText = 'Securing Cryptographic Uplink...';
+      consoleDiv.classList.add('active');
+      consoleDiv.innerHTML = `<p class="log-line">> Establishing proxy channels to gateway core...</p>`;
+
+      setTimeout(() => {
+        consoleDiv.innerHTML += `<p class="log-line">> Handshaking protocol credentials... OK</p>`;
+        consoleDiv.scrollTop = consoleDiv.scrollHeight;
+      }, 500);
+
+      setTimeout(() => {
+        consoleDiv.innerHTML += `<p class="log-line">> Wrapping metadata packet: [SND_ID: ${name.toUpperCase()} | RET_RT: ${email}]</p>`;
+        consoleDiv.scrollTop = consoleDiv.scrollHeight;
+      }, 1000);
+
+      setTimeout(() => {
+        consoleDiv.innerHTML += `<p class="log-line" style="color:var(--purple)">> Retransmitting data flow bytes...</p>`;
+        consoleDiv.scrollTop = consoleDiv.scrollHeight;
+      }, 1500);
+
+      setTimeout(() => {
+        consoleDiv.innerHTML += `<p class="log-line" style="color:var(--green)">> Retransmission complete! Signal core dispatched.</p>`;
+        consoleDiv.scrollTop = consoleDiv.scrollHeight;
+        
+        btn.innerHTML = `<i data-lucide="check" class="btn-icon"></i> Signals Transmitted`;
+        lucide.createIcons();
+        
+        // Massive physical purple explosion
+        triggerParticleSpray(-2500, 1800, '#bd00ff');
+      }, 2200);
+    }
+
+    // Physical spatial particle spray emitter
+    function triggerParticleSpray(wx, wy, colorHex) {
+      const count = 70;
+      for (let i = 0; i < count; i++) {
+        particles.push({
+          x: wx + (Math.random() - 0.5) * 80,
+          y: wy + (Math.random() - 0.5) * 80,
+          z: 30 + Math.random() * 40,
+          vx: (Math.random() - 0.5) * 10.0,
+          vy: (Math.random() - 0.5) * 10.0,
+          vz: 5.0 + Math.random() * 8.0,
+          size: 1.8 + Math.random() * 3.5,
+          color: colorHex,
+          alpha: 1.0,
+          maxLife: 100 + Math.random() * 100,
+          life: 0,
+          isConfetti: true
+        });
+      }
+    }
+  </script>
+</body>
+</html>

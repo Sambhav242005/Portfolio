@@ -24,39 +24,40 @@ export function Footer({ data }: { data: ProfileData }) {
   if (!data) return null;
 
   return (
-    <footer className="relative mt-20 overflow-hidden border-t border-border bg-muted/20 pt-12 pb-8">
-      <div className="absolute top-0 left-0 h-1 w-full bg-gradient-to-r from-transparent via-primary to-transparent opacity-50" />
+    <footer className="relative overflow-hidden border-t border-border/70 bg-muted/25 py-10">
+      <div className="absolute left-0 top-0 h-px w-full bg-gradient-to-r from-transparent via-primary/60 to-transparent" />
 
       <div className="container mx-auto px-4">
-        <div className="flex flex-col items-center justify-between gap-6 md:flex-row">
-          <div className="text-center md:text-left">
-            <h3 className="mb-2 text-xl font-bold text-gradient">{data.name}</h3>
-            <p className="text-sm text-muted-foreground">{data.tagline}</p>
+        <div className="mx-auto grid max-w-7xl gap-8 rounded-[8px] border border-border/70 bg-background/75 p-6 shadow-sm md:grid-cols-[1fr_auto] md:items-center md:p-8">
+          <div>
+            <p className="mb-3 text-xs font-bold uppercase tracking-[0.16em] text-primary">Open to AI and software roles</p>
+            <h3 className="text-2xl font-bold leading-tight text-foreground md:text-3xl">{data.name}</h3>
+            <p className="mt-3 max-w-2xl text-sm leading-6 text-muted-foreground">{data.tagline}</p>
           </div>
 
-          <div className="flex space-x-4">
+          <div className="flex gap-3">
             <SocialButton
               href={data.github}
               icon={<GithubIcon className="h-5 w-5" />}
               label="GitHub"
-              className="text-muted-foreground transition-colors hover:text-primary"
+              className="h-11 w-11 rounded-full border border-border/70 bg-card text-muted-foreground transition-colors hover:border-primary/35 hover:text-primary"
             />
             <SocialButton
               href={data.linkedin}
               icon={<LinkedinIcon className="h-5 w-5" />}
               label="LinkedIn"
-              className="text-muted-foreground transition-colors hover:text-primary"
+              className="h-11 w-11 rounded-full border border-border/70 bg-card text-muted-foreground transition-colors hover:border-primary/35 hover:text-primary"
             />
             <SocialButton
               href={`mailto:${data.email}`}
               icon={<Mail className="h-5 w-5" />}
               label="Mail"
-              className="text-muted-foreground transition-colors hover:text-primary"
+              className="h-11 w-11 rounded-full border border-border/70 bg-card text-muted-foreground transition-colors hover:border-primary/35 hover:text-primary"
             />
           </div>
         </div>
 
-        <div className="mt-8 flex flex-col flex-wrap items-center justify-between gap-2 border-t border-border/50 pt-8 text-xs text-muted-foreground md:flex-row">
+        <div className="mx-auto mt-6 flex max-w-7xl flex-col flex-wrap items-center justify-between gap-2 text-xs text-muted-foreground md:flex-row">
           <p>Copyright {new Date().getFullYear()} {data.name}. All rights reserved.</p>
           <p>Built with Next.js, Tailwind CSS and React Three Fiber</p>
         </div>

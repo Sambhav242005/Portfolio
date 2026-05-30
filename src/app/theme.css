@@ -4,7 +4,7 @@
 */
 
 :root {
-  --radius: 0.75rem;
+  --radius: 0.5rem;
   /* Premium Pearl/Cool-Gray Light Theme - Refined for better contrast */
   --background: 210 20% 98%; /* Slightly off-white for depth */
   --foreground: 220 40% 12%; /* Deep navy black */
@@ -24,7 +24,7 @@
   --muted: 220 15% 90%;
   --muted-foreground: 220 20% 35%; /* Darkened for better readability */
   
-  --accent: 220 80% 90%;
+  --accent: 196 80% 88%;
   --accent-foreground: 220 40% 12%;
   
   --destructive: 350 80% 50%;
@@ -46,9 +46,8 @@
   --gradient-start: 220 40% 98%;
   --gradient-end: 220 20% 94%;
   --glow-primary: rgba(230, 90, 30, 0.12);
-  --glow-accent: rgba(100, 150, 250, 0.12);
+  --glow-accent: rgba(8, 145, 178, 0.12);
 }
-
 .dark {
   /* Dark theme tokens */
   --background: 220 40% 6%;
@@ -68,8 +67,8 @@
   --muted: 220 30% 12%;
   --muted-foreground: 218 18% 66%;
   
-  --accent: 260 60% 40%;
-  --accent-foreground: 260 60% 98%;
+  --accent: 194 72% 34%;
+  --accent-foreground: 194 65% 96%;
   
   --destructive: 0 70% 60%;
   --destructive-foreground: 0 0% 100%;
@@ -88,28 +87,7 @@
   --glass-bg: rgba(15, 20, 35, 0.6); /* Slightly more opaque */
   --glass-border: rgba(255, 255, 255, 0.12);
   --gradient-start: 220 40% 6%;
-  --gradient-end: 260 40% 12%;
+  --gradient-end: 212 34% 12%;
   --glow-primary: rgba(240, 100, 40, 0.25);
-  --glow-accent: rgba(120, 80, 240, 0.25);
-}
-
-/* Mark / highlight (used by blog and markdown) */
-:root {
-  --mark-bg: 48 100% 80%; /* light yellow */
-  --mark-foreground: 210 12% 12%; /* dark text on highlight */
-}
-
-.dark {
-  --mark-bg: 48 100% 28%; /* darker yellow/pale in dark mode */
-  --mark-foreground: 0 0% 100%;
-}
-
-/* Ensure prose and mark.highlight use the theme variables */
-.prose mark,
-.prose .highlight,
-mark.highlight {
-  background: hsl(var(--mark-bg));
-  color: hsl(var(--mark-foreground));
-  padding: 0 0.125rem; /* matches px-[2px] */
-  border-radius: 0.125rem; /* matches rounded-sm */
+  --glow-accent: rgba(8, 145, 178, 0.22);
 }

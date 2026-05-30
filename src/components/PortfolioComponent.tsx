@@ -7,9 +7,33 @@ import { SkillsSection } from "./SkillsSection";
 import { CertificationsGrid } from "./CertificationsGrid";
 import { Footer } from "./Footer";
 import { SocialButton } from "./utility/common";
-import { Mail } from "lucide-react";
+import { ArrowRight, Bot, BrainCircuit, Code2, DatabaseZap, FileText, Mail, ScanFace, Workflow } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+
+const proofPoints = [
+  { label: "AI agents", icon: BrainCircuit },
+  { label: "Computer vision", icon: ScanFace },
+  { label: "Full-stack systems", icon: Workflow },
+];
+
+const capabilityHighlights = [
+  {
+    title: "Agent workflows",
+    detail: "LangChain, LangGraph, tool routing, and backend APIs shaped into working product flows.",
+    icon: Bot,
+  },
+  {
+    title: "Computer vision",
+    detail: "YOLO, OpenCV, recognition pipelines, and vector retrieval built for real-time use cases.",
+    icon: ScanFace,
+  },
+  {
+    title: "Product engineering",
+    detail: "Next.js, FastAPI, Docker, databases, and deployment details handled as one system.",
+    icon: Code2,
+  },
+];
 
 function GithubIcon({ className }: { className?: string }) {
   return (
@@ -34,61 +58,86 @@ export default function PortfolioComponent({ data }: { data: PortfolioData }) {
     <main id="main-content" className="min-h-screen bg-background text-foreground flex flex-col">
       
       {/* 3D Hero Section */}
-      <section className="relative flex min-h-[100svh] items-center justify-center overflow-hidden px-4 pt-28 pb-12 md:px-0">
+      <section className="relative min-h-[100svh] overflow-hidden px-4 pt-28 pb-16 md:px-8 lg:px-12">
         <HeroScene />
         
-        <div className="z-10 text-center px-4 pointer-events-none">
-          <AnimatedSection direction="up" delay={0.2}>
-            <h1 className="text-5xl md:text-7xl font-extrabold mb-6 drop-shadow-xl text-foreground">
-              {data.profile.name}
-            </h1>
-          </AnimatedSection>
-          
-          <AnimatedSection direction="up" delay={0.4}>
-            <p className="text-xl md:text-3xl mb-8 font-light text-foreground/90 drop-shadow-lg">
-              {data.profile.tagline}
-            </p>
-          </AnimatedSection>
-          
-          <AnimatedSection direction="up" delay={0.6}>
-            <div className="mt-8 flex flex-wrap justify-center gap-6 pointer-events-auto">
-              <SocialButton
-                href={data.profile.github}
-                icon={<GithubIcon className="w-8 h-8" />}
-                label="GitHub"
-                className="text-foreground hover:text-primary transition-colors glow-hover"
-              />
-              <SocialButton
-                href={data.profile.linkedin}
-                icon={<LinkedinIcon className="w-8 h-8" />}
-                label="LinkedIn"
-                className="text-foreground hover:text-primary transition-colors glow-hover"
-              />
-              <SocialButton
-                href={`mailto:${data.profile.email}`}
-                icon={<Mail className="w-8 h-8" />}
-                label="Mail"
-                className="text-foreground hover:text-primary transition-colors glow-hover"
-              />
-            </div>
-            
-            <div className="mt-12 flex flex-col justify-center gap-4 pointer-events-auto sm:flex-row">
-              <a
-                href="#projects"
-                className={cn(buttonVariants({ size: "lg" }), "px-8 shadow-lg shadow-primary/30 font-bold")}
-              >
-                View Work
-              </a>
-              <a
-                href="/cv"
-                target="_blank"
-                rel="noopener noreferrer"
-                className={cn(buttonVariants({ variant: "outline", size: "lg" }), "px-8 bg-foreground/5 backdrop-blur-md text-foreground border-foreground/30 hover:bg-foreground/10 hover:text-foreground font-bold")}
-              >
-                View CV
-              </a>
-            </div>
-          </AnimatedSection>
+        <div className="relative z-10 mx-auto grid min-h-[calc(100svh-9rem)] max-w-7xl items-center gap-12 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)]">
+          <div className="pointer-events-none max-w-3xl text-left">
+            <AnimatedSection direction="right" delay={0.15}>
+              <span className="mb-6 inline-flex rounded-full border border-primary/25 bg-primary/10 px-4 py-2 text-sm font-semibold text-primary shadow-sm">
+                AI systems builder
+              </span>
+              <h1 className="mb-6 text-5xl font-extrabold leading-[0.95] tracking-tight text-foreground md:text-7xl">
+                {data.profile.name}
+              </h1>
+            </AnimatedSection>
+
+            <AnimatedSection direction="right" delay={0.3}>
+              <p className="max-w-2xl text-xl font-semibold leading-snug text-foreground/90 md:text-3xl">
+                AI Engineer & Python Developer building useful agents, vision systems, and production-ready web tools.
+              </p>
+              <p className="mt-5 max-w-2xl text-base leading-7 text-muted-foreground md:text-lg">
+                {data.profile.tagline}
+              </p>
+            </AnimatedSection>
+
+            <AnimatedSection direction="up" delay={0.45}>
+              <div className="mt-8 flex flex-wrap gap-3">
+                {proofPoints.map(({ label, icon: Icon }) => (
+                  <span
+                    key={label}
+                    className="inline-flex items-center gap-2 rounded-full border border-border/70 bg-background/70 px-4 py-2 text-sm font-medium text-foreground/85 shadow-sm"
+                  >
+                    <Icon className="h-4 w-4 text-primary" />
+                    {label}
+                  </span>
+                ))}
+              </div>
+
+              <div className="pointer-events-auto mt-9 flex flex-wrap gap-4">
+                <a
+                  href="#projects"
+                  className={cn(buttonVariants({ size: "lg" }), "gap-2 px-8 font-bold shadow-lg shadow-primary/20")}
+                >
+                  View Work <ArrowRight className="h-4 w-4" />
+                </a>
+                <a
+                  href="/cv"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={cn(
+                    buttonVariants({ variant: "outline", size: "lg" }),
+                    "gap-2 border-foreground/25 bg-background/60 px-8 font-bold text-foreground backdrop-blur-md hover:bg-background/80 hover:text-foreground"
+                  )}
+                >
+                  <FileText className="h-4 w-4" /> View CV
+                </a>
+              </div>
+
+              <div className="pointer-events-auto mt-8 flex flex-wrap gap-3">
+                <SocialButton
+                  href={data.profile.github}
+                  icon={<GithubIcon className="h-5 w-5" />}
+                  label="GitHub"
+                  className="h-11 w-11 rounded-full border border-border/70 bg-background/60 text-foreground/75 transition-colors hover:border-primary/40 hover:text-primary"
+                />
+                <SocialButton
+                  href={data.profile.linkedin}
+                  icon={<LinkedinIcon className="h-5 w-5" />}
+                  label="LinkedIn"
+                  className="h-11 w-11 rounded-full border border-border/70 bg-background/60 text-foreground/75 transition-colors hover:border-primary/40 hover:text-primary"
+                />
+                <SocialButton
+                  href={`mailto:${data.profile.email}`}
+                  icon={<Mail className="h-5 w-5" />}
+                  label="Mail"
+                  className="h-11 w-11 rounded-full border border-border/70 bg-background/60 text-foreground/75 transition-colors hover:border-primary/40 hover:text-primary"
+                />
+              </div>
+            </AnimatedSection>
+          </div>
+
+          <div className="hidden min-h-[28rem] lg:block" aria-hidden="true" />
         </div>
         
         {/* Scroll indicator */}
@@ -101,14 +150,67 @@ export default function PortfolioComponent({ data }: { data: PortfolioData }) {
       </section>
 
       {/* About Section */}
-      <section className="container mx-auto px-4 py-24" id="about">
-        <div className="max-w-4xl mx-auto text-center">
-          <AnimatedSection direction="up">
-            <h2 className="text-3xl font-bold mb-8 text-gradient">Who I Am</h2>
-            <p className="text-lg md:text-xl leading-relaxed text-muted-foreground font-medium">
-              {data.profile.summary}
-            </p>
-          </AnimatedSection>
+      <section className="relative overflow-hidden border-y border-border/70 bg-muted/20 py-24 md:py-28" id="about">
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
+        <div className="container mx-auto px-4">
+          <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+            <AnimatedSection direction="right">
+              <div className="max-w-2xl">
+                <span className="mb-4 inline-flex rounded-full border border-primary/25 bg-primary/10 px-3 py-1 text-xs font-bold uppercase tracking-[0.16em] text-primary">
+                  Build profile
+                </span>
+                <h2 className="text-3xl font-bold leading-tight tracking-tight text-foreground md:text-5xl">
+                  I turn AI ideas into systems people can actually open, test, and use.
+                </h2>
+                <p className="mt-6 text-base leading-7 text-muted-foreground md:text-lg">
+                  {data.profile.summary}
+                </p>
+              </div>
+            </AnimatedSection>
+
+            <AnimatedSection direction="left" delay={0.12}>
+              <div className="grid gap-4">
+                <div className="rounded-[8px] border border-border/70 bg-background/80 p-5 shadow-sm">
+                  <div className="flex items-center gap-3 text-sm font-semibold text-muted-foreground">
+                    <BrainCircuit className="h-4 w-4 text-primary" />
+                    Current focus
+                  </div>
+                  <p className="mt-3 text-2xl font-bold text-foreground">AI engineering</p>
+                </div>
+                <div className="rounded-[8px] border border-border/70 bg-background/80 p-5 shadow-sm">
+                  <div className="flex items-center gap-3 text-sm font-semibold text-muted-foreground">
+                    <Workflow className="h-4 w-4 text-primary" />
+                    Featured builds
+                  </div>
+                  <p className="mt-3 text-2xl font-bold text-foreground">{data.projects.length} projects</p>
+                </div>
+                <div className="rounded-[8px] border border-border/70 bg-background/80 p-5 shadow-sm">
+                  <div className="flex items-center gap-3 text-sm font-semibold text-muted-foreground">
+                    <DatabaseZap className="h-4 w-4 text-primary" />
+                    Toolkit breadth
+                  </div>
+                  <p className="mt-3 text-2xl font-bold text-foreground">{data.skills.length} skill groups</p>
+                </div>
+              </div>
+            </AnimatedSection>
+          </div>
+
+          <div className="mx-auto mt-12 grid max-w-7xl gap-4 lg:grid-cols-[1.15fr_0.85fr]">
+            {capabilityHighlights.map(({ title, detail, icon: Icon }, index) => (
+              <AnimatedSection key={title} direction="up" delay={index * 0.08}>
+                <div className={cn(
+                  "h-full rounded-[8px] border border-border/70 bg-background/70 p-6 shadow-sm transition-colors hover:border-primary/35",
+                  index === 0 && "lg:row-span-2 lg:p-8"
+                )}>
+                  <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-[8px] bg-primary/10 text-primary">
+                    <Icon className="h-5 w-5" />
+                  </div>
+                  <h3 className="text-lg font-bold text-foreground">{title}</h3>
+                  <p className="mt-3 text-sm leading-6 text-muted-foreground">{detail}</p>
+                </div>
+              </AnimatedSection>
+            ))}
+          </div>
         </div>
       </section>
 

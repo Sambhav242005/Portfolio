@@ -1,0 +1,176 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-05-29T00:00:00+05:30",
+  "title": "Design System: Sambhav Surana Portfolio",
+  "extensions": {
+    "colorMeta": {
+      "primary-orange": {
+        "role": "primary",
+        "displayName": "Signal Orange",
+        "canonical": "hsl(24 95% 45%)",
+        "tonalRamp": ["#331303", "#663007", "#99400a", "#cc5005", "#e65c06", "#f47724", "#f9a56c", "#fff0e6"]
+      },
+      "accent-cyan": {
+        "role": "secondary",
+        "displayName": "Circuit Cyan",
+        "canonical": "hsl(196 80% 88%)",
+        "tonalRamp": ["#082c36", "#0f4b5d", "#187b96", "#229bb8", "#5ec3d9", "#9be0ed", "#c9effb", "#effbff"]
+      },
+      "background-light": {
+        "role": "neutral",
+        "displayName": "Pearl Workbench",
+        "canonical": "hsl(210 20% 98%)",
+        "tonalRamp": ["#0b0d10", "#1a2028", "#394352", "#6b7582", "#aeb6c0", "#d2d9e3", "#eef2f6", "#f9fafb"]
+      },
+      "background-dark": {
+        "role": "neutral",
+        "displayName": "Deep Console",
+        "canonical": "hsl(220 40% 6%)",
+        "tonalRamp": ["#090d15", "#0f1724", "#162033", "#263449", "#536072", "#929aaa", "#c9cfd8", "#f3f5f7"]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Hero name only."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Section titles and major narrative shifts."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Readable descriptions and summaries."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Short system labels and chips."
+      }
+    },
+    "shadows": [
+      {
+        "name": "surface-rest",
+        "value": "0 1px 2px rgba(15, 23, 42, 0.05)",
+        "purpose": "Default card depth."
+      },
+      {
+        "name": "accent-hover",
+        "value": "0 22px 60px -36px var(--glow-primary)",
+        "purpose": "Interactive project-card hover only."
+      },
+      {
+        "name": "header-float",
+        "value": "0 10px 30px rgba(15, 23, 42, 0.08)",
+        "purpose": "Fixed header and high-priority navigation surfaces."
+      }
+    ],
+    "motion": [
+      {
+        "name": "spring-standard",
+        "value": "type: spring; stiffness: 100; damping: 20",
+        "purpose": "Section reveal and card interaction timing."
+      },
+      {
+        "name": "state-transition",
+        "value": "300ms ease",
+        "purpose": "Hover and color transitions."
+      }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "1024px" },
+      { "name": "xl", "value": "1280px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Main action button for hero and decisive commands.",
+      "html": "<button class=\"ds-btn-primary\">View Work</button>",
+      "css": ".ds-btn-primary { height: 40px; padding: 10px 32px; border: 0; border-radius: 8px; background: #e65c06; color: #ffffff; font-family: Geist, Arial, sans-serif; font-size: 14px; font-weight: 700; cursor: pointer; transition: transform 300ms ease, background 300ms ease; } .ds-btn-primary:hover { background: #f47724; transform: translateY(-1px); } .ds-btn-primary:focus-visible { outline: 2px solid #f47724; outline-offset: 2px; }"
+    },
+    {
+      "name": "Outline Button",
+      "kind": "button",
+      "refersTo": "button-outline",
+      "description": "Secondary action with a real border and theme-safe background.",
+      "html": "<button class=\"ds-btn-outline\">View CV</button>",
+      "css": ".ds-btn-outline { height: 40px; padding: 10px 32px; border: 1px solid #d2d9e3; border-radius: 8px; background: #f9fafb; color: #121a2b; font-family: Geist, Arial, sans-serif; font-size: 14px; font-weight: 700; cursor: pointer; transition: transform 300ms ease, border-color 300ms ease; } .ds-btn-outline:hover { border-color: #e65c06; transform: translateY(-1px); } .ds-btn-outline:focus-visible { outline: 2px solid #e65c06; outline-offset: 2px; }"
+    },
+    {
+      "name": "Capability Chip",
+      "kind": "chip",
+      "refersTo": "chip",
+      "description": "Small icon-led proof point for hero and section labels.",
+      "html": "<span class=\"ds-chip\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M12 3l7 4v10l-7 4-7-4V7l7-4z\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"/></svg>AI agents</span>",
+      "css": ".ds-chip { display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border: 1px solid #d2d9e3; border-radius: 999px; background: #ffffffcc; color: #121a2b; font-family: Geist, Arial, sans-serif; font-size: 14px; font-weight: 600; } .ds-chip svg { width: 16px; height: 16px; color: #e65c06; }"
+    },
+    {
+      "name": "Standard Card",
+      "kind": "card",
+      "refersTo": "card-standard",
+      "description": "Default project, skill, timeline, and certification surface.",
+      "html": "<article class=\"ds-card\"><p class=\"ds-card-label\">Project index</p><h3>Real-Time AI Face Recognition System</h3><p>High-throughput face tracking system using YOLO and vector retrieval.</p></article>",
+      "css": ".ds-card { max-width: 420px; padding: 24px; border: 1px solid #d2d9e3; border-radius: 8px; background: #ffffff; color: #121a2b; box-shadow: 0 1px 2px rgba(15,23,42,0.05); font-family: Geist, Arial, sans-serif; transition: border-color 300ms ease, transform 300ms ease; } .ds-card:hover { border-color: #e65c06; transform: translateY(-2px); } .ds-card-label { margin: 0 0 12px; color: #e65c06; font-size: 12px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; } .ds-card h3 { margin: 0 0 12px; font-size: 22px; line-height: 1.15; } .ds-card p { margin: 0; color: #4b5563; font-size: 14px; line-height: 1.6; }"
+    },
+    {
+      "name": "Floating Navigation",
+      "kind": "nav",
+      "refersTo": "navigation",
+      "description": "Rounded fixed header with translucent surface and compact labels.",
+      "html": "<nav class=\"ds-nav\"><a href=\"#about\">About</a><a href=\"#projects\">Projects</a><a href=\"#skills\">Skills</a></nav>",
+      "css": ".ds-nav { display: inline-flex; gap: 8px; padding: 10px; border: 1px solid #d2d9e3; border-radius: 999px; background: rgba(249,250,251,0.86); box-shadow: 0 10px 30px rgba(15,23,42,0.08); backdrop-filter: blur(16px); font-family: Geist, Arial, sans-serif; } .ds-nav a { padding: 8px 18px; border-radius: 999px; color: #121a2b; text-decoration: none; font-size: 14px; font-weight: 650; transition: background 300ms ease, color 300ms ease; } .ds-nav a:hover { background: rgba(18,26,43,0.06); color: #e65c06; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Working AI Bench",
+    "overview": "This portfolio should feel like a precise engineering workbench: clean enough to scan quickly, technical enough to show real capability, and warm enough to feel like a person built it. The brand is not a generic AI landing page. It is a student engineer showing tangible systems: agents, vision, model architecture, APIs, repositories, and proof of practice.",
+    "keyCharacteristics": [
+      "Asymmetric page rhythm with left-aligned section headings.",
+      "One primary accent: confident orange used sparingly.",
+      "Cyan only as a secondary technical signal.",
+      "Solid, readable surfaces in both light and dark mode.",
+      "Icon-led skill and proof elements, not percentage bars."
+    ],
+    "rules": [
+      {
+        "name": "The One Signal Rule",
+        "body": "Orange is the only primary accent. Do not add purple, rainbow gradients, or neon color families.",
+        "section": "colors"
+      },
+      {
+        "name": "The Dark Contrast Rule",
+        "body": "Dark mode surfaces must remain readable without relying on glow. Cards, Three.js panels, and chips need real foreground/background contrast.",
+        "section": "colors"
+      },
+      {
+        "name": "The No Gradient Type Rule",
+        "body": "Do not use gradient text for headings. Use size, weight, spacing, and color hierarchy instead.",
+        "section": "typography"
+      },
+      {
+        "name": "The Flat First Rule",
+        "body": "Surfaces are flat at rest. Hover may lift slightly, but never use decorative glow as the main way to separate content.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do keep section headers left-aligned or asymmetrically paired with supporting content.",
+      "Do use icons for skills, proof chips, social buttons, and technical categories.",
+      "Do use solid readable surfaces for project, skill, timeline, and certification cards.",
+      "Do keep cards at 8px radius and use borders as the main content separator.",
+      "Do verify both light and dark mode after touching the hero scene or theme tokens."
+    ],
+    "donts": [
+      "Don't bring back skill percentage bars or visible level scoring.",
+      "Don't use gradient text for section headings.",
+      "Don't make every section the same centered heading plus equal-card grid.",
+      "Don't use purple-blue AI gradients, neon glow, or pure black backgrounds.",
+      "Don't rely on transparent glass cards in dark mode.",
+      "Don't add a blog section unless there is a real plan to maintain it."
+    ]
+  }
+}

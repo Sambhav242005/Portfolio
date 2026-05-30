@@ -43,7 +43,6 @@ export default async function CVPage() {
           <Printer className="w-5 h-5" />
           Print / Save PDF
         </button>
-        {/* eslint-disable-next-line @next/next/no-sync-scripts */}
         <script dangerouslySetInnerHTML={{
           __html: `
           document.getElementById('print-button').addEventListener('click', () => window.print());

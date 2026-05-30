@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import tailwindAnimate from "tailwindcss-animate";
 
 const config: any = {
     darkMode: "class",
@@ -6,12 +7,6 @@ const config: any = {
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
-  ],
-  safelist: [
-    'bg-yellow-200',
-    'dark:bg-yellow-600',
-    'px-1',
-    'rounded',
   ],
   theme: {
   	extend: {
@@ -86,7 +81,7 @@ const config: any = {
   		}
   	}
   },
-  plugins: [require("tailwindcss-animate"),require('@tailwindcss/typography')],
+  plugins: [tailwindAnimate],
 
 };
 export default config;

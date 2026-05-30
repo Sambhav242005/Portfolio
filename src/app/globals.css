@@ -31,8 +31,21 @@
   --color-ring: hsl(var(--ring));
 }
 
-/* Minimal global styles. Keep this file small and stable to avoid loader/parser issues.
-   Import external CSS (katex, highlight.js) in the pages/components that need them instead. */
+/* Minimal global styles. Keep this file small and stable to avoid loader/parser issues. */
+
+@font-face {
+  font-family: "Geist";
+  src: url("./fonts/GeistVF.woff") format("woff");
+  font-display: swap;
+  font-weight: 100 900;
+}
+
+@font-face {
+  font-family: "Geist Mono";
+  src: url("./fonts/GeistMonoVF.woff") format("woff");
+  font-display: swap;
+  font-weight: 100 900;
+}
 
 html, body {
   height: 100%;
@@ -46,7 +59,7 @@ html {
 }
 
 body {
-  font-family: Inter, Arial, Helvetica, sans-serif;
+  font-family: "Geist", Arial, Helvetica, sans-serif;
   background: var(--color-background);
   color: var(--color-foreground);
   margin: 0;
@@ -124,6 +137,10 @@ section {
   .glow-hover:hover {
     box-shadow: 0 0 20px var(--glow-primary);
     border-color: hsl(var(--primary) / 0.3);
+  }
+
+  .font-mono {
+    font-family: "Geist Mono", ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace;
   }
 }
 
