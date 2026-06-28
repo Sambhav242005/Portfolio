@@ -1,0 +1,615 @@
+{
+  "resume": {
+    "basics": {
+      "name": "Sambhav Surana",
+      "headline": "AI/ML Developer | Python Developer",
+      "summary": "Third-year student specializing in Artificial Intelligence. I have built custom AI models, intelligent agents, and real-time face recognition systems from scratch. Skilled in Python, PyTorch, and full-stack development. I am passionate about turning complex AI concepts into working software and am looking for a challenging role in engineering.",
+      "email": "sambhav242005@gmail.com",
+      "phone": "+917999468896",
+      "url": "https://sambhav-surana.online",
+      "location": {
+        "city": "India"
+      },
+      "profiles": [
+        {
+          "network": "GitHub",
+          "url": "https://github.com/Sambhav242005"
+        },
+        {
+          "network": "LinkedIn",
+          "url": "https://www.linkedin.com/in/sambhav-surana-19a557279/"
+        }
+      ]
+    },
+    "sections": {
+      "experience": {
+        "items": [
+          {
+            "organization": "Abhyudaya Coding Club",
+            "position": "Club Member",
+            "location": "Shri Vaishnav Vidyapeeth Vishwavidyalaya",
+            "date": "2024 - Present",
+            "bullets": [
+              "The development of AI-based projects including Time Table Generation system using constraint satisfaction algorithms",
+              "Organized workshops on Python, NumPy, Pandas, and Scikit-learn for club members",
+              "Collaborated with team members on model optimization and performance enhancement"
+            ]
+          }
+        ]
+      },
+      "certifications": {
+        "items": [
+          {
+            "title": "Hackathons & Competitions",
+            "name": "Hackwave 2.0",
+            "date": "Aug 2025",
+            "summary": "Participated in a 36-hour coding hackathon organized by Echelon Dev Society at CDGI, Indore. Gained hands-on experience in rapid prototyping, teamwork, and problem-solving.",
+            "url": "https://hackwave-site.vercel.app/"
+          },
+          {
+            "title": "Introduction to Machine Learning",
+            "name": "NPTEL Online Certification - IIT Kharagpur",
+            "date": "Jul-Sep 2024",
+            "bullets": [
+              "Achieved Elite Certificate with a consolidated score of 66%",
+              "Completed an 8-week course covering fundamental machine learning concepts and assignments"
+            ]
+          }
+        ]
+      },
+      "skills": {
+        "items": [
+          {
+            "name": "Programming Languages",
+            "keywords": [
+              "Python",
+              "JavaScript",
+              "SQL",
+              "Bash"
+            ],
+            "level": 5
+          },
+          {
+            "name": "ML Libraries & Frameworks",
+            "keywords": [
+              "NumPy",
+              "Pandas",
+              "Scikit-learn",
+              "TensorFlow",
+              "PyTorch",
+              "Matplotlib"
+            ],
+            "level": 6
+          },
+          {
+            "name": "Computer Vision",
+            "keywords": [
+              "OpenCV",
+              "Image Processing",
+              "Data Augmentation",
+              "YOLO",
+              "Face Recognition",
+              "Object Detection"
+            ],
+            "level": 6
+          },
+          {
+            "name": "Deep Learning",
+            "keywords": [
+              "CNN",
+              "Neural Networks",
+              "Model Training",
+              "Transfer Learning",
+              "Feature Extraction"
+            ],
+            "level": 6
+          },
+          {
+            "name": "NLP & Generative AI",
+            "keywords": [
+              "LangChain",
+              "OpenAI API",
+              "Ollama",
+              "Text Processing",
+              "Query Decomposition",
+              "LLM Integration"
+            ],
+            "level": 6
+          },
+          {
+            "name": "Deployment & Tools",
+            "keywords": [
+              "REST APIs",
+              "Git",
+              "GitHub",
+              "Model Deployment",
+              "Gradio",
+              "WebSockets"
+            ],
+            "level": 6
+          },
+          {
+            "name": "Databases",
+            "keywords": [
+              "MySQL",
+              "MongoDB",
+              "ChromaDB"
+            ],
+            "level": 5
+          },
+          {
+            "name": "Web Technologies",
+            "keywords": [
+              "React.js",
+              "Next.js",
+              "HTML/CSS",
+              "Tailwind CSS"
+            ],
+            "level": 5
+          },
+          {
+            "name": "Development Tools",
+            "keywords": [
+              "VS Code",
+              "PyCharm",
+              "Jupyter Notebook",
+              "Git"
+            ],
+            "level": 5
+          },
+          {
+            "name": "Operating Systems",
+            "keywords": [
+              "Windows",
+              "Linux"
+            ],
+            "level": 5
+          }
+        ]
+      },
+      "education": {
+        "items": [
+          {
+            "institution": "Shri Vaishnav Vidyapeeth Vishwavidyalaya",
+            "area": "CSE (AI-IBM) III Year",
+            "score": "7.2 CGPA",
+            "studyType": "B.Tech.",
+            "date": "2023 - Present"
+          }
+        ]
+      },
+      "projects": {
+        "items": []
+      },
+      "languages": {
+        "items": [
+          {
+            "name": "English",
+            "level": 5
+          },
+          {
+            "name": "Hindi",
+            "level": 5
+          },
+          {
+            "name": "German",
+            "level": 2
+          }
+        ]
+      },
+      "timeline": {
+        "items": [
+          {
+            "date": "2023 - Present",
+            "title": "B.Tech in Computer Science (AI-IBM)",
+            "meta": "Coursework: machine learning, NLP, time series, statistics, and full-stack development"
+          },
+          {
+            "date": "2024 - Present",
+            "title": "Club Member, Abhyudaya Coding Club",
+            "meta": "Built AI timetable-generation work and ran Python, NumPy, Pandas, and Scikit-learn workshops"
+          },
+          {
+            "date": "2024 - Present",
+            "title": "Independent AI Project Work",
+            "meta": "Velora transformer training, AI fitness coaching, multi-agent workflows, YOLO face recognition, and simulation systems"
+          },
+          {
+            "date": "Jul 2024 - Sep 2024",
+            "title": "Introduction to Machine Learning",
+            "meta": "NPTEL Online Certification, IIT Kharagpur"
+          },
+          {
+            "date": "Aug 2025",
+            "title": "Hackwave 2.0",
+            "meta": "36-hour hackathon focused on rapid prototyping, teamwork, and product problem-solving"
+          }
+        ]
+      }
+    }
+  },
+  "projects": [
+    {
+      "title": "Velora Transformer Training",
+      "slug": "velora-transformer-training",
+      "summary": "A local-first LLaMA-style training stack with RoPE, RMSNorm, SwiGLU, GQA, checkpoint safety, and FineWeb-Edu workflows.",
+      "tags": [
+        "Python",
+        "PyTorch",
+        "Transformers",
+        "FineWeb"
+      ],
+      "coverImage": "/project-assets/velora-cover.svg",
+      "githubUrl": "https://github.com/Sambhav242005/Velora",
+      "resume": {
+        "priority": 1,
+        "date": "2026",
+        "summary": "A local-first LLaMA-style training stack for safe small-model pretraining and SFT workflows.",
+        "bullets": [
+          "Training Infrastructure: Built RoPE, RMSNorm, SwiGLU, GQA, checkpoint safety, and restartable training loops.",
+          "Data Pipeline: Prepared tokenizer, FineWeb-Edu, and SFT workflows with RAM-safe memmap loading.",
+          "Run Safety: Added micro-batch search, VRAM logging, and atomic checkpoint writes for interrupted runs."
+        ],
+        "tags": [
+          "Python",
+          "PyTorch",
+          "Transformers",
+          "FineWeb"
+        ]
+      },
+      "featured": true,
+      "status": "published",
+      "order": 1,
+      "updatedAt": "2026-06-22",
+      "body": [
+        "## Problem",
+        "",
+        "Training language models fails in practical ways before it fails academically: datasets are too large, VRAM is tight, runs crash, and checkpoints get corrupted.",
+        "",
+        "## Approach",
+        "",
+        "I built Velora as a local smoke-test-first training stack before larger RunPod runs, with safe dataset preparation and restartable training loops.",
+        "",
+        "## Technical Decisions",
+        "",
+        "- LLaMA-style decoder-only transformer architecture with RoPE, RMSNorm, SwiGLU, and grouped-query attention.",
+        "- RAM-safe memmap loading for tokenized datasets.",
+        "- Automatic micro-batch search and VRAM logging to keep runs inside hardware limits.",
+        "- Atomic checkpoint writes and automatic resume from `last.pt` after interruption, OOM, crash, or SIGTERM.",
+        "- FineWeb-Edu preparation, tokenizer training, base training, and separate SFT workflows.",
+        "",
+        "## Result",
+        "",
+        "This is the strongest model-engineering proof in the portfolio because it shows infrastructure around training, not only notebook experimentation."
+      ]
+    },
+    {
+      "title": "AI Fitness Trainer",
+      "slug": "ai-fitness-trainer",
+      "summary": "A local computer-vision fitness coach using YOLOv11 pose estimation, Ollama vision feedback, rep counting, and voice guidance.",
+      "tags": [
+        "YOLOv11",
+        "Flask",
+        "Ollama",
+        "Computer Vision"
+      ],
+      "coverImage": "/project-assets/fitness-trainer-cover.svg",
+      "githubUrl": "https://github.com/Sambhav242005/AI-Fitness-Trainer",
+      "resume": {
+        "priority": 4,
+        "date": "2026",
+        "summary": "A local computer-vision fitness coach with pose tracking, form feedback, rep counting, and voice guidance.",
+        "bullets": [
+          "Pose Tracking: Used YOLOv11 pose estimation for squats, bicep curls, and pushups.",
+          "Feedback Loop: Combined exercise geometry with local vision-model review through Ollama.",
+          "Product Flow: Delivered browser camera input, rep counting, and text-to-speech coaching."
+        ],
+        "tags": [
+          "YOLOv11",
+          "Flask",
+          "Ollama",
+          "Computer Vision"
+        ]
+      },
+      "featured": true,
+      "status": "published",
+      "order": 2,
+      "updatedAt": "2026-06-22",
+      "body": [
+        "## Problem",
+        "",
+        "Workout apps often count reps without understanding form, while good form feedback usually requires a human coach.",
+        "",
+        "## Approach",
+        "",
+        "I built a browser-based local assistant that uses camera input, YOLOv11 pose estimation, exercise-specific geometry, and a local vision LLM to provide feedback.",
+        "",
+        "## Technical Decisions",
+        "",
+        "- Flask serves the web interface and backend routes.",
+        "- YOLOv11 pose estimation tracks squats, bicep curls, and pushups.",
+        "- Geometry logic evaluates depth, extension, and rep transitions.",
+        "- Ollama vision analysis periodically reviews captured form.",
+        "- Text-to-speech turns corrections into real-time coaching.",
+        "",
+        "## Result",
+        "",
+        "The project demonstrates practical AI product integration: CV inference, local LLM calls, browser camera workflow, privacy-preserving local processing, and user feedback loops."
+      ]
+    },
+    {
+      "title": "CityBuilder Simulation",
+      "slug": "city-builder-simulation",
+      "summary": "A micro-city simulation with a FastAPI backend, React dashboard, resource loop, tests, exports, and deployment structure.",
+      "tags": [
+        "FastAPI",
+        "React",
+        "TypeScript",
+        "Simulation"
+      ],
+      "coverImage": "/project-assets/city-builder-cover.svg",
+      "githubUrl": "https://github.com/Sambhav242005/City-Builder",
+      "resume": {
+        "priority": 5,
+        "date": "2026",
+        "summary": "A micro-city simulation with a FastAPI service boundary, React dashboard, tests, and export structure.",
+        "bullets": [
+          "Simulation Core: Modeled a predictable resource loop behind a FastAPI backend.",
+          "Dashboard: Built React and TypeScript controls for inspecting simulation state.",
+          "Engineering Hygiene: Added backend tests, exports, and deployment-oriented structure."
+        ],
+        "tags": [
+          "FastAPI",
+          "React",
+          "TypeScript",
+          "Simulation"
+        ]
+      },
+      "featured": true,
+      "status": "published",
+      "order": 3,
+      "updatedAt": "2026-06-22",
+      "body": [
+        "## Problem",
+        "",
+        "Simulation projects need clear state updates, predictable rules, and a frontend that makes the system understandable.",
+        "",
+        "## Approach",
+        "",
+        "I built a stable micro-city MVP around a single resource loop, then exposed it through a FastAPI backend and a React dashboard.",
+        "",
+        "## Technical Decisions",
+        "",
+        "- FastAPI owns the simulation service boundary.",
+        "- React and TypeScript render the dashboard and controls.",
+        "- Backend tests verify simulation behavior.",
+        "- Export and deployment folders keep artifacts organized for iteration.",
+        "",
+        "## Result",
+        "",
+        "CityBuilder adds full-stack systems proof: backend state modeling, dashboard UI, testing, and deployment-oriented project structure."
+      ]
+    },
+    {
+      "title": "Forest Protector",
+      "slug": "forest-protector-game",
+      "summary": "A Python tower-defense game with 10 escalating waves, 50 dynamic path combinations, tower upgrades, economy, and a live GitHub Pages build.",
+      "tags": [
+        "Python",
+        "Game Systems",
+        "Pygame",
+        "Procedural Paths"
+      ],
+      "coverImage": "/project-assets/forest-protector-cover.svg",
+      "githubUrl": "https://github.com/Sambhav242005/Forest-Protector",
+      "liveUrl": "https://sambhav242005.github.io/Forest-Protector/",
+      "resume": {
+        "priority": 6,
+        "date": "2026",
+        "summary": "A Python tower-defense game with escalating waves, procedural path combinations, upgrades, and economy rules.",
+        "bullets": [
+          "Game Systems: Implemented 10 waves, tower upgrades, enemy scaling, and economy balancing.",
+          "Procedural Variety: Created 50 path combinations across circular, straight, zigzag, spiral, and wave routes.",
+          "Published Build: Shipped a playable GitHub Pages version for direct review."
+        ],
+        "tags": [
+          "Python",
+          "Game Systems",
+          "Pygame",
+          "Procedural Paths"
+        ]
+      },
+      "featured": true,
+      "status": "published",
+      "order": 4,
+      "updatedAt": "2026-06-22",
+      "body": [
+        "## Problem",
+        "",
+        "Tower defense games become repetitive when the path and tower strategy stay fixed across waves.",
+        "",
+        "## Approach",
+        "",
+        "I built a five-minute tower-defense game with changing paths, escalating enemy compositions, and a refund system that forces strategy changes between waves.",
+        "",
+        "## Technical Decisions",
+        "",
+        "- 10 waves increase enemy count and composition difficulty.",
+        "- 50 path combinations include circular, straight, zigzag, spiral, wave, and generated routes.",
+        "- Archer, cannon, and magic towers have distinct cost, range, fire-rate, damage, accuracy, and upgrade caps.",
+        "- A 75 percent refund after path changes keeps the economy fair while requiring new placements.",
+        "",
+        "## Result",
+        "",
+        "Forest Protector adds a different kind of engineering signal: complete game rules, balancing, procedural variation, and a playable published artifact."
+      ]
+    },
+    {
+      "title": "AI Face Detect and Recognition WebGPU",
+      "slug": "ai-face-recognition-system",
+      "summary": "A client-side AI face tracking and recognition application running YOLOv8 face detection and EdgeFace embeddings directly in the browser via WebGPU and ONNX Runtime.",
+      "tags": [
+        "WebGPU",
+        "ONNX Runtime",
+        "YOLOv8",
+        "FastAPI",
+        "FAISS"
+      ],
+      "coverImage": "/project-assets/ml-training.svg",
+      "githubUrl": "https://github.com/Sambhav242005/AI-Face-Detect-and-Recognition",
+      "resume": {
+        "priority": 2,
+        "date": "2025",
+        "summary": "A client-side AI face tracking and recognition application running YOLOv8 and EdgeFace directly in the browser via WebGPU and ONNX Runtime.",
+        "bullets": [
+          "Browser-Based AI: Ran YOLOv8 face detection and EdgeFace embeddings in-browser via WebGPU/WASM ONNX Runtime.",
+          "FastAPI Backend: Designed a lightweight backend to host FAISS session indexes and JSON metadata.",
+          "Features: Built session persistence, pause/resume tracking states, and real-time cropping pipelines."
+        ],
+        "tags": [
+          "WebGPU",
+          "ONNX Runtime",
+          "YOLOv8",
+          "FastAPI",
+          "FAISS"
+        ]
+      },
+      "featured": true,
+      "status": "published",
+      "order": 6,
+      "updatedAt": "2026-06-22",
+      "body": [
+        "## Problem",
+        "",
+        "Traditional face recognition systems require expensive server-side GPU resources for video frame inference, which raises privacy concerns and increases hosting costs.",
+        "",
+        "## Approach",
+        "",
+        "I built a client-side face recognition system that offloads YOLOv8 face detection and EdgeFace embedding extraction directly to the user's browser GPU using ONNX Runtime WebGPU. The backend acts as a lightweight coordinate system, using FastAPI and FAISS to index and search embeddings.",
+        "",
+        "## Technical Decisions",
+        "",
+        "- YOLOv8 face detection compiled to ONNX runs inside a Web Worker via ONNX Runtime WebGPU.",
+        "- EdgeFace models generate 512-dimension face embeddings client-side for low latency.",
+        "- FastAPI serves backend session routes, saving and loading FAISS database structures locally.",
+        "- Built pipeline controls supporting frame capture pausing, real-time bounding box renders, and photo-based lookup overrides.",
+        "",
+        "## Result",
+        "",
+        "This research proof proves that computer vision inference pipelines can run efficiently on client-side GPUs, maintaining user privacy and reducing server load."
+      ]
+    },
+    {
+      "title": "MagneticStorage Neuro-Savant",
+      "slug": "magneticstorage-neuro-savant",
+      "summary": "A Python agentic memory system that organizes information into hierarchical concept groups and detail cells instead of a flat RAG index.",
+      "tags": [
+        "Python",
+        "ChromaDB",
+        "GraphRAG",
+        "Ollama"
+      ],
+      "coverImage": "/project-assets/magnetic-storage-cover.svg",
+      "githubUrl": "https://github.com/Sambhav242005/MagneticStorage",
+      "resume": {
+        "priority": 3,
+        "date": "2026",
+        "summary": "A Python agentic memory system that organizes information into hierarchical concept groups and detail cells.",
+        "bullets": [
+          "Cellular Retrieval: Designed groups for concepts and cells for detailed vector-backed memories.",
+          "Consolidation Loop: Added sleep-mode merge and optimization passes to reduce duplicate memory groups.",
+          "Agent Tools: Built commands for status, visualization, persona behavior, story generation, GitHub ingestion, and checks."
+        ],
+        "tags": [
+          "Python",
+          "ChromaDB",
+          "GraphRAG",
+          "Ollama"
+        ]
+      },
+      "featured": true,
+      "status": "published",
+      "order": 8,
+      "updatedAt": "2026-06-24",
+      "body": [
+        "## Problem",
+        "",
+        "Flat retrieval systems can return isolated chunks without preserving the larger concept they belong to, which weakens long-running agent memory and story consistency.",
+        "",
+        "## Approach",
+        "",
+        "I built MagneticStorage as a local agentic memory prototype that stores high-level groups and lower-level cells, then retrieves through the concept layer before selecting detailed memories.",
+        "",
+        "## Technical Decisions",
+        "",
+        "- Hierarchical memory structure with groups for concepts and cells for detailed text/vector units.",
+        "- ChromaDB acts as the persistent vector substrate for group centroids and metadata-filtered retrieval.",
+        "- Sleep mode consolidates related groups through merge and optimization passes.",
+        "- Tool commands support memory inspection, visualization, persona behavior, story generation, GitHub ingestion, and performance checks.",
+        "- Ollama models provide local LLM and embedding workflows for the prototype.",
+        "",
+        "## Result",
+        "",
+        "The project adds an agent-memory signal to the portfolio: retrieval architecture, local persistence, consolidation behavior, and tool-oriented AI system design."
+      ]
+    }
+  ],
+  "writing": [
+    {
+      "title": "Hierarchical Memory Retrieval with ChromaDB",
+      "slug": "hierarchical-memory-chromadb",
+      "type": "technical-note",
+      "status": "published",
+      "date": "2026-06-25",
+      "tags": [
+        "ChromaDB",
+        "Vector Search",
+        "Agentic Memory"
+      ],
+      "summary": "How to structure persistent agent memory using concept groups and detailed cell retrieval in ChromaDB collections.",
+      "body": "Flat vector search (standard RAG) is not enough for persistent agent memory. It retrieves independent chunks of text without preserving the overarching concept, leading to lost context.\n\nTo solve this, I designed a hierarchical cellular memory system using ChromaDB, modeling relationship contexts that flat indices drop.\n\n## The Cellular Approach\n\nInstead of a single flat index, the memory architecture splits data into two distinct layers:\n1. **Layer 0: Groups (Concepts)** - High-level semantic centroids representing conceptual topics.\n2. **Layer 1: Cells (Details)** - Precise text and vector segments associated with a parent Group.\n\n## Centroid-driven Query Processing\n\nWhen a user or agent queries the database, the search proceeds in three distinct stages:\n\n* **Centroid Search**: Querying the group centroids collection (`ns_cells`) to identify the top-k relevant Concepts.\n* **Parallel Per-Group Queries**: Concurrently querying the HNSW index of the selected Groups via Python's `ThreadPoolExecutor` (reducing retrieval time to `t_{N/G}` instead of `k * t_{N/G}`).\n* **Entity Routing**: Running a parallel query on a dedicated entity index. If named entities match a Group, that Group's score is boosted, guaranteeing recall for specific concepts even when semantic similarity is low.\n\n## Workarounds for ChromaDB Collections\n\nDuring development, dynamically creating and deleting dozens of collections led to descriptor locks. To workaround this:\n- Stale dynamically created group collections (`ns_grp_{id}`) are cached in-memory and re-created on session restarts.\n- The master cells collection (`ns_cells`) acts as the single source of truth, persisting coordinates and raw content across runs.\n\n## Sleep Mode & Agentic Consolidation\n\nTo keep the concept hierarchy compact, a background thread runs a consolidation pass:\n* **Vector Merge**: A greedy merge runs on centroids with cosine similarity > 0.85, grouping related nodes.\n* **Agentic Analysis**: An LLM agent (`_run_conflict_analysis_agent`) inspects the merged cells to resolve factual contradictions and merge semantic groups."
+    },
+    {
+      "title": "Real-Time Face Recognition via WebGPU",
+      "slug": "face-recognition-webgpu",
+      "type": "research-note",
+      "status": "published",
+      "date": "2026-05-12",
+      "tags": [
+        "WebGPU",
+        "ONNX",
+        "Computer Vision"
+      ],
+      "summary": "Deploying YOLOv8 face detection and EdgeFace embeddings directly to browser GPUs for zero-latency client-side inference.",
+      "body": "Most face recognition systems run expensive, server-side GPU models (like PyTorch on CUDA). This architecture increases hosting costs and poses massive privacy issues since user images must travel over the network. I built a research prototype that runs fully local, client-side inference directly in the browser via WebGPU.\n\n## Client-Side Pipeline: YOLOv8 and EdgeFace\n\nThe browser-based AI pipeline relies on two models compiled to ONNX:\n- **YOLOv8-face**: For real-time face detection and bounding box coordinate calculations.\n- **EdgeFace**: A high-performance embedding model that extracts 512-dimension face representation vectors.\n\nBy utilizing ONNX Runtime WebGPU and WebAssembly, these models run directly on the client's local GPU.\n\n## Preventing UI Thread Jitter with Web Workers\n\nRunning heavy inference loops on webcam streams causes frame rate drops and rendering delays. To maintain a smooth 60 FPS user experience:\n- Frame extraction, canvas cropping, and ONNX model evaluation are offloaded to a background `Web Worker`.\n- Bounding boxes and embeddings are sent back to the main thread via structured clones, ensuring the UI remains completely responsive.\n\n## The Coordinate Server (FastAPI + FAISS)\n\nThe backend acts purely as a coordinate server:\n- It exposes a lightweight FastAPI API that stores and queries session embeddings.\n- It leverages a FAISS vector index for near-instant classification of incoming embeddings, mapping them to saved user metadata."
+    },
+    {
+      "title": "Local AI Fitness Coaching with YOLOv11",
+      "slug": "fitness-coach-yolov11",
+      "type": "project-log",
+      "status": "published",
+      "date": "2026-05-28",
+      "tags": [
+        "YOLOv11",
+        "Ollama",
+        "Pose Estimation"
+      ],
+      "summary": "Building a privacy-first fitness tracker utilizing browser camera feeds, keypoint math, and local Vision LLM feedback.",
+      "body": "Fitness applications typically count repetitions based on simple timers or accelerometer changes, which fail to evaluate if a user is performing the exercise correctly. I built a local fitness coach that combines real-time coordinate math with a Vision LLM for detailed form correction.\n\n## Keypoint Extraction & Joint Geometry\n\nUsing YOLOv11-pose, the application extracts 17 body keypoints from the webcam stream. We calculate joint angles in real time using 2D vector geometry. For instance, the knee flex angle is calculated by taking keypoints for the hip (A), knee (B), and ankle (C):\n\n- Vector BA = (xA - xB, yA - yB)\n- Vector BC = (xC - xB, yC - yB)\n- Angle = arccos( (Vector BA dot Vector BC) / (norm(BA) * norm(BC)) )\n\n## State Machine Rep Counting\n\nTo avoid false counts due to jitter, the system uses a two-threshold state machine. For squats, a rep is initiated when the knee angle drops below 90 degrees (deep squat) and completes only when it returns above 160 degrees (full extension).\n\n## Form Feedback Loop via local Vision LLMs\n\nWhen keypoint calculations detect a form error (e.g. knees passing toes during squats), the flask backend captures the video frame and feeds it to a local `qwen3-vl:latest` model via Ollama. The model analyzes the form and returns concrete correction advice, which is spoken aloud using the browser's Web Speech API."
+    },
+    {
+      "title": "What I learned training a 100M custom LLM",
+      "slug": "training-100m-model",
+      "type": "technical-note",
+      "status": "published",
+      "date": "2026-06-10",
+      "tags": [
+        "LLM",
+        "Training",
+        "PyTorch"
+      ],
+      "summary": "Key takeaways from training the Velora-100M transformer model from scratch, including data prep and learning loops.",
+      "body": "Pretraining language models is usually the domain of large compute clusters. However, designing and pretraining a small 100M model locally provides invaluable insights into data pipelines, tokenization, and numerical stability. This post covers the design of Velora, a custom LLaMA-style decoder transformer built from scratch in PyTorch.\n\n## Core Transformer Architecture\n\nVelora does not use Hugging Face libraries; it is constructed from custom PyTorch layers:\n- **Rotary Position Embeddings (RoPE)**: For better relative position modeling over standard absolute embeddings.\n- **RMSNorm**: Replacing LayerNorm for faster computational speeds.\n- **SwiGLU Activation**: Used in the feed-forward network to improve gradient flow.\n- **Grouped Query Attention (GQA)**: To balance decoding speeds and key-value cache memory footprints.\n\n## RAM-Safe Tokenization & Ingestion\n\nIngesting large datasets like FineWeb-Edu can easily crash local machine memory:\n- **Custom Tokenizer**: Trained a byte-level BPE tokenizer (`tokenizer.json`).\n- **Memory Mapping**: Utilized NumPy's `memmap` to stream tokenized binaries directly from disk, keeping RAM consumption under 2GB.\n\n## Training Safety & Failure Recovery\n\nLocal training runs are prone to interruptions and Out-Of-Memory (OOM) errors. I added several safety measures to the training loop:\n- **Micro-Batch Search**: The script executes a quick startup pass to identify the largest stable batch size for the local GPU's VRAM.\n- **Atomic Checkpoint Writes**: Weights are written to a temporary file before replacing `last.pt`, ensuring that a crash mid-checkpoint does not corrupt the save."
+    }
+  ]
+}

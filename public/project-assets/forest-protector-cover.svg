@@ -1,0 +1,21 @@
+<svg width="1200" height="760" viewBox="0 0 1200 760" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Forest Protector tower defense map">
+  <rect width="1200" height="760" fill="#E4EBDD"/>
+  <rect x="56" y="52" width="1088" height="656" rx="8" fill="#D8DFD0" stroke="#C6D0BC"/>
+  <path d="M80 540C196 466 292 502 390 424C492 342 560 338 650 418C750 506 838 452 938 366C1014 300 1080 320 1120 280" stroke="#F2E7D0" stroke-width="72" stroke-linecap="round"/>
+  <path d="M80 540C196 466 292 502 390 424C492 342 560 338 650 418C750 506 838 452 938 366C1014 300 1080 320 1120 280" stroke="#A77F35" stroke-width="5" stroke-linecap="round" stroke-dasharray="12 18"/>
+  <g fill="#314A36">
+    <circle cx="214" cy="468" r="34"/>
+    <circle cx="498" cy="336" r="34"/>
+    <circle cx="786" cy="458" r="34"/>
+    <circle cx="1010" cy="318" r="34"/>
+  </g>
+  <g fill="#171714">
+    <rect x="190" y="422" width="48" height="72" rx="6"/>
+    <rect x="474" y="290" width="48" height="72" rx="6"/>
+    <rect x="762" y="412" width="48" height="72" rx="6"/>
+    <rect x="986" y="272" width="48" height="72" rx="6"/>
+  </g>
+  <rect x="96" y="92" width="370" height="126" rx="8" fill="#FFFDF8" stroke="#C6D0BC"/>
+  <text x="124" y="142" font-family="Georgia, serif" font-size="34" font-weight="700" fill="#171714">Forest Protector</text>
+  <text x="124" y="180" font-family="Arial, sans-serif" font-size="18" fill="#676A60">10 waves, 50 changing paths</text>
+</svg>

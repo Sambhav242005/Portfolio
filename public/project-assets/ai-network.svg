@@ -1,0 +1,39 @@
+<svg width="900" height="720" viewBox="0 0 900 720" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Abstract neural network map">
+  <circle cx="455" cy="345" r="246" stroke="#DED8C9" stroke-width="1" opacity="0.55"/>
+  <g opacity="0.26" stroke="#B08A47" stroke-width="1">
+    <path d="M240 180H344"/>
+    <path d="M202 250H322"/>
+    <path d="M632 160H742"/>
+    <path d="M622 520H752"/>
+    <path d="M168 480H315"/>
+  </g>
+  <g stroke="#6F7D57" stroke-width="1.5" opacity="0.72">
+    <path d="M343 262L414 170L503 234L588 164L652 266L604 375L682 468L542 522L443 461L318 518L274 395L343 262Z"/>
+    <path d="M343 262L503 234L604 375L443 461L343 262Z"/>
+    <path d="M414 170L443 461L588 164"/>
+    <path d="M274 395L503 234L682 468"/>
+    <path d="M318 518L604 375L652 266"/>
+    <path d="M542 522L343 262L588 164"/>
+  </g>
+  <g fill="#171714">
+    <circle cx="343" cy="262" r="6"/>
+    <circle cx="414" cy="170" r="6"/>
+    <circle cx="503" cy="234" r="6"/>
+    <circle cx="588" cy="164" r="6"/>
+    <circle cx="652" cy="266" r="6"/>
+    <circle cx="604" cy="375" r="6"/>
+    <circle cx="682" cy="468" r="6"/>
+    <circle cx="542" cy="522" r="6"/>
+    <circle cx="443" cy="461" r="6"/>
+    <circle cx="318" cy="518" r="6"/>
+    <circle cx="274" cy="395" r="6"/>
+  </g>
+  <g fill="#6F7D57" opacity="0.38">
+    <circle cx="382" cy="348" r="3"/>
+    <circle cx="480" cy="352" r="3"/>
+    <circle cx="532" cy="316" r="3"/>
+    <circle cx="558" cy="431" r="3"/>
+    <circle cx="392" cy="510" r="3"/>
+    <circle cx="612" cy="230" r="3"/>
+  </g>
+</svg>

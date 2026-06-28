@@ -1,0 +1,61 @@
+<svg width="1200" height="760" viewBox="0 0 1200 760" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="MagneticStorage hierarchical memory system visual">
+  <rect width="1200" height="760" fill="#F7F3EA"/>
+  <rect x="60" y="58" width="1080" height="644" rx="8" fill="#FFFDF8" stroke="#D8CFBC"/>
+  <g stroke="#D8CFBC" stroke-width="1">
+    <path d="M160 210H1040"/>
+    <path d="M160 330H1040"/>
+    <path d="M160 450H1040"/>
+    <path d="M160 570H1040"/>
+    <path d="M300 130V632"/>
+    <path d="M520 130V632"/>
+    <path d="M740 130V632"/>
+    <path d="M960 130V632"/>
+  </g>
+  <g opacity="0.18" stroke="#314A36" stroke-width="2">
+    <path d="M286 356C376 240 486 232 600 354C704 466 832 480 934 352"/>
+    <path d="M280 410C396 500 502 510 610 414C710 325 836 294 940 404"/>
+    <path d="M392 262C470 370 466 472 392 578"/>
+    <path d="M812 256C742 360 748 468 828 580"/>
+  </g>
+  <g>
+    <circle cx="600" cy="382" r="86" fill="#314A36"/>
+    <circle cx="600" cy="382" r="58" fill="#405A45"/>
+    <circle cx="600" cy="382" r="24" fill="#D0A85A"/>
+    <text x="600" y="389" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#171714">Core</text>
+  </g>
+  <g fill="#FFFDF8" stroke="#314A36" stroke-width="3">
+    <rect x="210" y="176" width="210" height="92" rx="8"/>
+    <rect x="780" y="176" width="210" height="92" rx="8"/>
+    <rect x="210" y="496" width="210" height="92" rx="8"/>
+    <rect x="780" y="496" width="210" height="92" rx="8"/>
+  </g>
+  <g fill="#314A36">
+    <text x="315" y="215" text-anchor="middle" font-family="Georgia, serif" font-size="24" font-weight="700">Groups</text>
+    <text x="885" y="215" text-anchor="middle" font-family="Georgia, serif" font-size="24" font-weight="700">Cells</text>
+    <text x="315" y="535" text-anchor="middle" font-family="Georgia, serif" font-size="24" font-weight="700">Sleep</text>
+    <text x="885" y="535" text-anchor="middle" font-family="Georgia, serif" font-size="24" font-weight="700">Tools</text>
+  </g>
+  <g fill="#676A60" font-family="Arial, sans-serif" font-size="16">
+    <text x="315" y="244" text-anchor="middle">concept clusters</text>
+    <text x="885" y="244" text-anchor="middle">detail memories</text>
+    <text x="315" y="564" text-anchor="middle">consolidation</text>
+    <text x="885" y="564" text-anchor="middle">agent commands</text>
+  </g>
+  <g stroke="#A77F35" stroke-width="4" stroke-linecap="round">
+    <path d="M420 222C484 244 532 294 570 332"/>
+    <path d="M780 222C714 246 666 294 630 332"/>
+    <path d="M420 542C492 508 536 462 570 426"/>
+    <path d="M780 542C710 510 668 462 630 426"/>
+  </g>
+  <g fill="#D0A85A">
+    <circle cx="450" cy="234" r="8"/>
+    <circle cx="750" cy="234" r="8"/>
+    <circle cx="450" cy="530" r="8"/>
+    <circle cx="750" cy="530" r="8"/>
+  </g>
+  <g>
+    <rect x="118" y="96" width="336" height="82" rx="8" fill="#171714"/>
+    <text x="146" y="132" font-family="Georgia, serif" font-size="28" font-weight="700" fill="#F4EFE5">MagneticStorage</text>
+    <text x="146" y="158" font-family="Arial, sans-serif" font-size="16" fill="#B8B2A5">hierarchical agent memory</text>
+  </g>
+</svg>

@@ -1,0 +1,20 @@
+<svg width="1200" height="760" viewBox="0 0 1200 760" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Mountain route planning visual">
+  <rect width="1200" height="760" fill="#E9E4D8"/>
+  <rect x="60" y="60" width="1080" height="640" rx="8" fill="#FFFDF7" stroke="#D8CFBC"/>
+  <path d="M60 520L212 358L356 468L548 258L702 410L862 214L1140 520V700H60V520Z" fill="#BFCBB3"/>
+  <path d="M60 580L260 440L392 520L606 366L762 502L910 374L1140 556V700H60V580Z" fill="#8FA082"/>
+  <path d="M60 635L256 552L426 598L620 482L806 594L990 492L1140 594V700H60V635Z" fill="#314A36"/>
+  <path d="M218 198C312 252 412 260 526 300C640 340 708 410 824 426C900 437 982 422 1042 382" stroke="#A77F35" stroke-width="5" stroke-linecap="round" stroke-dasharray="10 18"/>
+  <g fill="#171714">
+    <circle cx="218" cy="198" r="10"/>
+    <circle cx="526" cy="300" r="10"/>
+    <circle cx="824" cy="426" r="10"/>
+    <circle cx="1042" cy="382" r="10"/>
+  </g>
+  <g>
+    <rect x="104" y="104" width="320" height="148" rx="8" fill="#FFFDF7" stroke="#D8CFBC"/>
+    <text x="132" y="148" font-family="Georgia, serif" font-size="36" font-weight="700" fill="#171714">Tripova</text>
+    <text x="132" y="186" font-family="Arial, sans-serif" font-size="18" fill="#676A60">Explore, share, and plan</text>
+    <rect x="132" y="210" width="112" height="30" rx="6" fill="#314A36"/>
+  </g>
+</svg>

@@ -1,0 +1,17 @@
+<svg width="1200" height="760" viewBox="0 0 1200 760" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Procedural world terrain visual">
+  <rect width="1200" height="760" fill="#F7F3EA"/>
+  <rect x="54" y="54" width="1092" height="652" rx="8" fill="#D8DFD0" stroke="#D8CFBC"/>
+  <path d="M54 494L162 384L260 432L372 288L492 398L620 236L774 432L908 314L1146 520V706H54V494Z" fill="#F0E8D7"/>
+  <path d="M54 562L190 478L330 526L492 420L658 534L824 430L970 534L1146 476V706H54V562Z" fill="#7D906D"/>
+  <path d="M54 622L222 568L408 618L594 520L796 630L978 562L1146 612V706H54V622Z" fill="#304B35"/>
+  <g stroke="#314A36" stroke-width="1.4" opacity="0.45">
+    <path d="M160 638C260 594 340 594 452 640C570 689 650 678 760 622C888 556 1016 572 1100 638"/>
+    <path d="M126 590C250 548 358 552 486 590C632 634 718 624 848 566C956 518 1038 536 1110 586"/>
+    <path d="M190 540C292 498 414 502 540 540C658 576 736 570 842 520C930 478 1008 486 1082 528"/>
+  </g>
+  <g>
+    <rect x="94" y="92" width="276" height="104" rx="8" fill="#FFFDF7" stroke="#D8CFBC"/>
+    <text x="122" y="134" font-family="Georgia, serif" font-size="28" font-weight="700" fill="#171714">World system</text>
+    <text x="122" y="168" font-family="Arial, sans-serif" font-size="17" fill="#676A60">Terrain, biomes, simulation</text>
+  </g>
+</svg>

@@ -1,36 +1,45 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Sambhav Surana Portfolio
 
-## Getting Started
+Blueprint-aligned public portfolio for Sambhav Surana.
 
-First, run the development server:
+## Data Sources
+
+- Site content: `data/site.json`
+  - `resume`: profile, timeline, skills, certifications, education, and resume settings
+  - `projects`: public project cards, detail pages, and resume project priority
+  - `writing`: writing and research entries
+- Resume PDF: `public/resume/sambhav-surana-resume.pdf`
+
+## Resume Generator
+
+- Generator: `scripts/generate-resume.mjs`
+- Input: `data/site.json`
+- Outputs: `public/resume/sambhav-surana-resume.pdf` and `public/resume/sambhav-surana-resume.html`
+- Style asset: `public/resume/profile-photo.jpg`
+
+Run `npm run resume:generate` after editing `data/site.json`. The `dev` and `build` scripts also run the generator first. The generator uses the `resume` object from `data/site.json` as the resume-builder source and renders a blue-header builder-style PDF/HTML.
+
+Resume projects are selected from published records in `data/site.json` `projects`, sorted by `resume.priority`, and capped at four items so the resume remains a two-page document.
+
+Project visuals are resolved from each project's GitHub repository first: `docs/portfolio-cover.svg` on `main`, then `master`. If that SVG is not available, the site falls back to the project's local `coverImage`, then `public/project-assets/default-project-cover.svg`.
+
+The public site must not expose admin, login, JSON sync, database controls, or private Obsidian notes.
+
+## Routes
+
+- `/`
+- `/projects`
+- `/projects/[slug]`
+- `/writing`
+- `/writing/[slug]`
+- `/resume`
+- `/contact`
+
+## Commands
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm run resume:generate
+npm run build
+npm run lint
 ```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.

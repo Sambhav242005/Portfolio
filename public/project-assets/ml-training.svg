@@ -1,0 +1,29 @@
+<svg width="1200" height="760" viewBox="0 0 1200 760" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Training chart and model metrics">
+  <rect width="1200" height="760" fill="#121712"/>
+  <rect x="56" y="52" width="1088" height="656" rx="8" fill="#182018" stroke="#394435"/>
+  <g opacity="0.55" stroke="#344331">
+    <path d="M104 164H1096"/>
+    <path d="M104 260H1096"/>
+    <path d="M104 356H1096"/>
+    <path d="M104 452H1096"/>
+    <path d="M104 548H1096"/>
+    <path d="M104 644H1096"/>
+    <path d="M236 112V644"/>
+    <path d="M388 112V644"/>
+    <path d="M540 112V644"/>
+    <path d="M692 112V644"/>
+    <path d="M844 112V644"/>
+    <path d="M996 112V644"/>
+  </g>
+  <path d="M112 564C180 528 208 508 260 474C340 420 390 392 450 356C526 310 576 278 652 258C728 238 788 250 856 214C932 174 984 160 1090 146" stroke="#D0A85A" stroke-width="5" stroke-linecap="round"/>
+  <path d="M112 620C182 594 248 566 310 528C388 480 456 445 538 432C622 419 684 394 756 350C838 300 914 282 1090 250" stroke="#9EB58A" stroke-width="4" stroke-linecap="round"/>
+  <g fill="#F4EFE5">
+    <text x="104" y="112" font-family="Arial, sans-serif" font-size="28" font-weight="700">80M model training</text>
+    <text x="104" y="148" font-family="Arial, sans-serif" font-size="18" fill="#B8B2A5">Loss curves, checkpoints, and evaluation notes</text>
+  </g>
+  <g>
+    <rect x="812" y="502" width="284" height="104" rx="8" fill="#202819" stroke="#45523B"/>
+    <text x="840" y="545" font-family="Arial, sans-serif" font-size="18" fill="#B8B2A5">checkpoint</text>
+    <text x="840" y="582" font-family="Arial, sans-serif" font-size="26" font-weight="700" fill="#F4EFE5">stable run</text>
+  </g>
+</svg>

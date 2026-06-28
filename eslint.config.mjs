@@ -3,27 +3,17 @@ import tseslint from "typescript-eslint";
 
 export default tseslint.config(
   {
-    ignores: [
-      ".next/**",
-      "build/**",
-      "out/**",
-      "node_modules/**",
-      "next-env.d.ts",
-      "public/*.html",
-    ],
+    ignores: [".agents/**", ".codex/**", ".next/**", ".serena/**", "node_modules/**", "out/**", "dist/**"],
   },
   ...tseslint.configs.recommended,
   {
-    files: ["**/*.{js,jsx,ts,tsx}"],
+    files: ["**/*.{ts,tsx}"],
     plugins: {
       "@next/next": nextPlugin,
     },
     rules: {
       ...nextPlugin.configs.recommended.rules,
       ...nextPlugin.configs["core-web-vitals"].rules,
-      "@typescript-eslint/no-unused-vars": "off",
-      "@typescript-eslint/no-empty-object-type": "off",
-      "@typescript-eslint/no-explicit-any": "off",
     },
-  }
+  },
 );

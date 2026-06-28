@@ -1,0 +1,36 @@
+<svg width="1200" height="760" viewBox="0 0 1200 760" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="City Builder simulation dashboard">
+  <rect width="1200" height="760" fill="#F7F3EA"/>
+  <rect x="58" y="54" width="1084" height="652" rx="8" fill="#FFFDF8" stroke="#D8CFBC"/>
+  <g stroke="#D8CFBC">
+    <path d="M128 168H1072"/>
+    <path d="M128 282H1072"/>
+    <path d="M128 396H1072"/>
+    <path d="M128 510H1072"/>
+    <path d="M252 112V632"/>
+    <path d="M438 112V632"/>
+    <path d="M624 112V632"/>
+    <path d="M810 112V632"/>
+    <path d="M996 112V632"/>
+  </g>
+  <g fill="#314A36">
+    <rect x="166" y="210" width="84" height="126" rx="6"/>
+    <rect x="302" y="324" width="108" height="188" rx="6"/>
+    <rect x="482" y="188" width="112" height="276" rx="6"/>
+    <rect x="690" y="278" width="102" height="176" rx="6"/>
+    <rect x="882" y="214" width="138" height="296" rx="6"/>
+  </g>
+  <g fill="#A77F35">
+    <rect x="180" y="236" width="18" height="18"/>
+    <rect x="218" y="236" width="18" height="18"/>
+    <rect x="320" y="360" width="18" height="18"/>
+    <rect x="358" y="360" width="18" height="18"/>
+    <rect x="506" y="226" width="18" height="18"/>
+    <rect x="544" y="226" width="18" height="18"/>
+    <rect x="720" y="312" width="18" height="18"/>
+    <rect x="910" y="250" width="18" height="18"/>
+    <rect x="960" y="250" width="18" height="18"/>
+  </g>
+  <rect x="118" y="96" width="388" height="86" rx="8" fill="#171714"/>
+  <text x="146" y="134" font-family="Arial, sans-serif" font-size="30" font-weight="700" fill="#F4EFE5">CityBuilder MVP</text>
+  <text x="146" y="162" font-family="Arial, sans-serif" font-size="16" fill="#B8B2A5">FastAPI simulation + React dashboard</text>
+</svg>

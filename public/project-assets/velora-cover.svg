@@ -1,0 +1,26 @@
+<svg width="1200" height="760" viewBox="0 0 1200 760" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Velora model training pipeline visual">
+  <rect width="1200" height="760" fill="#121712"/>
+  <rect x="58" y="54" width="1084" height="652" rx="8" fill="#182018" stroke="#394435"/>
+  <g stroke="#344331" opacity="0.72">
+    <path d="M128 168H1072"/>
+    <path d="M128 282H1072"/>
+    <path d="M128 396H1072"/>
+    <path d="M128 510H1072"/>
+    <path d="M252 112V640"/>
+    <path d="M438 112V640"/>
+    <path d="M624 112V640"/>
+    <path d="M810 112V640"/>
+    <path d="M996 112V640"/>
+  </g>
+  <path d="M144 556C246 476 328 490 430 392C534 292 646 338 744 246C842 154 934 186 1058 118" stroke="#D0A85A" stroke-width="5" stroke-linecap="round"/>
+  <path d="M144 608C250 574 334 542 444 528C576 511 652 436 774 398C880 365 948 320 1058 258" stroke="#9EB58A" stroke-width="4" stroke-linecap="round"/>
+  <g fill="#F4EFE5">
+    <text x="118" y="122" font-family="Arial, sans-serif" font-size="32" font-weight="700">Velora</text>
+    <text x="118" y="158" font-family="Arial, sans-serif" font-size="18" fill="#B8B2A5">Decoder-only transformer training stack</text>
+  </g>
+  <g>
+    <rect x="760" y="504" width="312" height="112" rx="8" fill="#202819" stroke="#45523B"/>
+    <text x="790" y="548" font-family="Arial, sans-serif" font-size="18" fill="#B8B2A5">80M run</text>
+    <text x="790" y="588" font-family="Arial, sans-serif" font-size="28" font-weight="700" fill="#F4EFE5">checkpoint safe</text>
+  </g>
+</svg>
