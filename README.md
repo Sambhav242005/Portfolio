@@ -17,7 +17,7 @@ Blueprint-aligned public portfolio for Sambhav Surana.
 - Outputs: `public/resume/sambhav-surana-resume.pdf` and `public/resume/sambhav-surana-resume.html`
 - Style asset: `public/resume/profile-photo.jpg`
 
-Run `npm run resume:generate` after editing `data/site.json`. The `dev` and `build` scripts also run the generator first. The generator uses the `resume` object from `data/site.json` as the resume-builder source and renders a blue-header builder-style PDF/HTML.
+Run `npm run resume:generate` after editing `data/site.json`. The `dev` script also runs the generator first. The `build` script regenerates the HTML and reuses the committed PDF if Chrome or Edge is unavailable, which keeps hosted builds working on environments without a browser binary. The generator uses the `resume` object from `data/site.json` as the resume-builder source and renders a blue-header builder-style PDF/HTML.
 
 Resume projects are selected from published records in `data/site.json` `projects`, sorted by `resume.priority`, and capped at four items so the resume remains a two-page document.
 

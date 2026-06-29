@@ -30,6 +30,7 @@ const ibmPlexBoldPath = path.join(
 );
 const phosphorBoldPath = path.join(root, "node_modules", "@phosphor-icons", "web", "src", "bold", "Phosphor-Bold.woff2");
 const maxResumeProjects = 4;
+const allowExistingPdf = process.argv.includes("--allow-existing-pdf");
 
 const siteData = JSON.parse(await fs.readFile(siteDataPath, "utf8"));
 const resume = siteData.resume;
@@ -66,6 +67,11 @@ async function renderPdf(sourceHtmlPath, outputPdfPath) {
   const chromePath = await findChromePath();
 
   if (!chromePath) {
+    if (allowExistingPdf && await exists(outputPdfPath)) {
+      console.warn(`Chrome or Edge was not found; keeping existing ${path.relative(root, outputPdfPath)}.`);
+      return;
+    }
+
     throw new Error("Chrome or Edge is required to render the resume PDF.");
   }
 
