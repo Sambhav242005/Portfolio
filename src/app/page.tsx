@@ -19,7 +19,7 @@ const groupIcons = [IconBrain, IconCode, IconSettings];
 
 export default async function Home() {
   const profile = getPublicProfile();
-  const projects = getFeaturedProjects();
+  const projects = await getFeaturedProjects();
   const writing = (await getWriting()).slice(0, 3);
 
   return (
@@ -98,21 +98,23 @@ export default async function Home() {
             </div>
           </div>
 
-          <div id="writing">
-            <SectionHeading title="Writing & Research" actionLabel="View all" actionHref="/writing" />
-            <div className="writing-list">
-              {writing.map((item) => (
-                <article className="writing-item" id={item.slug} key={item.slug}>
-                  <div>
-                    <span>{formatDate(item.date)}</span>
-                    <h3>{item.title}</h3>
-                    <p>{item.summary}</p>
-                  </div>
-                  <Link href={`/writing/${item.slug}`}>Read</Link>
-                </article>
-              ))}
+          {writing.length > 0 ? (
+            <div id="writing">
+              <SectionHeading title="Writing & Research" actionLabel="View all" actionHref="/writing" />
+              <div className="writing-list">
+                {writing.map((item) => (
+                  <article className="writing-item" id={item.slug} key={item.slug}>
+                    <div>
+                      <span>{formatDate(item.date)}</span>
+                      <h3>{item.title}</h3>
+                      <p>{item.summary}</p>
+                    </div>
+                    <Link href={`/writing/${item.slug}`}>Read</Link>
+                  </article>
+                ))}
+              </div>
             </div>
-          </div>
+          ) : null}
         </section>
       </ScrollReveal>
     </main>

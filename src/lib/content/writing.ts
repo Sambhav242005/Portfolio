@@ -2,8 +2,14 @@ import "server-only";
 
 import fs from "node:fs";
 import path from "node:path";
-import { getProjectContentSource, getProjects, type Project } from "@/lib/content/projects";
-import { listMarkdownFiles, parseGitHubRepo, parseMarkdown, readMarkdownFile, type RemoteContentSource } from "@/lib/content/remote-markdown";
+import {
+  listMarkdownFiles,
+  normalizeSourceRoot,
+  parseGitHubRepo,
+  parseMarkdown,
+  readMarkdownFile,
+  type RemoteContentSource,
+} from "@/lib/content/remote-markdown";
 
 export type WritingItem = {
   title: string;
@@ -16,7 +22,6 @@ export type WritingItem = {
   body: string;
   sourceRepo?: string;
   sourcePath?: string;
-  projectSlug?: string;
 };
 
 type WritingOverride = Partial<Pick<WritingItem, "title" | "type" | "status" | "date" | "tags" | "summary">>;
@@ -32,7 +37,6 @@ type SiteData = {
 };
 
 type ArticleSource = RemoteContentSource & {
-  projectSlug?: string;
   ignoredPaths: string[];
 };
 
@@ -99,8 +103,7 @@ async function readRemoteWriting() {
 }
 
 function buildArticleSources(siteData: SiteData): ArticleSource[] {
-  const projectSources = getProjects().map((project) => articleSourceFromProject(project));
-  const writingSources = (siteData.writingSources ?? [])
+  return (siteData.writingSources ?? [])
     .filter((source) => source.enabled !== false)
     .map((source) => {
       const repo = parseGitHubRepo(source.repo);
@@ -113,23 +116,9 @@ function buildArticleSources(siteData: SiteData): ArticleSource[] {
         repo,
         ref: source.ref,
         sourceRoot: source.sourceRoot,
-        ignoredPaths: [],
+        ignoredPaths: [`${normalizeSourceRoot(source.sourceRoot)}/case-study.md`],
       };
     });
-
-  return [...projectSources, ...writingSources];
-}
-
-function articleSourceFromProject(project: Project): ArticleSource {
-  const source = getProjectContentSource(project);
-
-  return {
-    repo: source.repo,
-    ref: source.ref,
-    sourceRoot: source.sourceRoot,
-    projectSlug: project.slug,
-    ignoredPaths: [source.caseStudyPath],
-  };
 }
 
 async function readSourceArticles(source: ArticleSource) {
@@ -161,7 +150,6 @@ async function readArticle(source: ArticleSource, filePath: string): Promise<Wri
     body: parsed.body,
     sourceRepo: source.repo,
     sourcePath: filePath,
-    projectSlug: source.projectSlug,
   };
 
   if (!article.body) {

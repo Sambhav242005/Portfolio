@@ -7,8 +7,8 @@ export const metadata: Metadata = {
   description: "Published project work by Sambhav Surana.",
 };
 
-export default function ProjectsPage() {
-  const projects = getProjects();
+export default async function ProjectsPage() {
+  const projects = await getProjects();
 
   return (
     <main className="subpage-main">

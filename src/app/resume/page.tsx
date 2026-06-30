@@ -8,9 +8,9 @@ export const metadata: Metadata = {
   description: "Resume timeline, skills, and PDF download for Sambhav Surana.",
 };
 
-export default function ResumePage() {
+export default async function ResumePage() {
   const profile = getPublicProfile();
-  const proofProjects = getProjects().filter((project) => project.githubUrl || project.liveUrl).slice(0, 8);
+  const proofProjects = (await getProjects()).filter((project) => project.githubUrl || project.liveUrl).slice(0, 8);
   const github = profile.profiles.find((item) => item.network === "GitHub")?.url;
   const linkedin = profile.profiles.find((item) => item.network === "LinkedIn")?.url;
 
