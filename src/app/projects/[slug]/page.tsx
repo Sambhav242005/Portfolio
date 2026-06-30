@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { IconBrandGithub, IconExternalLink } from "@tabler/icons-react";
 import { MdxContent } from "@/components/mdx/mdx-content";
 import { ProjectCoverImage } from "@/components/public/ProjectCoverImage";
-import { getProjectBySlug, getProjects } from "@/lib/content/projects";
+import { getProjectBySlug, getProjectBySlugWithBody, getProjects } from "@/lib/content/projects";
 
 type ProjectPageProps = {
   params: Promise<{
@@ -35,7 +35,7 @@ export async function generateMetadata({ params }: ProjectPageProps): Promise<Me
 
 export default async function ProjectPage({ params }: ProjectPageProps) {
   const { slug } = await params;
-  const project = getProjectBySlug(slug);
+  const project = await getProjectBySlugWithBody(slug);
 
   if (!project) {
     notFound();

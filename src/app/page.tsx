@@ -17,10 +17,10 @@ import { getPublicProfile } from "@/lib/resume/profile";
 
 const groupIcons = [IconBrain, IconCode, IconSettings];
 
-export default function Home() {
+export default async function Home() {
   const profile = getPublicProfile();
   const projects = getFeaturedProjects();
-  const writing = getWriting().slice(0, 3);
+  const writing = (await getWriting()).slice(0, 3);
 
   return (
     <main>

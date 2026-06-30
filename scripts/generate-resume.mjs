@@ -133,25 +133,20 @@ function buildResumeProjects(projects) {
 
 function projectToResumeItem(project) {
   const resumeProject = project.resume ?? {};
+  const bullets = resumeProject.bullets;
+
+  if (!Array.isArray(bullets) || bullets.length === 0) {
+    throw new Error(`Project "${project.slug ?? project.title}" must define resume.bullets for resume generation.`);
+  }
 
   return {
     title: resumeProject.title ?? project.title,
     summary: resumeProject.summary ?? project.summary,
     date: resumeProject.date ?? "",
-    bullets: resumeProject.bullets ?? extractResumeBullets(project.body),
+    bullets,
     tags: resumeProject.tags ?? project.tags ?? [],
     url: resumeProject.url ?? project.githubUrl ?? project.liveUrl ?? "",
   };
-}
-
-function extractResumeBullets(body) {
-  const lines = Array.isArray(body) ? body : String(body ?? "").split("\n");
-
-  return lines
-    .map((line) => line.trim())
-    .filter((line) => line.startsWith("- "))
-    .map((line) => line.slice(2))
-    .slice(0, 3);
 }
 
 function buildHtml(data, hasPhoto) {

@@ -9,15 +9,15 @@ type WritingPageProps = {
   }>;
 };
 
-export function generateStaticParams() {
-  return getWriting().map((item) => ({
+export async function generateStaticParams() {
+  return (await getWriting()).map((item) => ({
     slug: item.slug,
   }));
 }
 
 export async function generateMetadata({ params }: WritingPageProps): Promise<Metadata> {
   const { slug } = await params;
-  const item = getWritingBySlug(slug);
+  const item = await getWritingBySlug(slug);
 
   if (!item) {
     return {
@@ -33,7 +33,7 @@ export async function generateMetadata({ params }: WritingPageProps): Promise<Me
 
 export default async function WritingDetailPage({ params }: WritingPageProps) {
   const { slug } = await params;
-  const item = getWritingBySlug(slug);
+  const item = await getWritingBySlug(slug);
 
   if (!item) {
     notFound();

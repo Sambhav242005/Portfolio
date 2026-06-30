@@ -2,6 +2,14 @@ import "server-only";
 
 import fs from "node:fs";
 import path from "node:path";
+import {
+  normalizeGitHubPath,
+  normalizeSourceRoot,
+  parseGitHubRepo,
+  parseMarkdown,
+  readMarkdownFile,
+  type RemoteContentSource,
+} from "@/lib/content/remote-markdown";
 
 type ResumeProject = {
   priority: number;
@@ -14,6 +22,14 @@ type ResumeProject = {
 };
 
 const defaultProjectCover = "/project-assets/default-project-cover.svg";
+const defaultCaseStudyFileName = "case-study.md";
+
+export type ProjectContentConfig = {
+  repo?: string;
+  ref?: string;
+  sourceRoot?: string;
+  caseStudyPath?: string;
+};
 
 export type Project = {
   title: string;
@@ -29,11 +45,20 @@ export type Project = {
   order: number;
   resume?: ResumeProject;
   updatedAt: string;
+  content?: ProjectContentConfig;
+  body?: string;
+};
+
+export type ProjectWithBody = Project & {
   body: string;
 };
 
+export type ProjectContentSource = RemoteContentSource & {
+  caseStudyPath: string;
+};
+
 type ProjectRecord = Omit<Project, "body" | "coverImages"> & {
-  body: string | string[];
+  body?: string | string[];
   coverImages?: string[];
 };
 
@@ -88,7 +113,7 @@ function readProjectFile(): Project[] {
       ...project,
       coverImage: coverImages[0] ?? defaultProjectCover,
       coverImages,
-      body: Array.isArray(project.body) ? project.body.join("\n").trim() : project.body.trim(),
+      body: project.body ? normalizeProjectBody(project.body) : undefined,
     };
   });
 }
@@ -105,4 +130,56 @@ export function getFeaturedProjects() {
 
 export function getProjectBySlug(slug: string) {
   return getProjects().find((project) => project.slug === slug);
+}
+
+export async function getProjectBySlugWithBody(slug: string): Promise<ProjectWithBody | undefined> {
+  const project = getProjectBySlug(slug);
+
+  if (!project) {
+    return undefined;
+  }
+
+  return {
+    ...project,
+    body: await readProjectCaseStudy(project),
+  };
+}
+
+export function getProjectContentSource(project: Project): ProjectContentSource {
+  const repo = parseGitHubRepo(project.content?.repo ?? project.githubUrl);
+
+  if (!repo) {
+    throw new Error(`${project.slug} is missing a valid GitHub content source.`);
+  }
+
+  const sourceRoot = normalizeSourceRoot(project.content?.sourceRoot);
+  const caseStudyPath = normalizeGitHubPath(project.content?.caseStudyPath ?? `${sourceRoot}/${defaultCaseStudyFileName}`);
+
+  return {
+    repo,
+    ref: project.content?.ref,
+    sourceRoot,
+    caseStudyPath,
+  };
+}
+
+async function readProjectCaseStudy(project: Project) {
+  const source = getProjectContentSource(project);
+  const location = `${source.repo}:${source.caseStudyPath}`;
+  const raw = await readMarkdownFile(source, source.caseStudyPath);
+  const parsed = parseMarkdown(raw, location);
+
+  if (parsed.frontmatter.contentKind !== "case-study") {
+    throw new Error(`${location} must set contentKind: case-study.`);
+  }
+
+  if (!parsed.body) {
+    throw new Error(`${location} has no markdown body.`);
+  }
+
+  return parsed.body;
+}
+
+function normalizeProjectBody(body: string | string[]) {
+  return Array.isArray(body) ? body.join("\n").trim() : body.trim();
 }

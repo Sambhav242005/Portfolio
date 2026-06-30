@@ -7,8 +7,8 @@ export const metadata: Metadata = {
   description: "Published writing and research notes by Sambhav Surana.",
 };
 
-export default function WritingPage() {
-  const writing = getWriting();
+export default async function WritingPage() {
+  const writing = await getWriting();
 
   return (
     <main className="subpage-main">
