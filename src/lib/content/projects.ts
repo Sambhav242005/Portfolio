@@ -131,6 +131,10 @@ function readProjectFile(): Project[] {
 }
 
 export async function getProjects() {
+  if (!shouldUseProjectCache()) {
+    return readProjectsWithRemoteMetadata();
+  }
+
   if (!projectsCache) {
     projectsCache = readProjectsWithRemoteMetadata();
   }
@@ -175,6 +179,10 @@ export function getProjectContentSource(project: Project): ProjectContentSource 
     sourceRoot,
     caseStudyPath,
   };
+}
+
+function shouldUseProjectCache() {
+  return process.env.NODE_ENV === "production";
 }
 
 async function readProjectsWithRemoteMetadata() {

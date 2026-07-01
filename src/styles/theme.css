@@ -1,0 +1,61 @@
+/* Portfolio theme tokens. Edit this file to change the site theme. */
+
+:root,
+[data-theme="light"] {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-dim: #eef4ff;
+  --ink: #111827;
+  --muted: #64748b;
+  --line: #dbe5f5;
+  --accent: #2563eb;
+  --accent-soft: #dbeafe;
+  --accent-hover: #1d4ed8;
+  --accent-ink: #ffffff;
+  --accent-warm: #f97316;
+  --accent-warm-soft: #ffedd5;
+  --brand-gradient: linear-gradient(135deg, var(--accent) 0%, var(--accent) 45%, var(--accent-warm) 100%);
+  --surface-translucent: rgb(255 255 255 / 0.8);
+  --header-bg: rgb(248 250 252 / 0.9);
+  --footer-bg: rgb(248 250 252 / 0.78);
+  --card-hover-border: rgb(249 115 22 / 0.34);
+  --button-secondary-border: rgb(17 24 39 / 0.22);
+  --chip-border: #d8e4f6;
+  --shell-background:
+    radial-gradient(circle at 78% 12%, rgb(37 99 235 / 0.11), transparent 26rem),
+    radial-gradient(circle at 16% 86%, rgb(249 115 22 / 0.08), transparent 24rem),
+    linear-gradient(180deg, #ffffff 0%, #f8fafc 42%);
+  --hero-art-opacity: 0.92;
+  --radius: 10px;
+  --shadow: 0 1px 3px rgb(15 23 42 / 0.04), 0 10px 30px rgb(37 99 235 / 0.08);
+  color-scheme: light;
+}
+
+[data-theme="dark"] {
+  --bg: #070b14;
+  --surface: #111827;
+  --surface-dim: #1d2738;
+  --ink: #f8fafc;
+  --muted: #a8b3c7;
+  --line: #28364d;
+  --accent: #60a5fa;
+  --accent-soft: #1e3a8a;
+  --accent-hover: #93c5fd;
+  --accent-ink: #06111f;
+  --accent-warm: #fb923c;
+  --accent-warm-soft: #7c2d12;
+  --brand-gradient: linear-gradient(135deg, var(--accent) 0%, var(--accent) 45%, var(--accent-warm) 100%);
+  --surface-translucent: rgb(17 24 39 / 0.8);
+  --header-bg: rgb(7 11 20 / 0.88);
+  --footer-bg: rgb(7 11 20 / 0.74);
+  --card-hover-border: rgb(251 146 60 / 0.42);
+  --button-secondary-border: rgb(248 250 252 / 0.25);
+  --chip-border: #28364d;
+  --shell-background:
+    radial-gradient(circle at 72% 12%, rgb(96 165 250 / 0.16), transparent 26rem),
+    radial-gradient(circle at 16% 86%, rgb(251 146 60 / 0.1), transparent 24rem),
+    linear-gradient(180deg, #0f172a 0%, #070b14 46%);
+  --hero-art-opacity: 0.78;
+  --shadow: 0 1px 3px rgb(0 0 0 / 0.32), 0 10px 34px rgb(15 23 42 / 0.38);
+  color-scheme: dark;
+}

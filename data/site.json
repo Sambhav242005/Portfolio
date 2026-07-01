@@ -3,7 +3,7 @@
     "basics": {
       "name": "Sambhav Surana",
       "headline": "AI/ML Developer | Python Developer",
-      "summary": "Third-year student specializing in Artificial Intelligence. I have built custom AI models, intelligent agents, and real-time face recognition systems from scratch. Skilled in Python, PyTorch, and full-stack development. I am passionate about turning complex AI concepts into working software and am looking for a challenging role in engineering.",
+      "summary": "I build AI agents, computer vision systems, and full-stack ML products that turn research ideas into working software.",
       "email": "sambhav242005@gmail.com",
       "phone": "+917999468896",
       "url": "https://sambhav-surana.online",
@@ -241,6 +241,9 @@
       ],
       "coverImage": "/project-assets/velora-cover.svg",
       "githubUrl": "https://github.com/Sambhav242005/Velora",
+      "content": {
+        "caseStudyPath": "docs/writing/velora.md"
+      },
       "resume": {
         "priority": 1,
         "date": "2026",
@@ -432,6 +435,63 @@
     }
   ],
   "writingSources": [
+    {
+      "repo": "Sambhav242005/Velora",
+      "ref": "main",
+      "sourceRoot": "docs/writing",
+      "enabled": true,
+      "label": "Velora",
+      "paths": [
+        "docs/writing/training/training-100m-model.md"
+      ]
+    },
+    {
+      "repo": "Sambhav242005/AI-Fitness-Trainer",
+      "ref": "main",
+      "sourceRoot": "docs/writing",
+      "enabled": true,
+      "label": "AI Fitness Trainer",
+      "paths": [
+        "docs/writing/dual-arm-hysteresis.md",
+        "docs/writing/local-vision-llm-pipeline.md",
+        "docs/writing/project-logs/fitness-coach-yolov11.md"
+      ]
+    },
+    {
+      "repo": "Sambhav242005/City-Builder",
+      "ref": "main",
+      "sourceRoot": "docs/writing",
+      "enabled": true,
+      "label": "CityBuilder Simulation",
+      "paths": [
+        "docs/writing/articles/canvas-city-map-rendering.md",
+        "docs/writing/articles/local-q-learning-agent.md"
+      ]
+    },
+    {
+      "repo": "Sambhav242005/AI-Face-Detect-and-Recognition",
+      "ref": "main",
+      "sourceRoot": "docs/writing",
+      "enabled": true,
+      "label": "AI Face Detect and Recognition WebGPU",
+      "paths": [
+        "docs/writing/research/face-recognition-webgpu.md"
+      ]
+    },
+    {
+      "repo": "Sambhav242005/MagneticStorage",
+      "ref": "main",
+      "sourceRoot": "docs/writing",
+      "enabled": true,
+      "label": "MagneticStorage Neuro-Savant",
+      "paths": [
+        "docs/writing/local-agentic-tools-ollama.md",
+        "docs/writing/memory/hierarchical-memory-chromadb.md",
+        "docs/writing/sleep-mode-consolidation.md",
+        "docs/writing/story-consistency-engine.md",
+        "docs/writing/three-stage-hybrid-search.md"
+      ]
+    },
     {
       "repo": "Sambhav242005/<writing-repo-name>",
       "sourceRoot": "docs/writing",

@@ -19,11 +19,11 @@ export default async function WritingPage() {
 
       <div className="article-index">
         {writing.map((item) => (
-          <article className="article-row" key={item.slug}>
+          <Link className="article-row" href={`/writing/${item.slug}`} key={item.slug}>
             <div>
-              <span>{item.type}</span>
+              <span className="article-type">{item.type}</span>
               <h2>
-                <Link href={`/writing/${item.slug}`}>{item.title}</Link>
+                {item.title}
               </h2>
               <p>{item.summary}</p>
               <div className="chip-row">
@@ -35,7 +35,7 @@ export default async function WritingPage() {
               </div>
             </div>
             <time dateTime={item.date}>{formatDate(item.date)}</time>
-          </article>
+          </Link>
         ))}
       </div>
     </main>

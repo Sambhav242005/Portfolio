@@ -199,10 +199,11 @@ function buildHtml(data, hasPhoto) {
 
     :root {
       color-scheme: light;
-      --accent: #008bd2;
-      --accent-dark: #006fa8;
-      --hero: #d9eef8;
-      --contact: #94d1ea;
+      --accent: #2563eb;
+      --accent-dark: #1d4ed8;
+      --accent-warm: #f97316;
+      --hero: #eaf2ff;
+      --contact: #dbeafe;
       --ink: #050505;
       --muted: #202020;
       --paper: #ffffff;
@@ -259,7 +260,9 @@ function buildHtml(data, hasPhoto) {
       position: relative;
       min-height: 64mm;
       padding: 6mm 5mm 0;
-      background: var(--hero);
+      background:
+        radial-gradient(circle at 86% 20%, rgb(249 115 22 / 0.22), transparent 29mm),
+        linear-gradient(135deg, var(--hero) 0%, #ffffff 100%);
     }
 
     .hero h1 {
@@ -301,8 +304,9 @@ function buildHtml(data, hasPhoto) {
       align-items: center;
       gap: 4.6mm;
       padding: 0 5mm;
+      border-top: 0.8pt solid rgb(249 115 22 / 0.36);
       background: var(--contact);
-      color: #06405d;
+      color: #0f2d5c;
       font-size: 8.2pt;
     }
 
@@ -362,7 +366,7 @@ function buildHtml(data, hasPhoto) {
     .section-title {
       margin-bottom: 2.2mm;
       padding-bottom: 1.2mm;
-      border-bottom: 1.1pt solid var(--accent);
+      border-bottom: 1.1pt solid var(--accent-warm);
       color: var(--accent);
       font-size: 10.2pt;
       font-weight: 700;
@@ -441,7 +445,7 @@ function buildHtml(data, hasPhoto) {
     .skill-bars span {
       width: 5.5mm;
       height: 2.65mm;
-      background: var(--accent);
+      background: linear-gradient(90deg, var(--accent), var(--accent-warm));
     }
 
     .skill-text {
@@ -517,7 +521,7 @@ function buildHtml(data, hasPhoto) {
       content: "\\e2e6";
       display: inline-block;
       margin-right: 1.35mm;
-      color: var(--accent);
+      color: var(--accent-warm);
       font-family: "Phosphor-Bold";
       font-size: 9.2pt;
       font-weight: 400;
@@ -533,7 +537,7 @@ function buildHtml(data, hasPhoto) {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 8mm;
-      color: var(--accent);
+      color: var(--accent-dark);
       font-weight: 700;
       font-size: 9.6pt;
     }
@@ -550,12 +554,12 @@ function buildHtml(data, hasPhoto) {
     .language-bars span {
       width: 7.1mm;
       height: 3mm;
-      border: 1.1pt solid var(--accent);
+      border: 1.1pt solid var(--accent-warm);
       background: transparent;
     }
 
     .language-bars span.filled {
-      background: var(--accent);
+      background: var(--accent-warm);
     }
 
     @media screen {

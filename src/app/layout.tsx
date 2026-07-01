@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { GeistSans } from "geist/font/sans";
 import { SiteFooter } from "@/components/public/Footer";
 import { SiteHeader } from "@/components/public/Header";
+import { ClientLenisWrapper } from "@/components/public/ClientLenisWrapper";
 import { ScrollEffect } from "@/components/public/ScrollEffect";
 import "./globals.css";
 
@@ -30,15 +31,19 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className={GeistSans.variable} suppressHydrationWarning>
+      <head>
+        <script id="theme-bootstrap" dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
       <body>
-        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
-        <div className="page-shell">
-          <ScrollEffect>
-            <SiteHeader />
-          </ScrollEffect>
-          {children}
-          <SiteFooter />
-        </div>
+        <ClientLenisWrapper>
+          <div className="page-shell">
+            <ScrollEffect>
+              <SiteHeader />
+            </ScrollEffect>
+            {children}
+            <SiteFooter />
+          </div>
+        </ClientLenisWrapper>
       </body>
     </html>
   );

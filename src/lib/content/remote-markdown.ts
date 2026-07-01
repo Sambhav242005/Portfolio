@@ -1,13 +1,10 @@
 import "server-only";
 
 const defaultSourceRoot = "docs/writing";
+const defaultRef = "main";
 const githubApiBaseUrl = "https://api.github.com";
 const githubRawBaseUrl = "https://raw.githubusercontent.com";
 const userAgent = "sambhav-portfolio-content-loader";
-
-type GitHubRepo = {
-  default_branch?: string;
-};
 
 type GitHubTree = {
   tree?: Array<{
@@ -27,7 +24,6 @@ export type ParsedMarkdown = {
   body: string;
 };
 
-const defaultBranchCache = new Map<string, Promise<string>>();
 const treeCache = new Map<string, Promise<string[]>>();
 const markdownCache = new Map<string, Promise<string>>();
 
@@ -75,6 +71,10 @@ export async function listMarkdownFiles(source: RemoteContentSource) {
   const ref = await resolveRef(source);
   const cacheKey = `${repo}@${ref}:${sourceRoot}`;
 
+  if (!shouldUseContentCache()) {
+    return fetchMarkdownTree(repo, ref, sourceRoot);
+  }
+
   if (!treeCache.has(cacheKey)) {
     treeCache.set(cacheKey, fetchMarkdownTree(repo, ref, sourceRoot));
   }
@@ -87,6 +87,10 @@ export async function readMarkdownFile(source: RemoteContentSource, filePath: st
   const normalizedPath = normalizeGitHubPath(filePath);
   const ref = await resolveRef(source);
   const cacheKey = `${repo}@${ref}:${normalizedPath}`;
+
+  if (!shouldUseContentCache()) {
+    return fetchMarkdown(repo, ref, normalizedPath);
+  }
 
   if (!markdownCache.has(cacheKey)) {
     markdownCache.set(cacheKey, fetchMarkdown(repo, ref, normalizedPath));
@@ -120,28 +124,7 @@ export function parseMarkdown(raw: string, location: string): ParsedMarkdown {
 }
 
 async function resolveRef(source: RemoteContentSource) {
-  if (source.ref) {
-    return source.ref;
-  }
-
-  const repo = assertRepo(source.repo);
-
-  if (!defaultBranchCache.has(repo)) {
-    defaultBranchCache.set(repo, fetchDefaultBranch(repo));
-  }
-
-  return defaultBranchCache.get(repo)!;
-}
-
-async function fetchDefaultBranch(repo: string) {
-  const metadata = await fetchGitHubJson<GitHubRepo>(`${githubApiBaseUrl}/repos/${repo}`, `${repo} repository metadata`);
-  const branch = metadata.default_branch?.trim();
-
-  if (!branch) {
-    throw new Error(`${repo} repository metadata did not include a default branch.`);
-  }
-
-  return branch;
+  return source.ref?.trim() || defaultRef;
 }
 
 async function fetchMarkdownTree(repo: string, ref: string, sourceRoot: string) {
@@ -160,9 +143,7 @@ async function fetchMarkdown(repo: string, ref: string, filePath: string) {
   const encodedPath = filePath.split("/").map(encodeURIComponent).join("/");
   const url = `${githubRawBaseUrl}/${repo}/${encodeURIComponent(ref)}/${encodedPath}`;
   const response = await fetch(url, {
-    headers: {
-      "User-Agent": userAgent,
-    },
+    headers: getGitHubHeaders(),
   });
 
   if (!response.ok) {
@@ -174,10 +155,7 @@ async function fetchMarkdown(repo: string, ref: string, filePath: string) {
 
 async function fetchGitHubJson<T>(url: string, label: string): Promise<T> {
   const response = await fetch(url, {
-    headers: {
-      Accept: "application/vnd.github+json",
-      "User-Agent": userAgent,
-    },
+    headers: getGitHubHeaders("application/vnd.github+json"),
   });
 
   if (!response.ok) {
@@ -185,6 +163,20 @@ async function fetchGitHubJson<T>(url: string, label: string): Promise<T> {
   }
 
   return response.json() as Promise<T>;
+}
+
+function getGitHubHeaders(accept?: string) {
+  const token = process.env.GITHUB_TOKEN ?? process.env.GH_TOKEN;
+
+  return {
+    ...(accept ? { Accept: accept } : {}),
+    "User-Agent": userAgent,
+    ...(token ? { Authorization: `Bearer ${token}` } : {}),
+  };
+}
+
+function shouldUseContentCache() {
+  return process.env.NODE_ENV === "production";
 }
 
 function parseFrontmatterBlock(block: string, location: string) {

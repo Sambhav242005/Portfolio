@@ -4,6 +4,7 @@ import fs from "node:fs";
 import path from "node:path";
 import {
   listMarkdownFiles,
+  normalizeGitHubPath,
   normalizeSourceRoot,
   parseGitHubRepo,
   parseMarkdown,
@@ -28,19 +29,33 @@ type WritingOverride = Partial<Pick<WritingItem, "title" | "type" | "status" | "
 
 type WritingSourceRecord = RemoteContentSource & {
   enabled?: boolean;
+  ignoredPaths?: string[];
   label?: string;
+  paths?: string[];
+};
+
+type ProjectContentConfig = RemoteContentSource & {
+  caseStudyPath?: string;
+};
+
+type ProjectRecord = {
+  githubUrl?: string;
+  content?: ProjectContentConfig;
 };
 
 type SiteData = {
+  projects?: ProjectRecord[];
   writingSources?: WritingSourceRecord[];
   writingOverrides?: Record<string, WritingOverride>;
 };
 
 type ArticleSource = RemoteContentSource & {
+  paths?: string[];
   ignoredPaths: string[];
 };
 
 let writingCache: Promise<WritingItem[]> | undefined;
+const defaultCaseStudyFileName = "case-study.md";
 
 function readSiteData() {
   const filePath = path.join(process.cwd(), "data", "site.json");
@@ -53,6 +68,10 @@ export function clearWritingCacheForTests() {
 }
 
 export async function getWriting() {
+  if (!shouldUseWritingCache()) {
+    return readRemoteWriting();
+  }
+
   if (!writingCache) {
     writingCache = readRemoteWriting();
   }
@@ -103,6 +122,8 @@ async function readRemoteWriting() {
 }
 
 function buildArticleSources(siteData: SiteData): ArticleSource[] {
+  const projectCaseStudyPaths = getProjectCaseStudyPathsByRepo(siteData.projects ?? []);
+
   return (siteData.writingSources ?? [])
     .filter((source) => source.enabled !== false)
     .map((source) => {
@@ -116,14 +137,45 @@ function buildArticleSources(siteData: SiteData): ArticleSource[] {
         repo,
         ref: source.ref,
         sourceRoot: source.sourceRoot,
-        ignoredPaths: [`${normalizeSourceRoot(source.sourceRoot)}/case-study.md`],
+        paths: source.paths?.map(normalizeGitHubPath),
+        ignoredPaths: [
+          `${normalizeSourceRoot(source.sourceRoot)}/${defaultCaseStudyFileName}`,
+          ...(source.ignoredPaths ?? []).map(normalizeGitHubPath),
+          ...(projectCaseStudyPaths.get(repo) ?? []),
+        ],
       };
     });
 }
 
+function shouldUseWritingCache() {
+  return process.env.NODE_ENV === "production";
+}
+
+function getProjectCaseStudyPathsByRepo(projects: ProjectRecord[]) {
+  const pathsByRepo = new Map<string, string[]>();
+
+  for (const project of projects) {
+    const repo = parseGitHubRepo(project.content?.repo ?? project.githubUrl);
+
+    if (!repo) {
+      continue;
+    }
+
+    const sourceRoot = normalizeSourceRoot(project.content?.sourceRoot);
+    const caseStudyPath = normalizeGitHubPath(project.content?.caseStudyPath ?? `${sourceRoot}/${defaultCaseStudyFileName}`);
+    const existingPaths = pathsByRepo.get(repo) ?? [];
+
+    if (!existingPaths.includes(caseStudyPath)) {
+      pathsByRepo.set(repo, [...existingPaths, caseStudyPath]);
+    }
+  }
+
+  return pathsByRepo;
+}
+
 async function readSourceArticles(source: ArticleSource) {
-  const files = await listMarkdownFiles(source);
   const ignoredPaths = new Set(source.ignoredPaths.map((ignoredPath) => ignoredPath.toLowerCase()));
+  const files = source.paths ?? (await listMarkdownFiles(source));
   const articlePaths = files.filter((filePath) => !ignoredPaths.has(filePath.toLowerCase()));
 
   return Promise.all(articlePaths.map((filePath) => readArticle(source, filePath)));

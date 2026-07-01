@@ -13,6 +13,8 @@ Blueprint-aligned public portfolio for Sambhav Surana.
 - Writing entries: enabled `writingSources` GitHub repository markdown files under `docs/writing/**/*.md`, excluding `case-study.md`
 - Resume PDF: `public/resume/sambhav-surana-resume.pdf`
 
+Remote GitHub content defaults to the `main` ref. Set `content.ref` on a project or `ref` on a writing source only when the repository uses another branch, tag, or commit SHA. Writing sources can provide explicit markdown `paths`; when they do, the loader fetches those raw files directly and skips GitHub's recursive tree API. Sources without `paths` use GitHub API tree discovery, so set `GITHUB_TOKEN` or `GH_TOKEN` in local/hosting environments if you need higher GitHub rate limits.
+
 ## Resume Generator
 
 - Generator: `scripts/generate-resume.mjs`
@@ -63,7 +65,7 @@ tags:
 ---
 ```
 
-Files with `status: draft` are not shown publicly. Project repositories are not automatic writing sources; add a repo to `writingSources` and set `enabled: true` when you want its article markdown to appear. Disabled placeholder entries are ignored.
+Files with `status: draft` are not shown publicly. Project repositories are not automatic writing sources; add a repo to `writingSources` and set `enabled: true` when you want its article markdown to appear. Prefer adding a `paths` array for known article files so the site does not need a GitHub tree scan on every source. Disabled placeholder entries are ignored. If a project repo is also a writing source, that project's configured case-study markdown path is skipped automatically.
 
 Project visuals are resolved from each project's GitHub repository first: `docs/portfolio-cover.svg` on `main`, then `master`. If that SVG is not available, the site falls back to the project's local `coverImage`, then `public/project-assets/default-project-cover.svg`.
 

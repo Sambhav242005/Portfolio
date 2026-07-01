@@ -1,15 +1,10 @@
 import Link from "next/link";
-import {
-  IconArrowRight,
-  IconBrain,
-  IconCode,
-  IconDownload,
-  IconSettings,
-} from "@tabler/icons-react";
+import { IconBrain, IconCode, IconSettings } from "@tabler/icons-react";
 import { ProjectCard } from "@/components/public/ProjectCard";
 import { SectionHeading } from "@/components/public/SectionHeading";
-import { SocialLinks } from "@/components/public/SocialLinks";
-import { GradientMesh } from "@/components/public/GradientMesh";
+import { HoverComboHero } from "@/components/public/HoverComboHero";
+import { HeroCopy } from "@/components/public/HeroCopy";
+import { AnimatedHero } from "@/components/public/AnimatedHero";
 import { ScrollReveal } from "@/components/public/ScrollReveal";
 import { getFeaturedProjects } from "@/lib/content/projects";
 import { formatDate, getWriting } from "@/lib/content/writing";
@@ -24,30 +19,13 @@ export default async function Home() {
 
   return (
     <main>
-      <section className="hero-section" id="work">
-        <div className="hero-copy">
-          <p className="intro-line">Hi, I&apos;m {profile.name}</p>
-          <h1>{profile.headline}</h1>
-          <p className="hero-summary">
-            {profile.summary}
-          </p>
-          <div className="hero-actions">
-            <Link className="button button-primary" href="/projects">
-              View Projects
-              <IconArrowRight aria-hidden="true" size={17} stroke={1.7} />
-            </Link>
-            <a className="button button-secondary" href="/resume/sambhav-surana-resume.pdf" download>
-              Download Resume
-              <IconDownload aria-hidden="true" size={17} stroke={1.7} />
-            </a>
-          </div>
-          <SocialLinks profile={profile} />
-        </div>
-        <GradientMesh className="hero-art" />
-      </section>
+      <AnimatedHero className="hero-section">
+        <HeroCopy profile={profile} />
+        <HoverComboHero className="hero-art" />
+      </AnimatedHero>
 
       <ScrollReveal>
-        <section className="section-block" id="projects">
+        <section className="section-block" id="work">
           <SectionHeading title="Featured Projects" actionLabel="View all projects" actionHref="/projects" />
           <div className="featured-project-grid">
             {projects.map((project, index) => (
