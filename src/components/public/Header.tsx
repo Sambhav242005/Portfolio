@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { IconMenu2 } from "@tabler/icons-react";
 import { ThemeToggle } from "./ThemeToggle";
+import { MobileNav } from "./MobileNav";
 
 const navItems = [
   { label: "Work", href: "/#work" },
@@ -30,19 +30,7 @@ export function SiteHeader() {
 
       <div className="header-actions">
         <ThemeToggle />
-        <details className="mobile-nav">
-          <summary aria-label="Open navigation">
-            <IconMenu2 aria-hidden="true" size={22} stroke={1.7} />
-            <span className="sr-only">Menu</span>
-          </summary>
-          <nav aria-label="Mobile navigation">
-            {navItems.map((item) => (
-              <Link key={item.href} href={item.href}>
-                {item.label}
-              </Link>
-            ))}
-          </nav>
-        </details>
+        <MobileNav />
       </div>
     </header>
   );

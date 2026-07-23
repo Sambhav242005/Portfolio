@@ -11,18 +11,18 @@ const container = {
   show: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.1,
-      delayChildren: 0.15,
+      staggerChildren: 0.08,
+      delayChildren: 0.1,
     },
   },
 };
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 16 },
+  hidden: { opacity: 0, y: 12 },
   show: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.45, ease: [0.16, 1, 0.3, 1] as const },
+    transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] as const },
   },
 };
 
@@ -42,11 +42,11 @@ export function HeroCopy({ profile }: HeroCopyProps) {
         <div className="hero-actions">
           <Link className="button button-primary" href="/projects">
             View Projects
-            <IconArrowRight aria-hidden="true" size={17} stroke={1.7} />
+            <IconArrowRight aria-hidden="true" size={16} stroke={1.8} />
           </Link>
           <a className="button button-secondary" href="/resume/sambhav-surana-resume.pdf" download>
             Download Resume
-            <IconDownload aria-hidden="true" size={17} stroke={1.7} />
+            <IconDownload aria-hidden="true" size={16} stroke={1.8} />
           </a>
         </div>
         <SocialLinks profile={profile} />
@@ -71,11 +71,11 @@ export function HeroCopy({ profile }: HeroCopyProps) {
       <motion.div className="hero-actions" variants={fadeUp}>
         <Link className="button button-primary" href="/projects">
           View Projects
-          <IconArrowRight aria-hidden="true" size={17} stroke={1.7} />
+          <IconArrowRight aria-hidden="true" size={16} stroke={1.8} />
         </Link>
         <a className="button button-secondary" href="/resume/sambhav-surana-resume.pdf" download>
           Download Resume
-          <IconDownload aria-hidden="true" size={17} stroke={1.7} />
+          <IconDownload aria-hidden="true" size={16} stroke={1.8} />
         </a>
       </motion.div>
       <motion.div variants={fadeUp}>

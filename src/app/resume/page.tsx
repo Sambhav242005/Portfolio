@@ -23,7 +23,7 @@ export default async function ResumePage() {
         </div>
         <a className="button button-primary" href="/resume/sambhav-surana-resume.pdf" download>
           Download PDF
-          <IconDownload aria-hidden="true" size={17} stroke={1.7} />
+          <IconDownload aria-hidden="true" size={16} stroke={1.8} />
         </a>
       </header>
 
@@ -36,13 +36,13 @@ export default async function ResumePage() {
           {github ? (
             <a href={github} target="_blank" rel="noreferrer">
               GitHub
-              <IconBrandGithub aria-hidden="true" size={16} stroke={1.7} />
+              <IconBrandGithub aria-hidden="true" size={15} stroke={1.8} />
             </a>
           ) : null}
           {linkedin ? (
             <a href={linkedin} target="_blank" rel="noreferrer">
               LinkedIn
-              <IconBrandLinkedin aria-hidden="true" size={16} stroke={1.7} />
+              <IconBrandLinkedin aria-hidden="true" size={15} stroke={1.8} />
             </a>
           ) : null}
           <a href={`mailto:${profile.email}`}>Email</a>
@@ -67,7 +67,7 @@ export default async function ResumePage() {
               {proofProjects.map((project) => (
                 <a key={project.slug} href={project.githubUrl ?? project.liveUrl} target="_blank" rel="noreferrer">
                   <span>{project.title}</span>
-                  <IconExternalLink aria-hidden="true" size={15} stroke={1.7} />
+                  <IconExternalLink aria-hidden="true" size={14} stroke={1.8} />
                 </a>
               ))}
             </div>

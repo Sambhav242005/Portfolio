@@ -18,16 +18,16 @@ export function SocialLinks({ profile }: SocialLinksProps) {
     <div className="social-links" aria-label="Social links">
       {github ? (
         <a href={github} aria-label="GitHub" target="_blank" rel="noreferrer">
-          <IconBrandGithub aria-hidden="true" size={20} stroke={1.8} />
+          <IconBrandGithub aria-hidden="true" size={18} stroke={1.8} />
         </a>
       ) : null}
       {linkedin ? (
         <a href={linkedin} aria-label="LinkedIn" target="_blank" rel="noreferrer">
-          <IconBrandLinkedin aria-hidden="true" size={20} stroke={1.8} />
+          <IconBrandLinkedin aria-hidden="true" size={18} stroke={1.8} />
         </a>
       ) : null}
       <a href={`mailto:${profile.email}`} aria-label="Email">
-        <IconMail aria-hidden="true" size={20} stroke={1.8} />
+        <IconMail aria-hidden="true" size={18} stroke={1.8} />
       </a>
     </div>
   );

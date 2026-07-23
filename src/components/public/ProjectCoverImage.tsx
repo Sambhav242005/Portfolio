@@ -8,6 +8,7 @@ type ProjectCoverImageProps = {
   alt: string;
   className?: string;
   priority?: boolean;
+  loading?: "lazy" | "eager";
   width?: number;
   height?: number;
 };
@@ -19,6 +20,7 @@ export function ProjectCoverImage({
   alt,
   className,
   priority = false,
+  loading,
   width = 1200,
   height = 760,
 }: ProjectCoverImageProps) {
@@ -35,6 +37,7 @@ export function ProjectCoverImage({
       height={height}
       className={className}
       priority={priority}
+      loading={loading}
       unoptimized
       onError={() => {
         setIndex((current) => (current < imageSources.length - 1 ? current + 1 : current));

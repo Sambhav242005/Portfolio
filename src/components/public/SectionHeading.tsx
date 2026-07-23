@@ -14,7 +14,7 @@ export function SectionHeading({ title, actionLabel, actionHref }: SectionHeadin
       {actionLabel && actionHref ? (
         <Link className="section-link" href={actionHref}>
           {actionLabel}
-          <IconArrowRight aria-hidden="true" size={16} stroke={1.7} />
+          <IconArrowRight aria-hidden="true" size={14} stroke={1.8} />
         </Link>
       ) : null}
     </div>

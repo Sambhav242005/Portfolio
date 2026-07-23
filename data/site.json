@@ -368,11 +368,11 @@
     {
       "title": "AI Face Detect and Recognition WebGPU",
       "slug": "ai-face-recognition-system",
-      "summary": "A client-side AI face tracking and recognition application running YOLOv8 face detection and EdgeFace embeddings directly in the browser via WebGPU and ONNX Runtime.",
+      "summary": "A client-side AI face tracking and recognition application running YOLOv11 face detection and EdgeFace embeddings directly in the browser via WebGPU and ONNX Runtime.",
       "tags": [
         "WebGPU",
         "ONNX Runtime",
-        "YOLOv8",
+        "YOLOv11",
         "FastAPI",
         "FAISS"
       ],
@@ -381,16 +381,16 @@
       "resume": {
         "priority": 2,
         "date": "2025",
-        "summary": "A client-side AI face tracking and recognition application running YOLOv8 and EdgeFace directly in the browser via WebGPU and ONNX Runtime.",
+        "summary": "A client-side AI face tracking and recognition application running YOLOv11 and EdgeFace directly in the browser via WebGPU and ONNX Runtime.",
         "bullets": [
-          "Browser-Based AI: Ran YOLOv8 face detection and EdgeFace embeddings in-browser via WebGPU/WASM ONNX Runtime.",
+          "Browser-Based AI: Ran YOLOv11 face detection and EdgeFace embeddings in-browser via WebGPU/WASM ONNX Runtime.",
           "FastAPI Backend: Designed a lightweight backend to host FAISS session indexes and JSON metadata.",
           "Features: Built session persistence, pause/resume tracking states, and real-time cropping pipelines."
         ],
         "tags": [
           "WebGPU",
           "ONNX Runtime",
-          "YOLOv8",
+        "YOLOv11",
           "FastAPI",
           "FAISS"
         ]

@@ -12,7 +12,7 @@ export function ProjectCard({ project, className = "" }: ProjectCardProps) {
   return (
     <article className={`project-card ${className}`} id={project.slug}>
       <Link className="project-card-media" href={`/projects/${project.slug}`} aria-label={`Open ${project.title} case study`}>
-        <ProjectCoverImage sources={project.coverImages} alt={`${project.title} visual`} />
+        <ProjectCoverImage sources={project.coverImages} alt={`${project.title} visual`} loading="eager" />
       </Link>
       <div className="project-card-body">
         <div>
@@ -31,18 +31,18 @@ export function ProjectCard({ project, className = "" }: ProjectCardProps) {
         <div className="project-card-actions">
           <Link className="card-link" href={`/projects/${project.slug}`}>
             View project
-            <IconArrowRight aria-hidden="true" size={15} stroke={1.7} />
+            <IconArrowRight aria-hidden="true" size={14} stroke={1.8} />
           </Link>
           {project.githubUrl ? (
             <a className="card-link card-link-muted" href={project.githubUrl} target="_blank" rel="noreferrer">
               GitHub
-              <IconBrandGithub aria-hidden="true" size={15} stroke={1.7} />
+              <IconBrandGithub aria-hidden="true" size={14} stroke={1.8} />
             </a>
           ) : null}
           {project.liveUrl ? (
             <a className="card-link card-link-muted" href={project.liveUrl} target="_blank" rel="noreferrer">
               Live
-              <IconExternalLink aria-hidden="true" size={15} stroke={1.7} />
+              <IconExternalLink aria-hidden="true" size={14} stroke={1.8} />
             </a>
           ) : null}
         </div>

@@ -25,13 +25,12 @@ export function ScrollReveal({ children, className = "" }: ScrollRevealProps) {
           observer.unobserve(el);
         }
       },
-      { rootMargin: "0px 0px -20px 0px", threshold: 0.05 },
+      { rootMargin: "0px 0px -40px 0px", threshold: 0.05 },
     );
 
     observer.observe(el);
 
-    // Fallback: reveal after 1.5s no matter what
-    const timer = setTimeout(reveal, 1500);
+    const timer = setTimeout(reveal, 1200);
 
     return () => {
       observer.disconnect();

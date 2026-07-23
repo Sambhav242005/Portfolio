@@ -18,8 +18,8 @@ export function AnimatedHero({ children, className = "", id }: AnimatedHeroProps
     offset: ["start start", "end start"],
   });
 
-  const sectionOpacity = useTransform(scrollYProgress, [0, 0.85], [1, 0.15]);
-  const sectionY = useTransform(scrollYProgress, [0, 0.85], [0, -40]);
+  const sectionOpacity = useTransform(scrollYProgress, [0, 0.9], [1, 0.1]);
+  const sectionY = useTransform(scrollYProgress, [0, 0.9], [0, -30]);
 
   if (reduce) {
     return (
