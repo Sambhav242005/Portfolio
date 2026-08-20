@@ -172,7 +172,7 @@
           {
             "institution": "Shri Vaishnav Vidyapeeth Vishwavidyalaya",
             "area": "CSE (AI-IBM) III Year",
-            "score": "7.2 CGPA",
+            "score": "7.02 CGPA",
             "studyType": "B.Tech.",
             "date": "2023 - Present"
           }
@@ -220,6 +220,11 @@
             "meta": "NPTEL Online Certification, IIT Kharagpur"
           },
           {
+            "date": "2025",
+            "title": "Activation-Weighted Low-Rank Compression Research",
+            "meta": "Published research on transformer weight compression achieving 5-7x improvement over SVD baseline"
+          },
+          {
             "date": "Aug 2025",
             "title": "Hackwave 2.0",
             "meta": "36-hour hackathon focused on rapid prototyping, teamwork, and product problem-solving"
@@ -230,6 +235,41 @@
   },
   "projects": [
     {
+      "title": "Activation-Weighted Low-Rank Compression",
+      "slug": "weighted-lowrank-compression",
+      "summary": "Research paper proposing an activation-weighted fitting method that reduces perplexity degradation by 5-7x vs plain SVD across GPT-2, Gemma-3, and Qwen2.5.",
+      "tags": [
+        "Python",
+        "PyTorch",
+        "Transformers",
+        "Research"
+      ],
+      "cardMetric": "Δ perplexity +21% → +3.6%",
+      "coverImage": "/project-assets/ml-training.svg",
+      "githubUrl": "https://github.com/Sambhav242005/Weighted-Lowrank-Compression",
+      "liveUrl": "https://sambhav242005.github.io/Weighted-Lowrank-Compression/index.html",
+      "resume": {
+        "priority": 1,
+        "date": "2026",
+        "summary": "Research on activation-weighted low-rank compression of transformer weights, achieving 5-7x improvement over plain SVD.",
+        "bullets": [
+          "Method: Closed-form activation-weighted fitting that minimizes error in activation space rather than weight space.",
+          "Results: Reduced perplexity degradation from +21% to +3.6% (GPT-2), +72% to -4.5% (Gemma-3), +26% to +3.8% (Qwen2.5).",
+          "Storage: int8 factor quantization proven lossless at 3x per-matrix compression ratio."
+        ],
+        "tags": [
+          "Python",
+          "PyTorch",
+          "Transformers",
+          "Research"
+        ]
+      },
+      "featured": true,
+      "status": "published",
+      "order": 0,
+      "updatedAt": "2025-12-01"
+    },
+    {
       "title": "Velora Transformer Training",
       "slug": "velora-transformer-training",
       "summary": "A local-first LLaMA-style training stack with RoPE, RMSNorm, SwiGLU, GQA, checkpoint safety, and FineWeb-Edu workflows.",
@@ -239,6 +279,7 @@
         "Transformers",
         "FineWeb"
       ],
+      "cardMetric": "RoPE · RMSNorm · SwiGLU · GQA",
       "coverImage": "/project-assets/velora-cover.svg",
       "githubUrl": "https://github.com/Sambhav242005/Velora",
       "content": {
@@ -275,6 +316,7 @@
         "Ollama",
         "Computer Vision"
       ],
+      "cardMetric": "YOLOv11 · rep count · voice",
       "coverImage": "/project-assets/fitness-trainer-cover.svg",
       "githubUrl": "https://github.com/Sambhav242005/AI-Fitness-Trainer",
       "resume": {
@@ -308,6 +350,7 @@
         "TypeScript",
         "Simulation"
       ],
+      "cardMetric": "FastAPI · React · resource loop",
       "coverImage": "/project-assets/city-builder-cover.svg",
       "githubUrl": "https://github.com/Sambhav242005/City-Builder",
       "resume": {
@@ -341,6 +384,7 @@
         "Pygame",
         "Procedural Paths"
       ],
+      "cardMetric": "10 waves · 50 path combos",
       "coverImage": "/project-assets/forest-protector-cover.svg",
       "githubUrl": "https://github.com/Sambhav242005/Forest-Protector",
       "liveUrl": "https://sambhav242005.github.io/Forest-Protector/",
@@ -376,6 +420,7 @@
         "FastAPI",
         "FAISS"
       ],
+      "cardMetric": "in-browser · ONNX · FAISS",
       "coverImage": "/project-assets/ml-training.svg",
       "githubUrl": "https://github.com/Sambhav242005/AI-Face-Detect-and-Recognition",
       "resume": {
@@ -410,6 +455,7 @@
         "GraphRAG",
         "Ollama"
       ],
+      "cardMetric": "hierarchical · ChromaDB · GraphRAG",
       "coverImage": "/project-assets/magnetic-storage-cover.svg",
       "githubUrl": "https://github.com/Sambhav242005/MagneticStorage",
       "resume": {
@@ -435,6 +481,16 @@
     }
   ],
   "writingSources": [
+    {
+      "repo": "Sambhav242005/Weighted-Lowrank-Compression",
+      "ref": "main",
+      "sourceRoot": ".",
+      "enabled": true,
+      "label": "Activation-Weighted Low-Rank Compression",
+      "paths": [
+        "docs/PAPER.md"
+      ]
+    },
     {
       "repo": "Sambhav242005/Velora",
       "ref": "main",
@@ -491,13 +547,16 @@
         "docs/writing/story-consistency-engine.md",
         "docs/writing/three-stage-hybrid-search.md"
       ]
-    },
-    {
-      "repo": "Sambhav242005/<writing-repo-name>",
-      "sourceRoot": "docs/writing",
-      "enabled": false,
-      "label": "Writing-only source placeholder"
     }
   ],
-  "writingOverrides": {}
+  "writingOverrides": {
+    "paper": {
+      "title": "Activation-Weighted Low-Rank Compression of Transformer Weights",
+      "type": "research",
+      "status": "published",
+      "date": "2026-08-15",
+      "tags": ["Transformers", "Model Compression", "Low-Rank Approximation", "PyTorch"],
+      "summary": "Activation-weighted closed-form low-rank fitting defeats plain SVD by 5-7x in perplexity delta across GPT-2, Gemma-3, and Qwen2.5."
+    }
+  }
 }

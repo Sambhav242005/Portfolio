@@ -36,6 +36,7 @@ export type Project = {
   slug: string;
   summary: string;
   tags: string[];
+  cardMetric?: string;
   coverImage: string;
   coverImages: string[];
   githubUrl?: string;
@@ -157,10 +158,24 @@ export async function getProjectBySlugWithBody(slug: string): Promise<ProjectWit
     return undefined;
   }
 
-  return {
-    ...project,
-    body: await readProjectCaseStudy(project),
-  };
+  if (!project.content?.repo && !project.githubUrl) {
+    return {
+      ...project,
+      body: "",
+    };
+  }
+
+  try {
+    return {
+      ...project,
+      body: await readProjectCaseStudy(project),
+    };
+  } catch {
+    return {
+      ...project,
+      body: "",
+    };
+  }
 }
 
 export function getProjectContentSource(project: Project): ProjectContentSource {
@@ -204,14 +219,22 @@ async function readProjectsWithRemoteMetadata() {
 }
 
 async function readProjectWithRemoteMetadata(project: Project): Promise<Project> {
-  const source = getProjectContentSource(project);
-  const location = `${source.repo}:${source.caseStudyPath}`;
-  const raw = await readMarkdownFile(source, source.caseStudyPath);
-  const parsed = parseMarkdown(raw, location);
+  if (!project.content?.repo && !project.githubUrl) {
+    return project;
+  }
 
-  assertCaseStudy(parsed.frontmatter, location);
+  try {
+    const source = getProjectContentSource(project);
+    const location = `${source.repo}:${source.caseStudyPath}`;
+    const raw = await readMarkdownFile(source, source.caseStudyPath);
+    const parsed = parseMarkdown(raw, location);
 
-  return applyCaseStudyFrontmatter(project, parsed.frontmatter, location);
+    assertCaseStudy(parsed.frontmatter, location);
+
+    return applyCaseStudyFrontmatter(project, parsed.frontmatter, location);
+  } catch {
+    return project;
+  }
 }
 
 async function readProjectCaseStudy(project: Project) {
