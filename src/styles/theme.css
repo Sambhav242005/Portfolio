@@ -1,65 +1,130 @@
-/* Portfolio theme tokens. Edit this file to change the site theme. */
+/* Portfolio theme tokens — Design system v2 */
 
 :root,
 [data-theme="light"] {
+  /* Surfaces */
   --bg: #fafafa;
   --surface: #ffffff;
   --surface-dim: #f1f3f5;
-  --ink: #1a1a1a;
+  --surface-elevated: #ffffff;
+
+  /* Text */
+  --ink: #0f0f0f;
+  --ink-secondary: #18181b;
   --muted: #6b7280;
+  --muted-strong: #52525b;
+
+  /* Borders */
   --line: #e5e7eb;
+  --line-strong: #d4d4d8;
+
+  /* Accent — Electric Blue */
   --accent: #2563eb;
   --accent-soft: #eff6ff;
   --accent-hover: #1d4ed8;
   --accent-ink: #ffffff;
+  --accent-muted: rgba(37, 99, 235, 0.08);
+
+  /* Accent Warm — Ember */
   --accent-warm: #ea580c;
   --accent-warm-soft: #fff7ed;
-  --brand-gradient: linear-gradient(135deg, var(--accent) 0%, var(--accent) 50%, var(--accent-warm) 100%);
-  --surface-translucent: rgb(255 255 255 / 0.85);
-  --header-bg: rgb(250 250 250 / 0.88);
-  --footer-bg: rgb(250 250 250 / 0.8);
-  --card-hover-border: rgb(37 99 235 / 0.25);
-  --button-secondary-border: rgb(26 26 26 / 0.15);
+  --accent-warm-muted: rgba(234, 88, 12, 0.08);
+
+  /* Brand */
+  --brand-gradient: linear-gradient(135deg, var(--accent) 0%, #7c3aed 50%, var(--accent-warm) 100%);
+  --brand-gradient-subtle: linear-gradient(135deg, var(--accent-soft) 0%, #f5f3ff 50%, var(--accent-warm-soft) 100%);
+
+  /* Translucent */
+  --surface-translucent: rgb(255 255 255 / 0.82);
+  --header-bg: rgb(250 250 250 / 0.85);
+  --footer-bg: rgb(250 250 250 / 0.75);
+
+  /* Interactive */
+  --card-hover-border: rgb(37 99 235 / 0.3);
+  --button-secondary-border: rgb(15 15 15 / 0.12);
   --chip-border: #e5e7eb;
+
+  /* Background pattern */
   --shell-background:
-    radial-gradient(circle at 78% 8%, rgb(37 99 235 / 0.06), transparent 30rem),
-    radial-gradient(circle at 16% 90%, rgb(234 88 12 / 0.04), transparent 28rem),
+    radial-gradient(circle at 78% 8%, rgb(37 99 235 / 0.05), transparent 28rem),
+    radial-gradient(circle at 16% 90%, rgb(234 88 12 / 0.03), transparent 26rem),
     linear-gradient(180deg, #ffffff 0%, #fafafa 50%);
+
   --hero-art-opacity: 0.9;
+
+  /* Radius */
   --radius: 12px;
-  --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.04);
-  --shadow: 0 1px 3px rgb(0 0 0 / 0.06), 0 8px 24px rgb(0 0 0 / 0.04);
-  --shadow-lg: 0 4px 12px rgb(0 0 0 / 0.06), 0 16px 40px rgb(0 0 0 / 0.06);
+  --radius-sm: 8px;
+  --radius-lg: 16px;
+  --radius-pill: 999px;
+
+  /* Shadows */
+  --shadow-xs: 0 1px 2px rgb(0 0 0 / 0.03);
+  --shadow-sm: 0 1px 3px rgb(0 0 0 / 0.04), 0 4px 12px rgb(0 0 0 / 0.03);
+  --shadow: 0 2px 4px rgb(0 0 0 / 0.04), 0 8px 24px rgb(0 0 0 / 0.06);
+  --shadow-lg: 0 4px 12px rgb(0 0 0 / 0.05), 0 20px 48px rgb(0 0 0 / 0.08);
+  --shadow-xl: 0 8px 24px rgb(0 0 0 / 0.06), 0 32px 64px rgb(0 0 0 / 0.1);
+
   color-scheme: light;
 }
 
 [data-theme="dark"] {
-  --bg: #0a0a0a;
-  --surface: #141414;
-  --surface-dim: #1a1a1a;
-  --ink: #f5f5f5;
-  --muted: #a1a1a1;
-  --line: #262626;
+  /* Surfaces */
+  --bg: #09090b;
+  --surface: #18181b;
+  --surface-dim: #27272a;
+  --surface-elevated: #1f1f23;
+
+  /* Text */
+  --ink: #fafafa;
+  --ink-secondary: #e4e4e7;
+  --muted: #a1a1aa;
+  --muted-strong: #d4d4d8;
+
+  /* Borders */
+  --line: #27272a;
+  --line-strong: #3f3f46;
+
+  /* Accent — Electric Blue */
   --accent: #60a5fa;
-  --accent-soft: rgba(96, 165, 250, 0.12);
+  --accent-soft: rgba(96, 165, 250, 0.1);
   --accent-hover: #93c5fd;
-  --accent-ink: #0a0a0a;
+  --accent-ink: #09090b;
+  --accent-muted: rgba(96, 165, 250, 0.06);
+
+  /* Accent Warm — Ember */
   --accent-warm: #fb923c;
-  --accent-warm-soft: rgba(251, 146, 60, 0.12);
-  --brand-gradient: linear-gradient(135deg, var(--accent) 0%, var(--accent) 50%, var(--accent-warm) 100%);
-  --surface-translucent: rgb(20 20 20 / 0.85);
-  --header-bg: rgb(10 10 10 / 0.88);
-  --footer-bg: rgb(10 10 10 / 0.8);
-  --card-hover-border: rgb(96 165 250 / 0.3);
-  --button-secondary-border: rgb(245 245 245 / 0.18);
-  --chip-border: #262626;
+  --accent-warm-soft: rgba(251, 146, 60, 0.1);
+  --accent-warm-muted: rgba(251, 146, 60, 0.06);
+
+  /* Brand */
+  --brand-gradient: linear-gradient(135deg, var(--accent) 0%, #a78bfa 50%, var(--accent-warm) 100%);
+  --brand-gradient-subtle: linear-gradient(135deg, var(--accent-soft) 0%, rgba(167, 139, 250, 0.1) 50%, var(--accent-warm-soft) 100%);
+
+  /* Translucent */
+  --surface-translucent: rgb(24 24 27 / 0.82);
+  --header-bg: rgb(9 9 11 / 0.85);
+  --footer-bg: rgb(9 9 11 / 0.75);
+
+  /* Interactive */
+  --card-hover-border: rgb(96 165 250 / 0.35);
+  --button-secondary-border: rgb(250 250 250 / 0.15);
+  --chip-border: #3f3f46;
+
+  /* Background pattern */
   --shell-background:
-    radial-gradient(circle at 72% 8%, rgb(96 165 250 / 0.08), transparent 30rem),
-    radial-gradient(circle at 16% 90%, rgb(251 146 60 / 0.05), transparent 28rem),
-    linear-gradient(180deg, #0f0f0f 0%, #0a0a0a 50%);
-  --hero-art-opacity: 0.75;
-  --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.2);
-  --shadow: 0 1px 3px rgb(0 0 0 / 0.3), 0 8px 24px rgb(0 0 0 / 0.25);
-  --shadow-lg: 0 4px 12px rgb(0 0 0 / 0.3), 0 16px 40px rgb(0 0 0 / 0.3);
+    radial-gradient(circle at 72% 8%, rgb(96 165 250 / 0.07), transparent 28rem),
+    radial-gradient(circle at 16% 90%, rgb(251 146 60 / 0.04), transparent 26rem),
+    linear-gradient(180deg, #0f0f0f 0%, #09090b 50%);
+
+  --hero-art-opacity: 0.7;
+
+  /* Shadows */
+  --shadow-xs: 0 1px 2px rgb(0 0 0 / 0.15);
+  --shadow-sm: 0 1px 3px rgb(0 0 0 / 0.2), 0 4px 12px rgb(0 0 0 / 0.15);
+  --shadow: 0 2px 4px rgb(0 0 0 / 0.2), 0 8px 24px rgb(0 0 0 / 0.2);
+  --shadow-lg: 0 4px 12px rgb(0 0 0 / 0.25), 0 20px 48px rgb(0 0 0 / 0.25);
+  --shadow-xl: 0 8px 24px rgb(0 0 0 / 0.3), 0 32px 64px rgb(0 0 0 / 0.35);
+
   color-scheme: dark;
 }

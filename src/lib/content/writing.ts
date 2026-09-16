@@ -95,27 +95,24 @@ async function readRemoteWriting() {
   const siteData = readSiteData();
   const overrides = siteData.writingOverrides ?? {};
   const sources = buildArticleSources(siteData);
-  const articleGroups = await Promise.all(sources.map(readSourceArticles));
+  const articleGroups = await Promise.all(sources.map((source) => readSourceArticles(source, overrides)));
   const articles = articleGroups.flat();
   const uniqueArticles = new Map<string, WritingItem>();
 
   for (const article of articles) {
-    const override = overrides[article.slug];
-    const overriddenArticle = override ? applyWritingOverride(article, override) : article;
-
-    if (overriddenArticle.status !== "published") {
+    if (article.status !== "published") {
       continue;
     }
 
-    const existing = uniqueArticles.get(overriddenArticle.slug);
+    const existing = uniqueArticles.get(article.slug);
 
     if (existing) {
       throw new Error(
-        `Duplicate writing slug "${overriddenArticle.slug}" in ${existing.sourceRepo}:${existing.sourcePath} and ${overriddenArticle.sourceRepo}:${overriddenArticle.sourcePath}.`,
+        `Duplicate writing slug "${article.slug}" in ${existing.sourceRepo}:${existing.sourcePath} and ${article.sourceRepo}:${article.sourcePath}.`,
       );
     }
 
-    uniqueArticles.set(overriddenArticle.slug, overriddenArticle);
+    uniqueArticles.set(article.slug, article);
   }
 
   return Array.from(uniqueArticles.values()).sort((a, b) => Date.parse(b.date) - Date.parse(a.date));
@@ -173,21 +170,39 @@ function getProjectCaseStudyPathsByRepo(projects: ProjectRecord[]) {
   return pathsByRepo;
 }
 
-async function readSourceArticles(source: ArticleSource) {
+async function readSourceArticles(source: ArticleSource, overrides?: Record<string, WritingOverride>) {
   const ignoredPaths = new Set(source.ignoredPaths.map((ignoredPath) => ignoredPath.toLowerCase()));
   const files = source.paths ?? (await listMarkdownFiles(source));
   const articlePaths = files.filter((filePath) => !ignoredPaths.has(filePath.toLowerCase()));
 
-  return Promise.all(articlePaths.map((filePath) => readArticle(source, filePath)));
+  return Promise.all(articlePaths.map((filePath) => readArticle(source, filePath, overrides)));
 }
 
-async function readArticle(source: ArticleSource, filePath: string): Promise<WritingItem> {
+async function readArticle(source: ArticleSource, filePath: string, overrides?: Record<string, WritingOverride>): Promise<WritingItem> {
   const raw = await readMarkdownFile(source, filePath);
   const location = `${source.repo}:${filePath}`;
   const parsed = parseMarkdown(raw, location);
-  const { frontmatter } = parsed;
+  const frontmatter = { ...parsed.frontmatter };
 
-  if (frontmatter.contentKind !== "article") {
+  // Derive slug from file path if not in frontmatter
+  if (!frontmatter.slug) {
+    const basename = filePath.split("/").pop() ?? filePath;
+    frontmatter.slug = basename.replace(/\.md$/i, "").toLowerCase();
+  }
+
+  // Apply override into frontmatter before validation
+  const slugKey = (frontmatter.slug as string)?.toLowerCase();
+  const fileOverride = slugKey ? overrides?.[slugKey] : undefined;
+  if (fileOverride) {
+    if (fileOverride.title) frontmatter.title = fileOverride.title;
+    if (fileOverride.type) frontmatter.type = fileOverride.type;
+    if (fileOverride.status) frontmatter.status = fileOverride.status;
+    if (fileOverride.date) frontmatter.date = fileOverride.date;
+    if (fileOverride.tags) frontmatter.tags = fileOverride.tags;
+    if (fileOverride.summary) frontmatter.summary = fileOverride.summary;
+  }
+
+  if (frontmatter.contentKind && frontmatter.contentKind !== "article") {
     throw new Error(`${location} must set contentKind: article.`);
   }
 
@@ -209,14 +224,6 @@ async function readArticle(source: ArticleSource, filePath: string): Promise<Wri
   }
 
   return article;
-}
-
-function applyWritingOverride(article: WritingItem, override: WritingOverride): WritingItem {
-  return {
-    ...article,
-    ...override,
-    tags: override.tags ?? article.tags,
-  };
 }
 
 function requiredString(frontmatter: Record<string, unknown>, key: string, location: string) {

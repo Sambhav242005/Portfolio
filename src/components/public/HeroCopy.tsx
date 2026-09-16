@@ -11,18 +11,18 @@ const container = {
   show: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.08,
-      delayChildren: 0.1,
+      staggerChildren: 0.1,
+      delayChildren: 0.15,
     },
   },
 };
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 12 },
+  hidden: { opacity: 0, y: 16 },
   show: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] as const },
+    transition: { duration: 0.55, ease: [0.16, 1, 0.3, 1] as const },
   },
 };
 
@@ -36,8 +36,11 @@ export function HeroCopy({ profile }: HeroCopyProps) {
   if (reduce) {
     return (
       <div className="hero-copy">
-        <p className="intro-line">Hi, I&apos;m {profile.name}</p>
-        <h1>{profile.headline}</h1>
+        <p className="intro-line">{profile.headline}</p>
+        <h1 className="hero-name">
+          {profile.name}
+          <span className="hero-name__dot">.</span>
+        </h1>
         <p className="hero-summary">{profile.summary}</p>
         <div className="hero-actions">
           <Link className="button button-primary" href="/projects">
@@ -62,9 +65,12 @@ export function HeroCopy({ profile }: HeroCopyProps) {
       animate="show"
     >
       <motion.p className="intro-line" variants={fadeUp}>
-        Hi, I&apos;m {profile.name}
+        {profile.headline}
       </motion.p>
-      <motion.h1 variants={fadeUp}>{profile.headline}</motion.h1>
+      <motion.h1 className="hero-name" variants={fadeUp}>
+        {profile.name}
+        <span className="hero-name__dot">.</span>
+      </motion.h1>
       <motion.p className="hero-summary" variants={fadeUp}>
         {profile.summary}
       </motion.p>

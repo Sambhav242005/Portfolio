@@ -103,7 +103,7 @@ export function parseMarkdown(raw: string, location: string): ParsedMarkdown {
   const normalized = raw.replace(/^\uFEFF/, "").replace(/\r\n/g, "\n");
 
   if (!normalized.startsWith("---\n")) {
-    throw new Error(`${location} is missing required frontmatter.`);
+    return { frontmatter: {}, body: normalized.trim() };
   }
 
   const endIndex = normalized.indexOf("\n---", 4);

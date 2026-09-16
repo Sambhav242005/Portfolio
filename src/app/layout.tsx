@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { GeistSans } from "geist/font/sans";
+import "@fontsource/instrument-serif/400-italic.css";
 import { SiteFooter } from "@/components/public/Footer";
 import { SiteHeader } from "@/components/public/Header";
 import { ClientLenisWrapper } from "@/components/public/ClientLenisWrapper";
