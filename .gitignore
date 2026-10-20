@@ -7,7 +7,17 @@ scratch/
 .agents/
 .codex/
 .serena/
+.commandcode/
+.impeccable/
+.playwright-mcp/
 *.tsbuildinfo
+
+# Local previews, screenshots, and runtime logs
+/artifacts/
+/hero-*.png
+/portfolio-hero.png
+/projects-desktop.png
+*.log
 
 .env
 .env.*

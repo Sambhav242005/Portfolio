@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { motion, useReducedMotion } from "motion/react";
+import { motion } from "motion/react";
 import { IconArrowRight, IconDownload } from "@tabler/icons-react";
 import { SocialLinks } from "./SocialLinks";
 import type { PublicProfile } from "@/lib/resume/profile";
@@ -31,37 +31,11 @@ interface HeroCopyProps {
 }
 
 export function HeroCopy({ profile }: HeroCopyProps) {
-  const reduce = useReducedMotion();
-
-  if (reduce) {
-    return (
-      <div className="hero-copy">
-        <p className="intro-line">{profile.headline}</p>
-        <h1 className="hero-name">
-          {profile.name}
-          <span className="hero-name__dot">.</span>
-        </h1>
-        <p className="hero-summary">{profile.summary}</p>
-        <div className="hero-actions">
-          <Link className="button button-primary" href="/projects">
-            View Projects
-            <IconArrowRight aria-hidden="true" size={16} stroke={1.8} />
-          </Link>
-          <a className="button button-secondary" href="/resume/sambhav-surana-resume.pdf" download>
-            Download Resume
-            <IconDownload aria-hidden="true" size={16} stroke={1.8} />
-          </a>
-        </div>
-        <SocialLinks profile={profile} />
-      </div>
-    );
-  }
-
   return (
     <motion.div
       className="hero-copy"
       variants={container}
-      initial="hidden"
+      initial={false}
       animate="show"
     >
       <motion.p className="intro-line" variants={fadeUp}>

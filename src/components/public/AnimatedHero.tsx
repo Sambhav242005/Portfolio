@@ -1,7 +1,8 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useScroll, useTransform, useReducedMotion } from "motion/react";
+import { motion, useScroll, useTransform } from "motion/react";
+import { useMotionPreference } from "./useMotionPreference";
 
 interface AnimatedHeroProps {
   children: React.ReactNode;
@@ -11,7 +12,7 @@ interface AnimatedHeroProps {
 
 export function AnimatedHero({ children, className = "", id }: AnimatedHeroProps) {
   const ref = useRef<HTMLDivElement>(null);
-  const reduce = useReducedMotion();
+  const reduce = useMotionPreference();
 
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -21,22 +22,14 @@ export function AnimatedHero({ children, className = "", id }: AnimatedHeroProps
   const sectionOpacity = useTransform(scrollYProgress, [0, 0.9], [1, 0.1]);
   const sectionY = useTransform(scrollYProgress, [0, 0.9], [0, -30]);
 
-  if (reduce) {
-    return (
-      <section ref={ref} className={className} id={id}>
-        {children}
-      </section>
-    );
-  }
-
   return (
     <motion.section
       ref={ref}
       className={className}
       id={id}
       style={{
-        opacity: sectionOpacity,
-        y: sectionY,
+        opacity: reduce ? 1 : sectionOpacity,
+        y: reduce ? 0 : sectionY,
       }}
     >
       {children}

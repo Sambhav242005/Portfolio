@@ -5,7 +5,6 @@ import Link from "next/link";
 import { IconMenu2, IconX } from "@tabler/icons-react";
 
 const navItems = [
-  { label: "Work", href: "/#work" },
   { label: "Projects", href: "/projects" },
   { label: "Resume", href: "/resume" },
   { label: "Writing", href: "/writing" },
@@ -34,7 +33,10 @@ export function MobileNav() {
     };
 
     const handleKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") close();
+      if (e.key === "Escape") {
+        close();
+        buttonRef.current?.focus();
+      }
     };
 
     document.addEventListener("pointerdown", handlePointerDown);
@@ -46,6 +48,13 @@ export function MobileNav() {
     };
   }, [open, close]);
 
+  useEffect(() => {
+    const desktop = window.matchMedia("(min-width: 1025px)");
+    const handleResize = () => { if (desktop.matches) close(); };
+    desktop.addEventListener("change", handleResize);
+    return () => desktop.removeEventListener("change", handleResize);
+  }, [close]);
+
   return (
     <div className="mobile-nav">
       <button
@@ -54,6 +63,7 @@ export function MobileNav() {
         type="button"
         aria-label={open ? "Close navigation" : "Open navigation"}
         aria-expanded={open}
+        aria-controls="mobile-navigation"
         onClick={() => setOpen((prev) => !prev)}
       >
         {open ? (
@@ -63,15 +73,16 @@ export function MobileNav() {
         )}
       </button>
 
-      {open && <div className="mobile-nav-overlay" onClick={close} />}
-
       <div
         ref={panelRef}
+        id="mobile-navigation"
+        hidden={!open}
         className={`mobile-nav-panel ${open ? "mobile-nav-panel--open" : ""}`}
-        role="dialog"
-        aria-label="Mobile navigation"
+        onBlur={(event) => {
+          if (!event.currentTarget.parentElement?.contains(event.relatedTarget as Node | null)) close();
+        }}
       >
-        <nav>
+        <nav aria-label="Primary">
           {navItems.map((item) => (
             <Link key={item.href} href={item.href} onClick={close}>
               {item.label}

@@ -3,7 +3,6 @@ import { ThemeToggle } from "./ThemeToggle";
 import { MobileNav } from "./MobileNav";
 
 const navItems = [
-  { label: "Work", href: "/#work" },
   { label: "Projects", href: "/projects" },
   { label: "Resume", href: "/resume" },
   { label: "Writing", href: "/writing" },

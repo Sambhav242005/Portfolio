@@ -1,16 +1,23 @@
 import Link from "next/link";
-import { IconBrain, IconCode, IconSettings } from "@tabler/icons-react";
+import { IconArrowUpRight } from "@tabler/icons-react";
 import { ProjectCard } from "@/components/public/ProjectCard";
 import { SectionHeading } from "@/components/public/SectionHeading";
 import { HeroCopy } from "@/components/public/HeroCopy";
+import { HeroProject } from "@/components/public/HeroProject";
+import { WritingNotice } from "@/components/public/WritingNotice";
 import { EmbeddingSpaceHero } from "@/components/public/EmbeddingSpaceHero";
 import { AnimatedHero } from "@/components/public/AnimatedHero";
 import { ScrollReveal } from "@/components/public/ScrollReveal";
 import { getFeaturedProjects } from "@/lib/content/projects";
-import { formatDate, getWriting } from "@/lib/content/writing";
+import { formatDate, getWritingResult } from "@/lib/content/writing";
 import { getPublicProfile } from "@/lib/resume/profile";
 
-const groupIcons = [IconBrain, IconCode, IconSettings];
+const capabilities = [
+  { title: "Local AI & retrieval", repo: "Reelbox", description: "Multimodal analysis, semantic search, and persistent background work." },
+  { title: "Computer vision", repo: "AI-Fitness-Trainer", description: "Pose estimation, rep counting, and local vision feedback." },
+  { title: "Model training", repo: "Velora", description: "Transformer architecture, training workflows, and checkpoint safety." },
+  { title: "Product engineering", repo: "City-Builder", description: "Python APIs, interactive interfaces, and simulation systems." },
+];
 
 function clusterForGroup(title: string) {
   const t = title.toLowerCase();
@@ -31,7 +38,9 @@ function clusterForProject(tags: string[]) {
 export default async function Home() {
   const profile = getPublicProfile();
   const projects = await getFeaturedProjects();
-  const writing = (await getWriting()).slice(0, 3);
+  const writingResult = await getWritingResult();
+  const writing = writingResult.items.slice(0, 3);
+  const heroProject = projects.find((project) => project.slug === "reelbox") ?? projects[0];
 
   const embeddingNodes = profile.skillGroups.flatMap((group) =>
     group.skills.map((skill) => ({
@@ -51,6 +60,7 @@ export default async function Home() {
       <AnimatedHero className="hero-section hero-section--embedding">
         <EmbeddingSpaceHero nodes={embeddingNodes} projects={embeddingProjects} />
         <HeroCopy profile={profile} />
+        {heroProject ? <HeroProject project={heroProject} /> : null}
       </AnimatedHero>
 
       <ScrollReveal>
@@ -66,23 +76,16 @@ export default async function Home() {
 
       <ScrollReveal>
         <section className="section-block" id="skills">
-          <SectionHeading title="Skills" />
-          <div className="skills-grid">
-            {profile.skillGroups.map((group, index) => {
-              const Icon = groupIcons[index % groupIcons.length];
+          <SectionHeading title="Capabilities, put to work" actionLabel="Full skill set" actionHref="/resume" />
+          <div className="capability-grid">
+            {capabilities.map((capability) => {
+              const project = projects.find((item) => item.githubUrl?.toLowerCase().endsWith(`/${capability.repo.toLowerCase()}`));
+              if (!project) return null;
               return (
-                <article className="skill-group" key={group.title}>
-                  <h3>
-                    <Icon aria-hidden="true" size={22} stroke={1.6} />
-                    {group.title}
-                  </h3>
-                  <div className="chip-row">
-                    {group.skills.map((skill) => (
-                      <span className="chip" key={skill}>
-                        {skill}
-                      </span>
-                    ))}
-                  </div>
+                <article className="capability" key={capability.repo}>
+                  <h3>{capability.title}</h3>
+                  <p>{capability.description}</p>
+                  <Link href={`/projects/${project.slug}`}>{project.title}<IconArrowUpRight aria-hidden="true" size={17} /></Link>
                 </article>
               );
             })}
@@ -105,9 +108,9 @@ export default async function Home() {
             </div>
           </div>
 
-          {writing.length > 0 ? (
             <div id="writing">
               <SectionHeading title="Writing & Research" actionLabel="View all" actionHref="/writing" />
+              <WritingNotice unavailableCount={writingResult.unavailableCount} empty={!writing.length} />
               <div className="writing-list">
                 {writing.map((item) => (
                   <article className="writing-item" id={item.slug} key={item.slug}>
@@ -121,7 +124,6 @@ export default async function Home() {
                 ))}
               </div>
             </div>
-          ) : null}
         </section>
       </ScrollReveal>
     </main>

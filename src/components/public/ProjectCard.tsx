@@ -38,7 +38,7 @@ export function ProjectCard({ project, className = "" }: ProjectCardProps) {
       onPointerLeave={handlePointerLeave}
     >
       <Link href={`/projects/${project.slug}`} className="project-card-image" aria-label={`View ${project.title}`}>
-        <ProjectCoverImage sources={project.coverImages} alt={`${project.title} preview`} loading="eager" />
+        <ProjectCoverImage sources={project.coverImages} alt={`${project.title} preview`} loading="lazy" />
         <span className="project-card-view">View project →</span>
       </Link>
       <div className="project-card-info">

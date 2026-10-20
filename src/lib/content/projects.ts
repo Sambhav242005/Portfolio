@@ -108,9 +108,9 @@ function readProjectFile(): Project[] {
   return siteData.projects.map((project, index) => {
     const fallbackTitle = project.title ?? getRepoName(project.content?.repo ?? project.githubUrl) ?? `Project ${index + 1}`;
     const coverImages = uniqueImageSources([
-      ...getGitHubCoverCandidates(project.githubUrl),
       ...(project.coverImages ?? []),
       project.coverImage,
+      ...getGitHubCoverCandidates(project.githubUrl),
       defaultProjectCover,
     ]);
 
@@ -158,10 +158,10 @@ export async function getProjectBySlugWithBody(slug: string): Promise<ProjectWit
     return undefined;
   }
 
-  if (!project.content?.repo && !project.githubUrl) {
+  if ((project.body && !project.content) || (!project.content?.repo && !project.githubUrl)) {
     return {
       ...project,
-      body: "",
+      body: project.body ?? "",
     };
   }
 
@@ -173,7 +173,7 @@ export async function getProjectBySlugWithBody(slug: string): Promise<ProjectWit
   } catch {
     return {
       ...project,
-      body: "",
+      body: project.body ?? "",
     };
   }
 }
@@ -219,7 +219,7 @@ async function readProjectsWithRemoteMetadata() {
 }
 
 async function readProjectWithRemoteMetadata(project: Project): Promise<Project> {
-  if (!project.content?.repo && !project.githubUrl) {
+  if ((project.body && !project.content) || (!project.content?.repo && !project.githubUrl)) {
     return project;
   }
 
@@ -398,5 +398,5 @@ function slugify(value: string) {
 }
 
 function normalizeProjectBody(body: string | string[]) {
-  return Array.isArray(body) ? body.join("\n").trim() : body.trim();
+  return Array.isArray(body) ? body.join("\n\n").trim() : body.trim();
 }

@@ -235,6 +235,47 @@
   },
   "projects": [
     {
+      "title": "Reelbox",
+      "slug": "reelbox",
+      "summary": "A local AI library for saved Instagram reels. Collect saves with a Chromium extension, organize them into topic folders, and find them again with semantic search.",
+      "tags": [
+        "Python",
+        "Ollama",
+        "MiniCPM-V",
+        "Chromium Extension"
+      ],
+      "cardMetric": "Local inference · semantic search · resumable queues",
+      "coverImage": "https://raw.githubusercontent.com/Sambhav242005/Reelbox/main/docs/media/reelbox-demo-poster.jpg",
+      "githubUrl": "https://github.com/Sambhav242005/Reelbox",
+      "resume": {
+        "priority": 2,
+        "date": "2026",
+        "summary": "Local AI library for saved Instagram reels with topic organization and semantic search.",
+        "bullets": [
+          "Built a Chromium extension and Python dashboard to collect saved reel links and browse topic folders.",
+          "Integrated local multimodal analysis with MiniCPM-V through Ollama and embedding-based semantic retrieval.",
+          "Persisted analysis queues, stop/resume state, verification pauses, and manual folder assignments across restarts."
+        ]
+      },
+      "featured": true,
+      "status": "published",
+      "order": -1,
+      "updatedAt": "2026-10-17",
+      "body": [
+        "## Find the reels you saved",
+        "Reelbox turns an Instagram Saved collection into a searchable library on your computer. A Chromium extension collects links; the local dashboard offers thumbnail and list views, topic folders, and text or semantic search.",
+        "## From saved link to searchable evidence",
+        "MiniCPM-V 4.6 handles local vision, writing, and topic routing through Ollama. The first analysis uses titles, captions, and covers. Nomic embeddings support semantic retrieval and folder matching. Deeper video analysis requires approval for each reel and uses sampled frames and speech transcription.",
+        "## Work that survives a restart",
+        "Queued analysis, Stop/Resume state, and verification pauses persist across restarts. Custom folder descriptions can match existing analyzed reels in the background, while manual folder assignments are preserved.",
+        "## Recorded result",
+        "A recorded run organized 50 technology reels in 11.96 seconds with five workers and a warm MiniCPM-V 4.6 model. It used cached titles, captions, and covers with fresh local inference. Instagram retrieval, downloads, video analysis, and model loading were excluded. Folder assignments have not been manually scored; this is a throughput sample, not an accuracy claim.",
+        "[Read the benchmark and measurement conditions](https://github.com/Sambhav242005/Reelbox/blob/main/docs/BENCHMARK.md) · [Watch the captioned demo](https://github.com/Sambhav242005/Reelbox/blob/main/docs/media/reelbox-demo.mp4)",
+        "## Boundaries",
+        "This is an experimental local application and unpacked browser extension. Instagram collection requires a signed-in account and internet access; session expiry, throttling, and layout changes can interrupt it. Dashboard data and default model inference stay local. Explicit remote model endpoints can send analysis inputs off the computer."
+      ]
+    },
+    {
       "title": "Activation-Weighted Low-Rank Compression",
       "slug": "weighted-lowrank-compression",
       "summary": "Research paper proposing an activation-weighted fitting method that reduces perplexity degradation by 5-7x vs plain SVD across GPT-2, Gemma-3, and Qwen2.5.",
@@ -488,7 +529,7 @@
       "enabled": true,
       "label": "Activation-Weighted Low-Rank Compression",
       "paths": [
-        "docs/PAPER.md"
+        "docs/archive/historical-drafts/PAPER.md"
       ]
     },
     {

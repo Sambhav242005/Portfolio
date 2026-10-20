@@ -54,7 +54,12 @@ type ArticleSource = RemoteContentSource & {
   ignoredPaths: string[];
 };
 
-let writingCache: Promise<WritingItem[]> | undefined;
+export type WritingResult = {
+  items: WritingItem[];
+  unavailableCount: number;
+};
+
+let writingCache: Promise<WritingResult> | undefined;
 const defaultCaseStudyFileName = "case-study.md";
 
 function readSiteData() {
@@ -68,6 +73,10 @@ export function clearWritingCacheForTests() {
 }
 
 export async function getWriting() {
+  return (await getWritingResult()).items;
+}
+
+export async function getWritingResult(): Promise<WritingResult> {
   if (!shouldUseWritingCache()) {
     return readRemoteWriting();
   }
@@ -95,8 +104,18 @@ async function readRemoteWriting() {
   const siteData = readSiteData();
   const overrides = siteData.writingOverrides ?? {};
   const sources = buildArticleSources(siteData);
-  const articleGroups = await Promise.all(sources.map((source) => readSourceArticles(source, overrides)));
-  const articles = articleGroups.flat();
+  const articleGroups = await Promise.allSettled(sources.map((source) => readSourceArticles(source, overrides)));
+  const articles: WritingItem[] = [];
+  let unavailableCount = 0;
+  for (const group of articleGroups) {
+    if (group.status === "fulfilled") {
+      articles.push(...group.value.items);
+      unavailableCount += group.value.unavailableCount;
+    } else {
+      unavailableCount += 1;
+      console.warn("Writing source unavailable:", group.reason);
+    }
+  }
   const uniqueArticles = new Map<string, WritingItem>();
 
   for (const article of articles) {
@@ -115,7 +134,10 @@ async function readRemoteWriting() {
     uniqueArticles.set(article.slug, article);
   }
 
-  return Array.from(uniqueArticles.values()).sort((a, b) => Date.parse(b.date) - Date.parse(a.date));
+  return {
+    items: Array.from(uniqueArticles.values()).sort((a, b) => Date.parse(b.date) - Date.parse(a.date)),
+    unavailableCount,
+  };
 }
 
 function buildArticleSources(siteData: SiteData): ArticleSource[] {
@@ -175,7 +197,18 @@ async function readSourceArticles(source: ArticleSource, overrides?: Record<stri
   const files = source.paths ?? (await listMarkdownFiles(source));
   const articlePaths = files.filter((filePath) => !ignoredPaths.has(filePath.toLowerCase()));
 
-  return Promise.all(articlePaths.map((filePath) => readArticle(source, filePath, overrides)));
+  const results = await Promise.allSettled(articlePaths.map((filePath) => readArticle(source, filePath, overrides)));
+  const items: WritingItem[] = [];
+  let unavailableCount = 0;
+  for (const result of results) {
+    if (result.status === "fulfilled") {
+      items.push(result.value);
+    } else {
+      unavailableCount += 1;
+      console.warn("Writing article unavailable:", result.reason);
+    }
+  }
+  return { items, unavailableCount };
 }
 
 async function readArticle(source: ArticleSource, filePath: string, overrides?: Record<string, WritingOverride>): Promise<WritingItem> {
